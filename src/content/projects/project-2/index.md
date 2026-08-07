@@ -1,5 +1,5 @@
 ---
-title: "Astro Nano"
+title: "Differential Sprocket Adapter"
 description: "Minimal portfolio and blog build with astro and no frameworks."
 date: "Mar 26 2024"
 demoURL: "https://astro-nano-demo.vercel.app"

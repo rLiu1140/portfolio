@@ -1,5 +1,5 @@
 ---
-title: "Astro Sphere"
+title: "FSAE Steering"
 description: "Portfolio and blog build with astro."
 date: "Mar 18 2024"
 demoURL: "https://astro-sphere-demo.vercel.app"
