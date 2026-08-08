@@ -13,8 +13,11 @@ const blog = (await getCollection("blog"))
   .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
 
 const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  // 1. Only grab projects that have an 'order' number and aren't drafts
+  .filter(project => !project.data.draft && project.data.order !== undefined)
+  // 2. Sort them numerically (1, 2, 3...). The "?? 0" keeps TypeScript happy!
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  // 3. Cut off any extras based on your site limits
   .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
 
 const allwork = (await getCollection("work"))
@@ -53,7 +56,7 @@ const work = await Promise.all(
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
-            Recent Projects
+            Featured Projects
           </h5>
           <Link href="/portfolio/projects">
             See all projects
