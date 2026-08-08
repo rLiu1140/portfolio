@@ -8,12 +8,71 @@ import { SITE } from "@consts";
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between">
       <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.NAME}
+        <div class="flex items-center justify-center w-8 h-8 group">
+          <svg 
+            id="tracking-icon" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="text-black/40 dark:text-white/40 group-hover:text-black dark:group-hover:text-white transition-colors duration-300"
+          >
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
         </div>
       </Link>
-      <nav class="flex gap-1">
+      
+      <nav class="flex gap-1 items-center">
+        <!-- Your navigation links and theme toggle buttons belong here -->
       </nav>
+      
     </div>
   </Container>
 </header>
+
+<script>
+  let currentAngle = 0;
+  let targetAngle = 0;
+  let mouseX = 0;
+  let mouseY = 0;
+
+  // Constantly record the mouse position
+  document.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  });
+
+  function animateGear() {
+    const icon = document.getElementById('tracking-icon');
+    if (icon) {
+      const rect = icon.getBoundingClientRect();
+      const iconCenterX = rect.left + rect.width / 2;
+      const iconCenterY = rect.top + rect.height / 2;
+
+      // Find the mathematical angle to the mouse
+      const rawTarget = Math.atan2(mouseY - iconCenterY, mouseX - iconCenterX) * (180 / Math.PI);
+
+      // Fix the boundary issue so it doesn't wildly spin backward at the 180/-180 mark
+      let deltaAngle = rawTarget - (targetAngle % 360);
+      if (deltaAngle > 180) deltaAngle -= 360;
+      if (deltaAngle < -180) deltaAngle += 360;
+      targetAngle += deltaAngle;
+
+      // Linear interpolation (lerp) for buttery smoothness. The 0.08 acts as "friction"
+      currentAngle += (targetAngle - currentAngle) * 0.08;
+
+      // Apply rotation immediately
+      icon.style.transform = `rotate(${currentAngle}deg)`;
+    }
+    
+    // Loop the animation at the monitor's refresh rate
+    requestAnimationFrame(animateGear);
+  }
+
+  // Kick off the loop
+  animateGear();
+</script>
