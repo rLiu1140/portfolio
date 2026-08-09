@@ -4,13 +4,7 @@ import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
-
-const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
 
 const projects = (await getCollection("projects"))
   // 1. Only grab projects that have an 'order' number and aren't drafts
@@ -19,18 +13,6 @@ const projects = (await getCollection("projects"))
   .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
   // 3. Cut off any extras based on your site limits
   .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
-);
-
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -38,8 +20,8 @@ const work = await Promise.all(
     <h4 class="animate font-semibold text-black dark:text-white">
       Ryan Liu
     </h4>
-        <h4 class="animate font-semibold text-black dark:text-white">
-        Mechanical Engineering · Northwestern University
+    <h4 class="animate font-semibold text-black dark:text-white">
+      Mechanical Engineering · Northwestern University
     </h4>
     <div class="space-y-16">
       <section>
@@ -48,7 +30,7 @@ const work = await Promise.all(
             I love to design, build, test, and optimize electromechanical systems. I'm dedicated to creating thoughtful hardware solutions to real-world problems.
           </p>
           <p class="animate">
-            I'm drawn to elegant and efficient systems that actually work. Currently exploring robotics, advanced manufacturing, and product design as I figure out what to obsess over next.
+            I'm drawn to elegant and efficient systems that actually work. Currently exploring robotics, advanced manufacturing, and product design, and I am actively seeking a mechanical engineering or robotics hardware internship for Summer 2027.
           </p>
         </article>
       </section>
