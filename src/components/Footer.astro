@@ -74,7 +74,7 @@ import BackToTop from "@components/BackToTop.astro";
     const activeClasses = ['text-black', 'dark:text-white'];
     const inactiveClasses = ['text-black/50', 'dark:text-white/50', 'hover:text-black', 'hover:dark:text-white'];
 
-    function setButtonState(btn, isActive) {
+    function setButtonState(btn: HTMLElement | null, isActive: boolean) {
       if (!btn) return;
       if (isActive) {
         btn.classList.remove(...inactiveClasses);
@@ -104,8 +104,8 @@ import BackToTop from "@components/BackToTop.astro";
   document.addEventListener("astro:page-load", updateThemeButtons);
   
   document.addEventListener("click", (e) => {
-    const target = e.target;
-    const btn = target.closest ? target.closest("button") : null;
+    const target = e.target as HTMLElement | null;
+    const btn = target?.closest("button");
     if (btn && ["light-theme-button", "dark-theme-button", "system-theme-button"].includes(btn.id)) {
       setTimeout(updateThemeButtons, 10);
     }
