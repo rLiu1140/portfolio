@@ -21,7 +21,7 @@ const projects = (await getCollection("projects"))
       Ryan Liu
     </h4>
     <h4 class="animate font-semibold text-black dark:text-white">
-      Mechanical Engineering • Northwestern University
+      Mechanical Engineering · Northwestern University
     </h4>
     <div class="space-y-16">
       <section>
@@ -40,9 +40,9 @@ const projects = (await getCollection("projects"))
           <h5 class="font-semibold text-black dark:text-white">
             Featured Projects
           </h5>
-          {/* Synchronized color classes applied */}
+          {/* Updated href to include /portfolio/ prefix */}
           <Link 
-            href="/projects" 
+            href="/portfolio/projects" 
             class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
           >
             See all projects
@@ -69,7 +69,6 @@ const projects = (await getCollection("projects"))
         <ul class="flex flex-wrap gap-2">
           {SOCIALS.map(SOCIAL => (
             <li class="flex gap-x-2 text-nowrap">
-              {/* Synchronized color classes applied */}
               <Link 
                 href={SOCIAL.HREF} 
                 external 
@@ -82,7 +81,6 @@ const projects = (await getCollection("projects"))
             </li>
           ))}
           <li class="line-clamp-1">
-            {/* Synchronized color classes applied */}
             <Link 
               href={`mailto:${SITE.EMAIL}`} 
               aria-label={`Email ${SITE.NAME}`}
