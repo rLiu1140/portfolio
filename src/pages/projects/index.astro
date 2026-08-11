@@ -76,39 +76,29 @@ const recentProjects = [...projects].sort((a, b) => b.data.date.valueOf() - a.da
 </PageLayout>
 
 <script>
+  import { setToggleState } from "@lib/utils";
+
   function setupProjectSorting() {
     const btnFeatured = document.getElementById('btn-featured');
     const btnRecent = document.getElementById('btn-recent');
     const listFeatured = document.getElementById('list-featured');
     const listRecent = document.getElementById('list-recent');
 
-    const activeClasses = ['text-black', 'dark:text-white'];
-    const inactiveClasses = ['text-black/50', 'dark:text-white/50', 'hover:text-black', 'hover:dark:text-white'];
+    if (!btnFeatured || !btnRecent || !listFeatured || !listRecent) return;
 
-    if (btnFeatured && btnRecent && listFeatured && listRecent) {
-      
-      btnFeatured.addEventListener('click', () => {
-        listFeatured.classList.remove('hidden');
-        listRecent.classList.add('hidden');
+    btnFeatured.addEventListener('click', () => {
+      listFeatured.classList.remove('hidden');
+      listRecent.classList.add('hidden');
+      setToggleState(btnFeatured, true);
+      setToggleState(btnRecent, false);
+    });
 
-        btnFeatured.classList.remove(...inactiveClasses);
-        btnFeatured.classList.add(...activeClasses);
-
-        btnRecent.classList.remove(...activeClasses);
-        btnRecent.classList.add(...inactiveClasses);
-      });
-
-      btnRecent.addEventListener('click', () => {
-        listRecent.classList.remove('hidden');
-        listFeatured.classList.add('hidden');
-
-        btnRecent.classList.remove(...inactiveClasses);
-        btnRecent.classList.add(...activeClasses);
-
-        btnFeatured.classList.remove(...activeClasses);
-        btnFeatured.classList.add(...inactiveClasses);
-      });
-    }
+    btnRecent.addEventListener('click', () => {
+      listRecent.classList.remove('hidden');
+      listFeatured.classList.add('hidden');
+      setToggleState(btnRecent, true);
+      setToggleState(btnFeatured, false);
+    });
   }
 
   document.addEventListener('astro:page-load', setupProjectSorting);

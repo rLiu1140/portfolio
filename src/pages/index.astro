@@ -21,7 +21,7 @@ const projects = (await getCollection("projects"))
       Ryan Liu
     </h4>
     <h4 class="animate font-semibold text-black dark:text-white">
-      Mechanical Engineering · Northwestern University
+      Mechanical Engineering • Northwestern University
     </h4>
     <div class="space-y-16">
       <section>
@@ -43,7 +43,7 @@ const projects = (await getCollection("projects"))
           {/* Updated href to include /portfolio/ prefix */}
           <Link 
             href="/portfolio/projects" 
-            class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+            class="link-fade"
           >
             See all projects
           </Link>
@@ -73,7 +73,7 @@ const projects = (await getCollection("projects"))
                 href={SOCIAL.HREF} 
                 external 
                 aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-                class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+                class="link-fade"
               >
                 {SOCIAL.NAME}
               </Link>
@@ -84,7 +84,7 @@ const projects = (await getCollection("projects"))
             <Link 
               href={`mailto:${SITE.EMAIL}`} 
               aria-label={`Email ${SITE.NAME}`}
-              class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+              class="link-fade"
             >
               {SITE.EMAIL}
             </Link>

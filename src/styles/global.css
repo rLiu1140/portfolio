@@ -55,6 +55,24 @@ article {
   }
 }
 
+@layer components {
+  /* Muted text/icon that brightens on hover — reused across nav, footer, and links */
+  .link-fade {
+    @apply text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out;
+  }
+
+  /* Bordered pill button (BackToTop / BackToPrev) */
+  .pill-btn {
+    @apply relative w-fit flex pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 link-fade;
+  }
+
+  /* Circular icon toggle button (Footer theme switcher). Color classes are
+     applied separately since JS swaps them for active/inactive state. */
+  .icon-toggle-btn {
+    @apply size-8 flex items-center justify-center rounded-full transition-colors duration-300 ease-in-out;
+  }
+}
+
 .animate {
   @apply opacity-0 translate-y-3;
   @apply transition-all duration-700 ease-out;

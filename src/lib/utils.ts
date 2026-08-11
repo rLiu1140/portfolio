@@ -1,18 +1,3 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export function formatDate(date: Date) {
-  return Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric"
-  }).format(date);
-}
-
 export function readingTime(html: string) {
   const textOnly = html.replace(/<[^>]+>/g, "");
   const wordCount = textOnly.split(/\s+/).length;
@@ -20,21 +5,15 @@ export function readingTime(html: string) {
   return `${readingTimeMinutes} min read`;
 }
 
-export function dateRange(startDate: Date, endDate?: Date | string): string {
-  const startMonth = startDate.toLocaleString("default", { month: "short" });
-  const startYear = startDate.getFullYear().toString();
-  let endMonth;
-  let endYear;
-
-  if (endDate) {
-    if (typeof endDate === "string") {
-      endMonth = "";
-      endYear = endDate;
-    } else {
-      endMonth = endDate.toLocaleString("default", { month: "short" });
-      endYear = endDate.getFullYear().toString();
-    }
-  }
-
-  return `${startMonth}${startYear} - ${endMonth}${endYear}`;
+/**
+ * Toggles an element between the site's "active" and "inactive" text-color
+ * state. Shared by the Footer theme switcher and the project sort tabs so
+ * the class list only lives in one place.
+ */
+export function setToggleState(btn: HTMLElement | null, isActive: boolean) {
+  const active = ["text-black", "dark:text-white"];
+  const inactive = ["text-black/50", "dark:text-white/50", "hover:text-black", "hover:dark:text-white"];
+  if (!btn) return;
+  btn.classList.remove(...(isActive ? inactive : active));
+  btn.classList.add(...(isActive ? active : inactive));
 }
