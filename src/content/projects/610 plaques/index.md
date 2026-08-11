@@ -1,0 +1,7 @@
+---
+title: "CNC-Machined Aluminum Plaques"
+description: "Custom-designed plaques, modeled and manufactured using Fusion 360 for CAD/CAM"
+date: 2025-06-13
+order: 5
+---
+Details coming soon.

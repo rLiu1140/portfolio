@@ -12,27 +12,18 @@ import BackToTop from "@components/BackToTop.astro";
       </div>
     </div>
     <div class="flex justify-between items-center">
-      <div>
+      <div class="text-black/50 dark:text-white/50">
         2026 {`|`} {SITE.NAME}
       </div>
       <div class="flex flex-wrap gap-1 items-center">
+        
+        {/* Light Theme Button */}
         <button
           id="light-theme-button"
           aria-label="Light theme"
-          class="group size-8 flex items-center justify-center rounded-full"
+          class="group size-8 flex items-center justify-center rounded-full text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -44,43 +35,25 @@ import BackToTop from "@components/BackToTop.astro";
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
         </button>
+
+        {/* Dark Theme Button */}
         <button
           id="dark-theme-button"
           aria-label="Dark theme"
-          class="group size-8 flex items-center justify-center rounded-full"
+          class="group size-8 flex items-center justify-center rounded-full text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
+
+        {/* System Theme Button */}
         <button
           id="system-theme-button"
           aria-label="System theme"
-          class="group size-8 flex items-center justify-center rounded-full"
+          class="group size-8 flex items-center justify-center rounded-full text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -90,3 +63,51 @@ import BackToTop from "@components/BackToTop.astro";
     </div>
   </Container>
 </footer>
+
+<script>
+  function updateThemeButtons() {
+    const theme = localStorage.getItem("theme");
+    const lightBtn = document.getElementById("light-theme-button");
+    const darkBtn = document.getElementById("dark-theme-button");
+    const systemBtn = document.getElementById("system-theme-button");
+
+    const activeClasses = ['text-black', 'dark:text-white'];
+    const inactiveClasses = ['text-black/50', 'dark:text-white/50', 'hover:text-black', 'hover:dark:text-white'];
+
+    function setButtonState(btn, isActive) {
+      if (!btn) return;
+      if (isActive) {
+        btn.classList.remove(...inactiveClasses);
+        btn.classList.add(...activeClasses);
+      } else {
+        btn.classList.remove(...activeClasses);
+        btn.classList.add(...inactiveClasses);
+      }
+    }
+
+    if (theme === "light") {
+      setButtonState(lightBtn, true);
+      setButtonState(darkBtn, false);
+      setButtonState(systemBtn, false);
+    } else if (theme === "dark") {
+      setButtonState(lightBtn, false);
+      setButtonState(darkBtn, true);
+      setButtonState(systemBtn, false);
+    } else {
+      setButtonState(lightBtn, false);
+      setButtonState(darkBtn, false);
+      setButtonState(systemBtn, true);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", updateThemeButtons);
+  document.addEventListener("astro:page-load", updateThemeButtons);
+  
+  document.addEventListener("click", (e) => {
+    const target = e.target;
+    const btn = target.closest ? target.closest("button") : null;
+    if (btn && ["light-theme-button", "dark-theme-button", "system-theme-button"].includes(btn.id)) {
+      setTimeout(updateThemeButtons, 10);
+    }
+  });
+</script>

@@ -30,12 +30,12 @@ const { Content } = await project.render();
       </BackToPrev>
     </div>
     <div class="space-y-1 my-10">
-      <div class="animate flex items-center gap-1.5">
-        <div class="font-base text-sm">
+      <div class="animate flex items-center gap-1.5 text-black/50 dark:text-white/50 text-sm">
+        <div class="font-base">
           <FormattedDate date={project.data.date} />
         </div>
         &bull;
-        <div class="font-base text-sm">
+        <div class="font-base">
           {readingTime(project.body)}
         </div>
       </div>
@@ -43,17 +43,25 @@ const { Content } = await project.render();
         {project.data.title}
       </div>
       {(project.data.demoURL || project.data.repoURL) && (
-        <nav class="animate flex gap-1">
+        <nav class="animate flex items-center gap-2">
           {project.data.demoURL && (
-            <Link href={project.data.demoURL} external>
+            <Link 
+              href={project.data.demoURL} 
+              external
+              class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+            >
               demo
             </Link>
           )}
           {project.data.demoURL && project.data.repoURL && (
-            <span>/</span>
+            <span class="text-black/30 dark:text-white/30">/</span>
           )}
           {project.data.repoURL && (
-            <Link href={project.data.repoURL} external>
+            <Link 
+              href={project.data.repoURL} 
+              external
+              class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+            >
               repo
             </Link>
           )}

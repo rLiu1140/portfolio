@@ -6,25 +6,110 @@ import ArrowCard from "@components/ArrowCard.astro";
 import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .filter(project => !project.data.draft);
+
+// Sort 1: Featured (Projects with an 'order' go first, then sorted by date)
+const featuredProjects = [...projects].sort((a, b) => {
+  const orderA = a.data.order ?? Infinity;
+  const orderB = b.data.order ?? Infinity;
+  if (orderA !== orderB) return orderA - orderB;
+  return b.data.date.valueOf() - a.data.date.valueOf();
+});
+
+// Sort 2: Recent (Strictly chronological)
+const recentProjects = [...projects].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">
-        Projects
+      
+      {/* Header and Sort Toggle */}
+      <div class="animate flex flex-wrap items-center justify-between gap-y-2">
+        <h4 class="font-semibold text-black dark:text-white">
+          Projects
+        </h4>
+        
+        {/* Sort Buttons */}
+        <div class="flex items-center gap-2">
+          
+          {/* Active State (Featured is default on load) */}
+          <button 
+            id="btn-featured" 
+            class="text-black dark:text-white transition-colors duration-300 ease-in-out cursor-pointer"
+          >
+            Featured
+          </button>
+          
+          <span class="text-black/30 dark:text-white/30">/</span>
+          
+          {/* Inactive State */}
+          <button 
+            id="btn-recent" 
+            class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out cursor-pointer"
+          >
+            Recent
+          </button>
+        </div>
       </div>
-      <ul class="animate flex flex-col gap-4">
-        {
-          projects.map((project) => (
-            <li>
-              <ArrowCard entry={project}/>
-            </li>
-          ))
-        }
+
+      {/* Featured List (Visible by Default) */}
+      <ul id="list-featured" class="animate flex flex-col gap-4">
+        {featuredProjects.map(project => (
+          <li>
+            <ArrowCard entry={project} />
+          </li>
+        ))}
       </ul>
+
+      {/* Recent List (Hidden by Default) */}
+      <ul id="list-recent" class="animate flex flex-col gap-4 hidden">
+        {recentProjects.map(project => (
+          <li>
+            <ArrowCard entry={project} />
+          </li>
+        ))}
+      </ul>
+
     </div>
   </Container>
 </PageLayout>
+
+<script>
+  function setupProjectSorting() {
+    const btnFeatured = document.getElementById('btn-featured');
+    const btnRecent = document.getElementById('btn-recent');
+    const listFeatured = document.getElementById('list-featured');
+    const listRecent = document.getElementById('list-recent');
+
+    const activeClasses = ['text-black', 'dark:text-white'];
+    const inactiveClasses = ['text-black/50', 'dark:text-white/50', 'hover:text-black', 'hover:dark:text-white'];
+
+    if (btnFeatured && btnRecent && listFeatured && listRecent) {
+      
+      btnFeatured.addEventListener('click', () => {
+        listFeatured.classList.remove('hidden');
+        listRecent.classList.add('hidden');
+
+        btnFeatured.classList.remove(...inactiveClasses);
+        btnFeatured.classList.add(...activeClasses);
+
+        btnRecent.classList.remove(...activeClasses);
+        btnRecent.classList.add(...inactiveClasses);
+      });
+
+      btnRecent.addEventListener('click', () => {
+        listRecent.classList.remove('hidden');
+        listFeatured.classList.add('hidden');
+
+        btnRecent.classList.remove(...inactiveClasses);
+        btnRecent.classList.add(...activeClasses);
+
+        btnFeatured.classList.remove(...activeClasses);
+        btnFeatured.classList.add(...inactiveClasses);
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', setupProjectSorting);
+</script>

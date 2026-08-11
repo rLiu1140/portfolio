@@ -12,7 +12,7 @@ const projects = (await getCollection("projects"))
   // 2. Sort them numerically (1, 2, 3...). The "?? 0" keeps TypeScript happy!
   .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
   // 3. Cut off any extras based on your site limits
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -21,7 +21,7 @@ const projects = (await getCollection("projects"))
       Ryan Liu
     </h4>
     <h4 class="animate font-semibold text-black dark:text-white">
-      Mechanical Engineering · Northwestern University
+      Mechanical Engineering • Northwestern University
     </h4>
     <div class="space-y-16">
       <section>
@@ -40,7 +40,11 @@ const projects = (await getCollection("projects"))
           <h5 class="font-semibold text-black dark:text-white">
             Featured Projects
           </h5>
-          <Link href="/portfolio/projects">
+          {/* Synchronized color classes applied */}
+          <Link 
+            href="/projects" 
+            class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+          >
             See all projects
           </Link>
         </div>
@@ -65,14 +69,25 @@ const projects = (await getCollection("projects"))
         <ul class="flex flex-wrap gap-2">
           {SOCIALS.map(SOCIAL => (
             <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
+              {/* Synchronized color classes applied */}
+              <Link 
+                href={SOCIAL.HREF} 
+                external 
+                aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+                class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+              >
                 {SOCIAL.NAME}
               </Link>
-              {"/"}
+              <span class="text-black/30 dark:text-white/30">{"/"}</span>
             </li>
           ))}
           <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
+            {/* Synchronized color classes applied */}
+            <Link 
+              href={`mailto:${SITE.EMAIL}`} 
+              aria-label={`Email ${SITE.NAME}`}
+              class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+            >
               {SITE.EMAIL}
             </Link>
           </li>
