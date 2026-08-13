@@ -1,0 +1,82 @@
+---
+interface Props {
+  csvUrl: string;
+  caption?: string;
+}
+const { csvUrl, caption } = Astro.props;
+
+const res = await fetch(csvUrl);
+if (!res.ok) {
+  throw new Error(`Failed to fetch sheet: ${res.status} ${res.statusText} — ${csvUrl}`);
+}
+const csv = await res.text();
+
+// Basic CSV parser — handles quoted cells with commas inside them
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (char === '"' && next === '"') {
+        cell += '"';
+        i++;
+      } else if (char === '"') {
+        inQuotes = false;
+      } else {
+        cell += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ",") {
+        row.push(cell);
+        cell = "";
+      } else if (char === "\n" || char === "\r") {
+        if (char === "\r" && next === "\n") i++;
+        row.push(cell);
+        rows.push(row);
+        row = [];
+        cell = "";
+      } else {
+        cell += char;
+      }
+    }
+  }
+  if (cell.length > 0 || row.length > 0) {
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows.filter(r => r.some(c => c.trim() !== ""));
+}
+
+const rows = parseCSV(csv);
+const [header, ...body] = rows;
+---
+
+<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
+  {caption && <p class="px-3 pt-3 text-sm font-medium text-black/70 dark:text-white/70">{caption}</p>}
+  <table class="w-full text-sm">
+    <thead class="bg-black/5 dark:bg-white/10">
+      <tr>
+        {header?.map((h) => (
+          <th class="px-3 py-2 text-left font-medium whitespace-nowrap">{h}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {body.map((row) => (
+        <tr class="border-t border-black/10 dark:border-white/10">
+          {row.map((cell) => (
+            <td class="px-3 py-2">{cell}</td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -4,6 +4,10 @@ description: "Designed and assembled a lightweight, high-stiffness carbon-fiber 
 date: 2027-06-19
 order: 1
 ---
+
+import SheetTable from '../../../components/SheetTable.astro';
+import { SHEETS } from '../../../data/sheets';
+
 ### Tube Material Selection
 #### 4130 Steel
 Mechanical Properties
@@ -65,23 +69,14 @@ Rock West Composites is one of the largest direct-to-consumer online suppliers o
 #### Wall Thickness
 According to FSAE rules, bonded joints within the steering system must have a mechanical backup, such as a bolt or pin. The primary failure modes around drilled holes under torsion are delamination due to stress concentration, matrix cracking, and pin/bolt tear-out. Using ⅛” walls significantly protects against these failures by decreasing shear stress, which is inversely proportional to wall thickness. The thicker wall also increases the bearing area between the fastener and the tube, which directly combats tear-out. Additionally, ⅛” walls allow for a reduced outer diameter while maintaining torsional stiffness, which helps with packaging at the cost of weight.
 
-<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
-  <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR6GjTFrFzTx7WKgMbyo6h4V-guvgqbPEtbkXvUvtTAKxzBQSRCafLvcsOPEPHgg8wvPACHba2UbHui/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
-    class="w-full min-w-full h-[500px] border-0 block"
-  ></iframe>
-</div>
+## steeringTubeComparison
 
-<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
-  <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MNwN38o0GZELkX5vzoeTKKBB4Hd9JcQ3guwUmUavXJg9c-Di2X7r7H1ZeVLy_23KnN9CLYNsiLeK/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
-    class="w-full min-w-full h-[500px] border-0 block"
-  ></iframe>
-</div>
+<SheetTable csvUrl={SHEETS.steeringTubeComparison} caption="steeringTubeComparison" />
 
-<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
-  <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRyqx9ahadSWSZkC0GO6n97VV68zDkbsh2mJhdqRFq0IepAAkPKbXfON86X1DPrFk2KwdUTBfB26HG2/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
-    class="w-full min-w-full h-[500px] border-0 block"
-  ></iframe>
-</div>
+## steeringTubeComparison
+
+<SheetTable csvUrl={SHEETS.steeringWeightCalcs} caption="steeringTubeComparison" />
+
+## steeringTubeComparison
+
+<SheetTable csvUrl={SHEETS.steeringPO} caption="steeringTubeComparison" />
