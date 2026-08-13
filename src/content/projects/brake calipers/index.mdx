@@ -1,0 +1,20 @@
+---
+title: "3D-Printed Bicycle Brake Calipers"
+description: "SLS-printed brake calipers designed and FEA-validated in NX to meet ISO braking requirements"
+date: 2026-06-09
+order: 2
+---
+#### Estimation of the Design Space
+The design space consists of both fixed and flexible components. In terms of positional constraints, there are predetermined caliper and brake pad mounting holes, and there must be adequate clearance for the bike wheel to pass through as shown in Figure 1. As for geometric constraints, each brake caliper has the same predetermined lever arm length, and the cable mounting holes are concentric.
+
+By referencing a working brake caliper made from the same material, a rough estimate of external boundaries of the design space shown in Figure 2, 3, and 4 were made. This boundary would allow for more than enough material to run finite element analysis without setting unnecessary constraints on load paths or representing an unrealistically large design space. This is critical for topology optimization as the design space is intended to consist of all possible space where material could be used to compose the brake calipers.
+
+#### Hand Calculations
+Hand calculations were used to relate brake geometry to input force, pad normal force, braking friction, and stopping distance. These calculations showed that required input force decreases as the input lever arm and cable lever arm increase, so these dimensions were preserved where possible during topology optimization.
+
+First, the relationship between geometry and the resulting braking force was explored through moment balances.
+Adhering to the dimensional constraints of the design space, a spatial model representing the greatest material condition of the brake calipers was created. This model as shown in Figure 8 would be used as the starting point of the design by using it for finite element analysis simulations to understand the load paths.
+
+An additional CAD model was produced as a visual representation of what the brake calipers could look like. This design as shown in Figure 9 adhered to the same positional and geometric design constraints as the design space, but referenced the design of preexisting caliper brakes rather than through simulation or topology optimization.
+
+Calculations to identify parameters for the specific load case were also performed. Equations similar to those used for the initial concept design were employed here. In addition, values for mass, speed, and braking distance were inserted, determined using research and information from the metrics table. The resulting forces included tension in the brake cable, normal force from the brake pad, and friction force.

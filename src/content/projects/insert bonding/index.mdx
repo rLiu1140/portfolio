@@ -1,0 +1,125 @@
+---
+title: "Carbon-Fiber Tube Insert Bond Testing"
+description: "Designed test fixtures and samples to evaluate the torsional and tensile strength of epoxy bonds"
+date: 2026-09-18
+order: 4
+---
+
+import { Image } from "astro:assets";
+import internalInsert from "../../../assets/internal.png";
+import externalInsert from "../../../assets/external.png";
+import geometrical from "../../../assets/geometrical.png";
+import glassBeads from "../../../assets/glass-beads.png";
+import failureModes from "../../../assets/failure-modes.png";
+
+### Overview
+Carbon fiber tubes are widely used in motorsports because of their high strength-to-weight ratio, stiffness, and low mass. Applications include suspension arms, steering columns, and other structural components. However, attaching hardware to carbon fiber tubing presents a significant engineering challenge.
+
+Drilling holes through carbon fiber tubing to mechanically secure inserts can interrupt continuous structural fibers, introduce stress concentrations, and increase the risk of delamination. As a result, bonded inserts are commonly used to transfer loads between the tube and attached components without compromising the primary fiber structure.
+
+Northwestern Formula Racing has previously experienced failed insert bonds in suspension arms, demonstrating the potentially catastrophic consequences of an unreliable bonding method. This project focuses on developing a reliable and structurally robust method for bonding inserts to carbon fiber tubing, with the goal of improving vehicle reliability and enabling greater use of carbon fiber structural components.
+
+The resulting design methodology can be applied to systems such as the steering column, where replacing conventional metal components with carbon fiber can reduce weight while maintaining the required strength and stiffness.
+
+### Insert Designs
+
+#### Internal
+A cylindrical feature slides inside the tube. This hides and protects the bond from external elements such as water, which can cause corrosion and weaken the joint. The internal insert provides a smoother stiffness transition and a cleaner load path, reducing stress concentrations and improving fatigue performance. However, the smaller bond diameter results in a reduced bonded area, requiring a longer engagement length to achieve the same torque capacity.
+
+<figure>
+  <Image src={internalInsert} alt="Internal Insert" style="border-radius: 6px; max-width: 100%; height: auto;" />
+  <figcaption>Figure 1: Internal Insert</figcaption>
+</figure>
+
+#### External
+A cylindrical feature slides around the outside of the tube. This provides a larger bonded area due to the increased outer surface area, allowing for a shorter insert engagement length. The increased bond diameter also reduces the shear stress in the adhesive for the same applied torque. However, the external sleeve creates a large stiffness transition where it meets the carbon fiber tube, resulting in stress concentrations and increasing the risk of peeling, a common failure mode in bonded joints.
+
+<figure>
+  <Image src={externalInsert} alt="External Insert" style="border-radius: 6px; max-width: 100%; height: auto;" />
+  <figcaption>Figure 2: External Insert</figcaption>
+</figure>
+
+### Bond Length
+Bond length is the distance of the engagement between the insert and tube. Critically, is it inversely proportional to the radius.
+
+$$
+L = \frac{T}{2\pi r^2 \tau_{\text{allowable}}}
+$$
+
+### Bondline Thickness
+Bondline thickness is the distance between two surfaces being joined, which is entirely filled by the adhesive. The optimal values for maximum shear and peel strength can be found on the Technical Data Sheet for each specific adhesive.
+
+$$
+\text{Bondline Thickness} = \frac{\text{Tube ID} - \text{Insert OD}}{2}
+$$
+
+| Too Thin | Too Thick |
+| --- | --- |
+| Most of the adhesive is squeezed out by the insert, causing metal-to-carbon contact and leaving minimal adhesive to absorb stress. The joint becomes extremely brittle. | The adhesive itself becomes the structural weak point. The adhesive tears apart internally before the insert or tubing fails. It is also difficult to center the insert. |
+
+### Insert Material
+
+| | 6061 Aluminum | 7075 Aluminum | 304 Stainless Steel | 4130 Steel | Grade 5 Titanium |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Shear Modulus / Density** | 9.63 | 9.57 | 9.71 | 10.19 | 9.93 |
+| **Notes** | Excellent bondability due to stable oxide layer; easy and repeatable surface prep; good corrosion resistance; low stiffness mismatch; industry standard | Similar bond strength to 6061; higher shear modulus and yield strength; harder to prep consistently; more susceptible to corrosion due to higher Zn and Cu content | Bonds well after abrasion; excellent corrosion resistance due to stable oxide layer; increased adhesive strain under cyclic loading due to high stiffness mismatch | Poor long-term durability due to high corrosion | Excellent bondability and corrosion resistance due to stable oxide layer; expensive; difficult to machine |
+
+### Galvanic Corrosion
+Galvanic corrosion occurs when an electrolyte (such as water) and two electrically connected conductive materials (carbon fiber and the metal insert) are present. The system acts like a battery, where the metal insert becomes the anode and the carbon fiber acts as the cathode. The metal loses electrons, which flow through the conductive connection to the carbon fiber, while the electrolyte allows ions to move and complete the reaction. The resulting metal ions react with hydroxide ions in the water to form corrosion products, degrading the bonded surface and reducing the strength of the joint.
+
+### Adhesive Selection
+Toughened, two-part structural epoxies should be used due to their high shear strength, fatigue resistance, and shock absorption. The industry standard for composite-to-metal assemblies is 3M Scotch-Weld DP420. However, there are a few alternatives within the same 3M Scotch-Weld family. All of these epoxies are ambient-cure adhesives, meaning they cure completely at standard room temperature.
+
+| Adhesive | Characteristics |
+| :--- | :--- |
+| **DP420** | The gold standard; 20-minute work life; reaches handling strength in 2 hours |
+| **DP420NS** | DP420 as a non-sag paste; better for loose machining tolerances; harder to flow into micro-gaps |
+| **DP460** | Slightly higher peel strength than DP420; 60-minute work life; reaches handling strength in 4 hours |
+| **DP460NS** | DP460 as a non-sag paste; better for loose machining tolerances; harder to flow into micro-gaps |
+
+### Gap Thickness Control
+Due to the presence of bondline thickness—where the insert OD is smaller than the tube ID—a standard cylindrical interface is difficult to align for a perfectly concentric fit during the epoxy curing process. Two common ways to ensure concentricity are a mechanical geometric solution and a glass bead solution. The geometric solution uses an extra protrusion to physically align with the inside of the tube, while the glass bead solution involves adding spherical beads to the epoxy to act as spacers between the insert and the tube.
+
+
+<figure>
+  <Image src={geometrical} alt="Geometrical Solution" style="border-radius: 6px; max-width: 100%; height: auto;" />
+  <figcaption>Figure 3: Geometrical Solution</figcaption>
+</figure>
+
+<figure>
+  <Image src={glassBeads} alt="Glass Beads Solution" style="border-radius: 6px; max-width: 100%; height: auto;" />
+  <figcaption>Figure 4: Glass Beads Solution</figcaption>
+</figure>
+
+<figure>
+  <Image src={failureModes} alt="Failure Modes" style="border-radius: 6px; max-width: 100%; height: auto;" />
+  <figcaption>Figure 5: Failure Modes</figcaption>
+</figure>
+
+### Surface Preperation
+
+| Step | Insert (Aluminum) | Tube (Carbon Fiber) |
+| :--- | :--- | :--- |
+| **1** | Sand with 80–120 grit sandpaper | Sand with 120–180 grit sandpaper |
+| **2** | Clean with acetone | Clean with acetone |
+| **3** | Air dry | Air dry |
+| **4** | Etch with West System 860 | — |
+| **5** | Submerge in non-diluted Alodine | — |
+| **6** | Submerge in water | — |
+| **7** | Air dry | — |
+
+### Mechanical Backup
+| Method | Description / Parts |
+| :--- | :--- |
+| **Transverse 1/4" Shoulder Bolt** | No clean solution due to critical fastener requirements |
+| **Single 3/16” Cross Pin** | MS Clevis Pin: <a href="https://www.mcmaster.com/94344A140/" target="_blank" rel="noopener noreferrer">94344A140</a><br />MS Cotter Pin: <a href="https://www.mcmaster.com/90157A101/" target="_blank" rel="noopener noreferrer">90157A101</a> |
+| **Double 1/8” Cross Pins at 90°** | No clean solution due to critical fastener requirements |
+
+$$
+\text{Allowable Double Shear Breaking Strength} = \left(\frac{\text{Applied Torque}}{\text{Tube ID}}\right) \times 2 \times \text{FoS}
+$$
+
+### Testing Methodology
+Coming soon...
+### Sources
+Coming soon...

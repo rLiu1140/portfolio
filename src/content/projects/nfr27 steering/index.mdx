@@ -1,0 +1,87 @@
+---
+title: "2027 Formula SAE Steering System"
+description: "Designed and assembled a lightweight, high-stiffness carbon-fiber steering system"
+date: 2027-06-19
+order: 1
+---
+### Tube Material Selection
+#### 4130 Steel
+Mechanical Properties
+Shear Modulus: 80 GPa
+Density: 7.85 g/cm3
+Ratio: 10.19
+Isotropic
+U-Joint Options
+Steel w steel adapter + weld (current)
+Pros: Most Rigid
+Cons: Heaviest, Weld Failure?
+Mil-Spec w adapter + transverse bolt/cross pins
+Pros: Light, Rigid
+~100 g lighter u-joints vs. current
+Cons: Stress Concentrations, Wear?
+
+#### Aluminum (for comparison)
+6061:
+Shear Modulus: 26 GPa
+Density: 2.70 g/cm3
+Ratio: 9.63
+7075:
+Shear Modulus: 26.9 GPa
+Density: 2.81 g/cm3
+Ratio: 9.57
+
+#### ±45° Lay-up Carbon Fiber Column
+Mechanical Properties
+Shear Modulus: 20-30 GPa
+Density: 1.50-1.60 g/cm3
+Ratio: ~16.13
+Anisotropic
+U-Joint Options
+Mil-Spec w adapter + epoxy w transverse bolt/cross pins
+Pros: Lightest, Rigid
+~100 g lighter u-joints + ~70 g lighter columns = ~170 g lighter vs. current
+Cons: Stress Concentrations, Bond Failure!
+
+#### Thoughts
+4130 is great for torsional rigidity (better than 7075 and 6061 alu)
+switching u-joints may be a low-cost way to save weight
+many race cars already use transverse bolts to attach u-joints
+mil-spec joints have 0 backlash
+cf tubing is the weight minimizing option, BUT:
+need to research and test bonds: talk to ppl working on sus rods?
+must drill holes into cf tubing: how bad is this?
+how important is saving 170 g (~50% of column weight) vs. 100 g?
+personally prefer steel w ms joints, but cf could be done if needed (or rlly wanted)
+
+
+
+### Carbon Fiber Tube Selection
+#### Manufacturer
+Rock West Composites is one of the largest direct-to-consumer online suppliers of composite materials and is well known for supporting projects from universities and FSAE teams. Their website is transparent with engineering data, including exact ply layups and material properties, and they even provide calculators for mechanical analysis. They offer an extremely wide range of composite products, including various sizes of carbon fiber tubing specifically designed for torsional applications using ±45° layups.
+
+#### Layup
+±45° layups provide the highest strength and stiffness for carbon fiber tubes under torsion. This is because the tensile and compressive stresses generated during torsional loading are maximized at 45° to the tube axis. Rock West torsion tubes are specifically designed for torsional applications, with fibers oriented primarily at ±45° to maximize torsional performance.
+
+#### Wall Thickness
+According to FSAE rules, bonded joints within the steering system must have a mechanical backup, such as a bolt or pin. The primary failure modes around drilled holes under torsion are delamination due to stress concentration, matrix cracking, and pin/bolt tear-out. Using ⅛” walls significantly protects against these failures by decreasing shear stress, which is inversely proportional to wall thickness. The thicker wall also increases the bearing area between the fastener and the tube, which directly combats tear-out. Additionally, ⅛” walls allow for a reduced outer diameter while maintaining torsional stiffness, which helps with packaging at the cost of weight.
+
+<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR6GjTFrFzTx7WKgMbyo6h4V-guvgqbPEtbkXvUvtTAKxzBQSRCafLvcsOPEPHgg8wvPACHba2UbHui/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
+    class="w-full min-w-full h-[500px] border-0 block"
+  ></iframe>
+</div>
+
+<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MNwN38o0GZELkX5vzoeTKKBB4Hd9JcQ3guwUmUavXJg9c-Di2X7r7H1ZeVLy_23KnN9CLYNsiLeK/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
+    class="w-full min-w-full h-[500px] border-0 block"
+  ></iframe>
+</div>
+
+<div class="w-full overflow-x-auto my-6 rounded-lg border border-black/15 dark:border-white/20">
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRyqx9ahadSWSZkC0GO6n97VV68zDkbsh2mJhdqRFq0IepAAkPKbXfON86X1DPrFk2KwdUTBfB26HG2/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
+    class="w-full min-w-full h-[500px] border-0 block"
+  ></iframe>
+</div>
