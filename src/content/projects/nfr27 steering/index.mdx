@@ -11,56 +11,39 @@ import { SHEETS } from '../../../data/sheets';
 ### Overview
 Formula SAE requires all teams to develop a mechanical steering system. Previously, Northwestern Formula Racing has used 4130 steel columns with welded connections to achieve a highly reliable and stiff steering system. However, reducing the weight of the steering system has been an area of interest.
 
-### Tube Material Selection
+### Column Material Selection
+#### Material Comparison
+| Material | Shear Modulus (GPa) | Density (g/cm³) | G/ρ Ratio | Behavior |
+|---|---|---|---|---|
+| **4130 Steel** | 80 | 7.85 | 10.19 | Isotropic |
+| 6061 Aluminum | 26 | 2.70 | 9.63 | Isotropic |
+| 7075 Aluminum | 26.9 | 2.81 | 9.57 | Isotropic |
+| **±45° CF Layup** | 20–30 | 1.50–1.60 | ~16.13 | Anisotropic |
+
+- 4130 steel beats both aluminum alloys, but carbon fiber is the best on paper. However, bonded connections require a mechanical backup per the rules.
+
+#### U-Joint Attachment Options
 #### 4130 Steel
-Mechanical Properties
-Shear Modulus: 80 GPa
-Density: 7.85 g/cm3
-Ratio: 10.19
-Isotropic
-U-Joint Options
-Steel w steel adapter + weld (current)
-Pros: Most Rigid
-Cons: Heaviest, Weld Failure?
-Mil-Spec w adapter + transverse bolt/cross pins
-Pros: Light, Rigid
-~100 g lighter u-joints vs. current
-Cons: Stress Concentrations, Wear?
+| Option | Pros | Cons |
+|---|---|---|
+| Steel w/ steel adapter + weld *(current)* | Most rigid | Heaviest, weld failure risk |
+| Mil-Spec w/ adapter + transverse bolt/cross pins | Light, rigid, ~100 g lighter than current | Stress concentrations, wear? |
 
-#### Aluminum (for comparison)
-6061:
-Shear Modulus: 26 GPa
-Density: 2.70 g/cm3
-Ratio: 9.63
-7075:
-Shear Modulus: 26.9 GPa
-Density: 2.81 g/cm3
-Ratio: 9.57
+#### ±45° CF Column
+| Option | Pros | Cons |
+|---|---|---|
+| Mil-Spec w/ adapter + epoxy + transverse bolt/cross pins | Lightest: ~100 g lighter joints + ~70 g lighter columns = **~170 g saved** vs. current | Stress concentrations, bond failure risk |
 
-#### ±45° Lay-up Carbon Fiber Column
-Mechanical Properties
-Shear Modulus: 20-30 GPa
-Density: 1.50-1.60 g/cm3
-Ratio: ~16.13
-Anisotropic
-U-Joint Options
-Mil-Spec w adapter + epoxy w transverse bolt/cross pins
-Pros: Lightest, Rigid
-~100 g lighter u-joints + ~70 g lighter columns = ~170 g lighter vs. current
-Cons: Stress Concentrations, Bond Failure!
+#### Takeaways
+- 4130 steel has better torsional rigidity-to-weight than 6061/7075 aluminum.
+- Mil-Spec U-joints are a low-cost weight-saving method.
+    - Common in race cars; zero backlash is achievable.
+- CF tubing minimizes weight but raises questions:
+    - Bond reliability: Test and reference CF suspension arms.
+    - Cross pins: How much does drilling into CF affect strength?
+    - Weight savings: Is an additional 70 g worth it after saving 100 g from the U-joints?
 
-#### Thoughts
-4130 is great for torsional rigidity (better than 7075 and 6061 alu)
-switching u-joints may be a low-cost way to save weight
-many race cars already use transverse bolts to attach u-joints
-mil-spec joints have 0 backlash
-cf tubing is the weight minimizing option, BUT:
-need to research and test bonds: talk to ppl working on sus rods?
-must drill holes into cf tubing: how bad is this?
-how important is saving 170 g (~50% of column weight) vs. 100 g?
-personally prefer steel w ms joints, but cf could be done if needed (or rlly wanted)
-
-### Carbon Fiber Tube Selection
+### Carbon-Fiber Tube Selection
 #### Manufacturer
 Rock West Composites is one of the largest direct-to-consumer online suppliers of composite materials and is well known for supporting projects from universities and FSAE teams. Their website is transparent with engineering data, including exact ply layups and material properties, and they even provide calculators for mechanical analysis. They offer an extremely wide range of composite products, including various sizes of carbon fiber tubing specifically designed for torsional applications using ±45° layups.
 
@@ -70,14 +53,12 @@ Rock West Composites is one of the largest direct-to-consumer online suppliers o
 #### Wall Thickness
 According to FSAE rules, bonded joints within the steering system must have a mechanical backup, such as a bolt or pin. The primary failure modes around drilled holes under torsion are delamination due to stress concentration, matrix cracking, and pin/bolt tear-out. Using ⅛” walls significantly protects against these failures by decreasing shear stress, which is inversely proportional to wall thickness. The thicker wall also increases the bearing area between the fastener and the tube, which directly combats tear-out. Additionally, ⅛” walls allow for a reduced outer diameter while maintaining torsional stiffness, which helps with packaging at the cost of weight.
 
-## steeringTubeComparison
+<SheetTable csvUrl={SHEETS.steeringTubeComparison} caption="Carbon-Fiber Tube Comparison" />
 
-<SheetTable csvUrl={SHEETS.steeringTubeComparison} caption="steeringTubeComparison" />
+- 0.750” OD × 0.500” ID maximizes weight savings while measurably improving stiffness.
 
-## steeringTubeComparison
+<SheetTable csvUrl={SHEETS.steeringWeightCalcs} caption="Steering Weight Calculator" />
 
-<SheetTable csvUrl={SHEETS.steeringWeightCalcs} caption="steeringTubeComparison" />
+<SheetTable csvUrl={SHEETS.steeringPO} caption="Steering Parts Order" />
 
-## steeringTubeComparison
-
-<SheetTable csvUrl={SHEETS.steeringPO} caption="steeringTubeComparison" />
+In progress.
