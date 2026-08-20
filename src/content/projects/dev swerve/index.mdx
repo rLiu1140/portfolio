@@ -1,7 +1,34 @@
 ---
-title: "Developmental FRC Swerve Drive Platform"
-description: "Designed, built, and wired a swerve drive platform for developing FRC vision systems"
-date: 2023-12-31
+title: "Developmental FRC Swerve Drive"
+description: "A compact drivetrain built to enable omnidirectional movement and vision-based automation"
+date: 2023-12-06
 order: 7
 ---
-Details coming soon.
+
+### Overview
+As FRC teams shifted to swerve drive, Team 610 faced significant limitations with its traditional tank-drive architecture. Tank drive restricted independent rotation and translation, reducing the effectiveness of vision-based navigation and making maneuvers more predictable during defense. However, implementing swerve drive required substantial software development, making an in-season transition unfeasible.
+
+To support Team 610’s adoption of swerve drive, I created a scaled-down drivetrain with all the components of a standard competition drivetrain.
+
+### Design
+The chassis measured 21" × 21", compared to typical 30" × 30" competition robots. This reduced footprint provided sufficient space for electronics while keeping the drivetrain compact and stable. Chassis tubing was machined on a manual mill, while gussets were CNC-routed.
+
+The drivetrain used four corner-mounted MK4i swerve modules powered by Falcon 500 motors. The inverted motor configuration protected the motors and lowered the center of mass, while Colson wheel compatibility provided durability for repeated testing.
+
+Instead of conventional wood and foam bumpers, curved ultra-high-molecular-weight polyethylene (UHMWPE) plates were riveted around the chassis corners. These plates provided a lightweight and simple solution for protecting the swerve modules from accidental impact. UHMWPE was selected for its high impact resistance and ductility.
+
+An adjustable-angle camera mount was secured to the front of the chassis, allowing programmers to optimize the camera position for AprilTag and reflective-tape detection.
+
+### Electronics
+To ensure software developed on the drivetrain accurately translated to the competition robot, standard FRC components were used.
+
+A 12 V, 18 Ah SLA battery powered the drivetrain through a power distribution hub. Eight 40 A, 12 V brushless motors powered the swerve modules, while an onboard CAN network connected all the devices. WAGO distribution hubs were positioned throughout the chassis to simplify wiring and serviceability. An OM5P wireless router provided the network connection required for driver-station control.
+
+### Results
+The drivetrain allowed programmers to develop both teleoperated and autonomous vision-assisted swerve control. Swerve drive was successfully implemented in the 2024 season, with progressively more advanced automation introduced each year.
+
+- **2024**: Vision-assisted shooting and automated drive-to-target
+- **2025**: Fully automated multi-level pick-and-place
+- **2026**: Fully automated dual-turret shooting while moving
+
+The transition to swerve drive was fundamental to Team 610’s recent success, helping advance the team's ranking from the top 250 in 2023 to the top 100 in 2025 and 2026 out of 3,700+ teams worldwide. Swerve drive also directly contributed to earning the Innovation in Control and Autonomous Awards.

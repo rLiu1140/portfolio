@@ -25,7 +25,18 @@ import Link from "@components/Link.astro";
         </div>
       </Link>
       
-      <nav class="flex gap-4 items-center">
+      <nav class="flex gap-2 items-center">
+        <!-- New Projects Link -->
+        <Link 
+          href="/portfolio/projects" 
+          class="link-fade"
+        >
+          Projects
+        </Link>
+
+        <!-- Divider -->
+        <span class="opacity-50">/</span>
+
         <!-- Direct PDF Resume Link utilizing the template's native Link component -->
         <Link 
           href="/portfolio/Ryan_Liu_Resume.pdf" 

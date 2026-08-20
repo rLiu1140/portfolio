@@ -1,110 +1,63 @@
 ---
 title: "3D-Printed Bicycle Brake Calipers"
-description: "SLS-printed brake calipers designed and FEA-validated to meet ISO braking requirements"
+description: "SLS-printed brake calipers designed and FEA-optimized to meet ISO braking requirements"
 date: 2026-06-09
 order: 2
 ---
 
 ### Overview
-As a term-long project for Northwestern's MECH_ENG 240: Intro to Mechanical Design and Manufacturing, teams of five were tasked with designing and testing rear bike brake calipers. Within my team, my role was to lead CAD and manufacturing.
+As a term-long project for ME 240: Intro to Mechanical Design and Manufacturing, teams of five were tasked with developing rear bike brake calipers. Within my team, I was entirely responsible for the design process, from initial sketches and CAD through FEA-driven optimization, testing-backed iteration, and technical documentation.
 
-### Needs and Metrics Tables
-Coming soon.
+### Requirements
+The design was driven by hard requirements specified by ISO 4210 bicycle safety standards as well as team-defined goals.
 
-### Design Concept Development
-#### Estimation of the Design Space
-The design space consists of both fixed and flexible components. In terms of positional constraints, there are predetermined caliper and brake pad mounting holes, and there must be adequate clearance for the bike wheel to pass through as shown in Figure 1. As for geometric constraints, each brake caliper has the same predetermined lever arm length, and the cable mounting holes are concentric.
+| Metric | Ideal | Marginal |
+|---|---|---|
+| Stopping distance (25 km/h) | ≤ 7 m | ≤ 15 m |
+| Mass | ≤ 200 g | ≤ 400 g |
+| Material | Nylon-12 (required) | — |
+| Appearance | 5/5 | 2/5 |
 
-By referencing a working brake caliper made from the same material, a rough estimate of external boundaries of the design space shown in Figure 2, 3, and 4 were made. This boundary would allow for more than enough material to run finite element analysis without setting unnecessary constraints on load paths or representing an unrealistically large design space. This is critical for topology optimization as the design space is intended to consist of all possible space where material could be used to compose the brake calipers.
+### Concept Development
+The design space was constrained by fixed caliper and brake pad mounting holes, a predetermined lever arm length, and clearance for wheel passage. A rough boundary of this space was hand-sketched before modeling it in CAD. This allowed for finite element analysis (FEA) without over-constraining any load paths.
 
-#### Hand Calculations
-Hand calculations were used to relate brake geometry to input force, pad normal force, braking friction, and stopping distance. These calculations showed that required input force decreases as the input lever arm and cable lever arm increase, so these dimensions were preserved where possible during topology optimization.
+#### Calculations
+The relationship between brake geometry and stopping performance was derived using kinematics and a moment balance equation. This showed that the input force required for a given stopping distance is inversely proportional to the input and cable lever arm lengths.
 
-First, the relationship between geometry and the resulting braking force was explored through moment balances.
+$$
+F_{in} = \frac{mv_i^2\,r_{out}\,r_{pad}\,r_{tire}}
+{2\mu d\,r_{in}\,r_{cable}\,r_{brake}}
+$$
 
-Next, braking distance kinematics and the geometric properties of the wheel were taken into account.
-
-The final relationship is shown below.
-
-These calculations demonstrated that the input force required for a certain stopping distance was inversely proportional to rin and rcable. This information was used during initial concept design.
-
-#### Concept Sketches
-Initial hand drawn sketches were produced to understand the physics behind how caliper brakes worked and what dimensions could be optimized for braking performance. Hand sketches were also initially used to visualize the rough design space as shown in Figure 2, 3, and 4 before dimensioned sketches were produced using CAD software.
-
-Using Siemens NX, two brake models were produced.
-
-Adhering to the dimensional constraints of the design space, a spatial model representing the greatest material condition of the brake calipers was created. This model as shown in Figure 8 would be used as the starting point of the design by using it for finite element analysis simulations to understand the load paths.
-
-An additional CAD model was produced as a visual representation of what the brake calipers could look like. This design as shown in Figure 9 adhered to the same positional and geometric design constraints as the design space, but referenced the design of preexisting caliper brakes rather than through simulation or topology optimization.
-
-Calculations to identify parameters for the specific load case were also performed. Equations similar to those used for the initial concept design were employed here. In addition, values for mass, speed, and braking distance were inserted, determined using research and information from the metrics table. The resulting forces included tension in the brake cable, normal force from the brake pad, and friction force.
-
-#### Optimization of Load Paths
-After running finite element analysis (FEA) simulations on the design space model, a few load path patterns were identified as shown in Figure 11 and 12. Most noticeably, and expectedly, loads desired to travel in a straight line between points of applied load and supports. Across both sides, the load applied to brake pads desired to travel most directly to the central caliper mounting holes. This meant that the load tightly hugged the inner radius of the curve where the bike tire passes through, creating a stress concentration. The simulations also showed that displacement was greatest at the end of each brake caliper in Figure 14 and 18, suggesting that more material may be required to stiffen those areas. The greatest load paths were on both the inner and outer surfaces of each caliper while smaller loads connected the larger loads as shown in Figure 11 and 12. In total, these loads outlined a rough area where the brake caliper should occupy, but also illustrated smaller triangular regions that may require less material.
+#### Load Path Visualization
+Running FEA on the initial design-space model revealed critical load paths through the part. Loads closely followed the inner radius near the wheel, concentrating at the caliper mounting hole and producing the largest displacement at the brake pad mounting hole. These simulations helped identify where material was structurally necessary and where it could be removed to minimize mass.
 
 #### Topology Optimization
-The topology of each brake caliper was optimized by referencing the load paths and deflection of the finite element analysis simulation results shown in the figures above. The shape of each brake caliper as shown in Figure 21 and 22 was determined by outlining the external load paths. Specifically, splines were used and dimensioned to accurately reflect these paths. Splines were selected over arcs for greater geometric control, allowing for material that would be excluded if the curve was modelled using a different method. Once the outer brake geometry was fully constrained, the entire brake was extruded to a thickness of 0.875”. Sketches were made on each side of the brake where there were loads as shown in Figure 23 and 24. An outer rim of 0.1” was projected using the offset feature while the thickness of inner ribs were generally smaller, ranging from 0.05” to 0.075” depending on the magnitude of the estimated load traveling through the rib. These ribs were carefully positioned to reflect the position of the simulated load paths. Cut extrudes were used to remove the negative material, leaving only the ribs behind and a thin section of remaining material. Geometrically, the sectional view of the part and its ribs resemble that of an I beam as shown in Figure 25 and 26, which reduces deflection through a high moment of inertia. To minimize stress concentrations and increase the amount of material of each rib, large internal fillets were used as shown in Figure 27. Specifically, fillets of larger radii were applied around the central caliper mounting hole which experienced more stress than other parts of the caliper. Smaller external fillets were also used to remove sharp edges that may be unsightly or unpleasant to feel during installation.
+The profile of each caliper was created using splines to precisely outline the outer load path. Once the boundaries were defined, ribs were sketched and created on each side of the calipers to reflect the direction and magnitude of the internal load paths. The resulting cross-section resembled an I-beam, maximizing stiffness and reducing deflection through an increased moment of inertia. Fillets were then sized based on local stress, with large internal fillets around the stress-concentrated caliper mounting hole and smaller external fillets distributed around less critical regions.
 
-#### Iterative Use of Finite Element Analysis
-Finite element analysis was used in several ways across the design process. It was initially used to identify the load paths and deflection of the design space model to help visualize and understand how calipers behave under loading. From these results, a model reflecting the simulation results was produced. Finite element analysis was then used to verify the behaviour of this initial optimized design, through stress and deflection and simulation as shown in Figure 28, 29, 30, and 31. Once the results met the initial metrics, it suggested that design was ready for manufacturing and real-world testing. Beneficially, the initial real-world test results passed all metrics, which showed that the finite element analysis was reflective of the actual testing. However, the real-world testing brought up design flaws that could not have been realized through finite element analysis. Notably, the method of assembly did not match the placement of the cable load on the right caliper, which did not account for a bending moment. Once the design was adjusted to better accommodate for the mounting method, finite element analysis was rerun with adjusted load placement to reflect real-world testing and verify the improvement in performance from the first design iteration as shown in Figure 32, 33, 34, and 35.
+FEA was used iteratively throughout the design process: first to visualize load paths, and then to verify the modeled geometry against stress and deflection requirements before committing to manufacturing.
 
-### Initial Testing Results
+### Design Iterations
+#### V1
 
-The caliper was initially mounted and tested using four nuts securing the cable to the right caliper. However, this did not accurately reflect the finite element analysis setup, where the forces were applied directly to the hole. Accordingly, the cable was remounted and tested without the fourth nut as shown in Figure 36.
+Initial real-world testing passed all performance metrics, confirming that the FEA results were generally predictive. However, the cable mounting hardware introduced an unaccounted-for bending moment on the right caliper. Removing an extra mounting nut allowed the cable to sit flush against the caliper face, reducing stopping distance from 254 in to 187 in and lever lockout force from 150 N to 102 N.
 
-The brake demonstrated improved performance when the cable was mounted directly against the face of the right caliper. When the additional nut was present between the cable and caliper, increased flection and braking distance were observed. With the nut removed the braking distance decreased from 254in to 187in. The force to lock out the lever also decreased from 150N to 102N.
+#### V2
 
-With the initial incorrect mounting setup, the stopping distance metric was not met as the finite element analysis setup did not reflect the actual loading. As a result, the right caliper experienced excessive bending both vertically and horizontally due to the diagonally applied force. However, with the proper mounting setup, all metrics were met.
+#### Changes from V1
+- Shifted the right caliper cable mounting face to be coplanar with the left caliper, eliminating the bending component.
+- Biased material placement along the new diagonal load path created by the offset face.
+- Redesigned the right caliper arm rib from an I to an X to increase bidirectional rigidity.
+- Tightened bolt hole tolerances (6.40 mm → 6.27 mm) to reduce mounting wobble.
 
-These results inspired changes to the finite element analysis setup which would make the loading more realistic, providing more accurate results for stress and deflection. From these results, areas requiring more material can be identified to make the calipers stiffer. In terms of design, offsetting the cable mounting face of the right caliper would allow for the cable to apply a direct vertical force to the right caliper, as the design initially intended.
+| Metric | Target (Marginal / Ideal) | V1 | V2 | Δ |
+|---|---|---|---|---|
+| Stopping distance (25 km/h) | ≤15 / ≤7 m | 13.5 m | 11.5 m | -14.8% |
+| Mass | ≤400 / ≤200 g | 30.2 g | 31.5 g | +4.3% |
 
-### Design Improvements Between Tests
+The updated design reduced stopping distance by 2 meters, a 14.8% improvement in braking performance. This came at the cost of only 1.3 g of additional mass, which is negligible relative to the bike and rider system and makes the tradeoff worthwhile.
 
-A number of design changes were made based on the initial testing results.
+### Reflection
+Without the provided material constraint, exploring metal alloys and more organic geometries could further improve performance without significantly increasing weight through the same SLS 3D-printing process.
 
-#### Right Caliper Cable Mount
-The face of the right caliper where the cable was directly mounted against was shifted backwards so that it is collinear with the cable hole of the left caliper. This was done to remove the horizontal component of the cable tension, allowing for less horizontal bending and greater breaking force applied. This change was made by extruding the circular profile of the cable mounting hole and using a fillet to seamlessly integrate it with the rest of the caliper while accounting for load paths and minimizing stress concentration as shown through Figure 37 and 38. This change also added more material to the part where there was excessive deflection in the initial trial, which would help improve the part’s stiffness as well.
-
-#### Right Caliper Ribs
-Although the initial finite element analysis simulation suggested that the area between the cable mounting hole and caliper mounting hole would experience low stresses and a single load path going across from the top to bottom, modeling around this simulation was not sufficient. As a result, a new rib geometry was incorporated into the design as shown in Figure 39. Compared to the initial I rib, the X rib provides greater resistance to bending in both directions, greatly increasing stiffness as a low weight cost.
-
-Instead of symmetric cut extrude depths, which would result in remaining material being perfectly centered in the part, the extrude depths now bias the remaining material closer to the cable mounting face. This was done to accommodate for the load path which now travelled diagonally from the offset cable mounting face and centered caliper mounting hole.
-
-Moving down the right caliper, the geometry of the ribs were moderately changed to better reflect the position of the load paths within the part. In the initial design, a small pocket remained on the back side of the caliper. However, with the new modified rib placement, this pocket would no longer be geometrically possible due to the size of the fillets. As a result, this pocket was entirely expelled as shown through Figure 40 and 41, which also increased the part’s rigidity.
-
-#### Left Caliper Ribs
-During the initial test, the left caliper experienced reduced deflection in comparison to the right caliper. A minimal change was made to the thickness of the internal ribs. In order from the top to bottom, the initial rib thickness was 0.05”, 0.0625”, and 0.75, which was increased to 0.0625”, 0.06875”, and 0.75” as shown in Figure 42. This was done to marginally increase stiffness with minimal weight increase.
-
-#### Inner Fillet Radius
-Across both calipers, increasing stiffness without changes in geometry or significant weight gain was desired. By increasing the inner fillet radii, which connected the ribs within the part, the moment of inertia of the cross section marginally increased to help resist bending and reduce overall deflection.
-
-#### Tolerancing
-The diameter of holes designed for M6 bolts were reduced from 6.4mm to 6.27mm for a tighter fit that reduces wobble after mounting. This would result in very minimal weight gain but help improve the brake’s performance.
-
-### Final Testing Results
-The final testing results confirmed that the evaluated design metrics were successfully met, including dry stopping distance, mass, assembly time, appearance, user confidence, and the Nylon-12 manufacturing constraint. However, several metrics from the original metrics table (Table 1) were not directly evaluated during final physical testing due to limitations in the available testing setup. Specifically, wet-condition stopping distance, wet/dry stopping distance ratio, brake force linearity, and user understanding time would require additional controlled testing conditions beyond the final test procedure.
-
-Some of the mounting hardware loosened over the trials, which resulted in a greater stopping distance, but tightening the nuts brought the stopping distance back to its initial value. The hardware loosened because they were not tightened properly during the initial assembly due to human error. A recommended bolt torque and torque wrench would prevent this from happening in the future. However, all testing metrics were still met.
-
-Comparing the final test results to the initial test, there is a significant reduction in stopping distance of 2 meters, equating to roughly a 14.8% decrease. This improvement in performance was only at the cost of an increase of 1.3 grams in weight, which is less than an increase of 4.3%. When considering the bike and rider system as a whole, an increase of 1.3 grams is even less significant and is a tradeoff worth making for an 14.8% increase in braking performance.
-
-### Additional Improvements and Adjust for Manufacturability
-For future iterations of the brake caliper, additional improvements would involve further topology optimization to achieve greater rigidity and a lower stopping distance with the same or further minimized mass. The current iteration of the brake calipers very closely reflects the simulation results in a two dimensional perspective of the front view. However, it less closely resembles the simulation results when examining the distribution of stresses and loads from a side view. However, the greatest constraint of the current calipers is the material, Nylon-12. By switching to a lightweight metal such as 7075 aluminum, the brake caliper would experience significant improvements in performance and longevity due to its significantly higher strength-to-weight ratio, structural stiffness, and fatigue resistance. At a certain threshold, however, substantially rigid brakes may induce the wheel to lock up if the user applies a substantial enough force. This lock up may result in an increased braking distance, and thus an anti-lock braking system may be required if the rider is unable to apply skilled braking.
-
-#### Scenario A: Casting
-Although casting requires high initial fixed costs for tooling, the variable cost per part is extremely low and the high production value results in a low overall cost per part. This process is able to produce the curved geometry with minimal material waste while unfinished aluminum casting yields an acceptable finish that meets the aesthetics requirement. Given that each mounting hole has a basic dimension of approximately 6mm, casting is able to meet the ± 0.1mm tolerance requirement as well.
-
-#### Scenario B: Forging
-During the manufacturing process, forging aligns the aluminum grain structure with the brake’s geometry, allowing for increased strength and fatigue resistance. This results in a greater strength to weight ratio, which the high performance bike requires at the cost of increased price. The curved profile is possible through forging aluminum, which also produces an excellent surface finish. However, forging may require an additional process such as drilling to machine the hole itself and achieve the required tolerance.
-
-#### Scenario C: Additive Manufacturing
-Due to the extremely low production volume, custom tooling would not be economically feasible. Additive manufacturing would require no additional fixed costs and less intensive CAM programming compared to CNC machining, which may reduce time between iterations. Additionally, additive manufacturing would allow for great geometric flexibility due to its high resolution, allowing for detailed and complex features with limited restrictions from tool bit sizes and fixtures that would be required in CNC machining.
-
-### Discussion
-Overall, the design process was relatively standard but comprehensive. The initial design phase was beneficial in understanding the purpose and need of the component, which gave direction to the design process. Notably, the ISO engineering standards were helpful in setting firm constraints and benchmarks that must be met. The specific and exact dimensions of the bike and brake mounting system were also provided, allowing for a relatively intuitive design space that could be represented in CAD software. At this time, hand calculations were made to understand the physics and properties of the braking system based on variables such as lever arm lengths, which would further guide the specific dimension of the design.
-
-By running finite element analysis simulations using the calculated loads, the stresses and forces of the system could be visualized and used to gain additional understanding of the component's geometry. These simulation results served as the baseline geometry for the brake calipers, as areas of load and stress would suggest the requirement for material. During this phase of the process, it can be noted that hand calculations were not prominent in the physical design of the components, but simply used to understand what loads the component may experience at fixed points. Instead, the organically generated geometry was referenced instead of converted into a simpler component through general design practices.
-
-To ensure that the modelled design sufficiently addressed the structural needs, finite element analysis was performed iteratively before verifying the results and having the component ready for initial real application testing. The initial testing was a critical point in the design process as it serves as the first time where the component is tested in a realistic environment with many variables in addition to the estimated fixed loads used in simulation. The results from this test were extremely valuable as a reference for how the components actually perform. Changes were made accordingly based on the initial testing results and finite element analysis was performed again. This time however, in addition to verifying results before manufacturing, the simulation results could be directly benchmarked against the initial simulation results to understand how the part may react differently from the first iteration. Final in-person testing confirmed that the changes implemented were correctly driven and resulted in beneficial improvement.
-
-Throughout the entire design process, there were no substantial challenges that required a major overhaul or redirection. In fact, the design process became more streamlined as more testing data was gathered from both simulations and in-person testing. The most significant challenges were faced in the initial design conception phase where there were many unknowns and variables, whose effect on the performance of the part needed to be understood before committing to a design decision.
+Overall, the design process was relatively standard but comprehensive, while the project highlighted the importance of real-world testing alongside simulation.

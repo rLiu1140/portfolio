@@ -1,137 +1,76 @@
 ---
 title: "2026 FSAE Differential Sprocket Adapter"
-description: "An FEA-validated, CNC-machined 7075-T6 aluminum spline-to-sprocket adapter"
+description: "An FEA-validated 7075-T6 aluminum spline-to-sprocket adapter machined on a Haas VF-2"
 date: 2026-01-19
 order: 3
 ---
 
 ### Overview
-
-The differential sprocket adapter (DSA) connects the differential to the drivetrain sprocket, transferring torque between the two. The differential shaft has a splined profile, and the drivetrain sprocket mounts via 6 bolt holes — the DSA bridges the two interfaces.
+The differential sprocket adapter (DSA) connects the differential to the drivetrain sprocket, transferring torque between the two. The differential shaft has a splined profile, while the drivetrain sprocket has six mounting holes.
 
 ### Requirements
+1. Ensure concentricity between the differential and sprocket.
+2. Achieve FoS > 1.25 and fatigue life > 400,000 cycles.
+3. Minimize mass.
+4. Successfully machine the part on the first attempt.
 
-1. Maintain concentricity between the differential and sprocket
-2. Factor of Safety (FoS) > 1.25 **and** total life > 400,000 cycles under 750 Nm of torque
-3. Minimize mass
-4. Machine successfully on the CNC on the first attempt
+### Load case
+The load case was derived from the peak motor torque of 220 Nm, converted to an equivalent force of 4,800 N applied at each bolt hole.
 
-### Loading
-
-Load case was derived from peak motor torque (220 Nm), converted to an equivalent force for more accurate simulation — **4,800 N** applied at each bolt hole.
-
-Early in FEA, the design still included hole inserts on the underside of the DSA. These were later removed for manufacturability, but during simulation they were modeled with an additional **2,290 N** force (opposing the direction of motion) to represent the reaction force the sprocket applies on the inserts.
-
-**Result:** FoS of 4.8, no fatigue damage predicted.
+During the second design iteration, an additional 2,290 N opposing the direction of motion was applied to represent the sprocket reaction force on the inserts. This was calculated by scaling the bolt-hole force by the ratio of sprocket width to DSA width.
 
 ### Stock
+- 7075-T6 aluminum disc, 1.6" thick × 8.0" OD.
+- Spline profile cut concentrically via outsourced wire EDM.
 
-7075-T6 aluminum disc, spline profile cut concentrically via outsourced wire EDM.
-**Stock size:** 3" thick × 8" OD
+### Design Iterations
+#### V1
 
----
+#### Features
+- 3-spoke design to minimize material and mounting hardware.
+- Pocketed geometry, optimized and verified with FEA.
+- Circularly arranged tabs for concentric mounting.
+- Filleted edges to reduce stress concentrations.
+- Chamfered edges to remove burrs and prevent mounting interference.
 
-## Design Iterations
+#### V2
 
-### V1
+#### Changes from V1
+- Added hole inserts for ¼-28 bolts, reducing mass by downsizing from M10 fasteners.
+- Increased spline cylinder diameter and plate thickness to reduce deflection and improve machinability.
+- Updated chamfer and fillet dimensions.
+- Switched the FEA load case from torque to force for more realistic loading.
+- Added an opposing force at the hole inserts to represent the sprocket reaction load.
 
-- 3-spoke design to minimize material and mounting hardware
-- Pocketed geometry, optimized and verified via FEA
-- Circularly arranged tabs for concentric mounting
-- Chamfered edges to remove burrs and prevent mounting interference
+| | V1 | V2 |
+|---|---|---|
+| Min. FoS | 2.625 | 4.8 |
+| Fatigue life | 696,100 cycles | Passed (>1M cycles) |
+| Fasteners | 3× M10 hex screws + locknuts | 3× ¼"-28 hex screws + locknuts |
+| Part mass | 78.58 g | 97.14 g |
+| Assembled mass | 180.58 g | 130.14 g (-27.94%) |
 
-**FEA — Factor of Safety**
+#### V3
 
-| Parameter | Value |
-|---|---|
-| Material | 7075-T6 (SN) |
-| Fixture | Fixed — inner spline faces |
-| External load | Torque, 750 Nm total — applied at inner bolt hole cylinder faces, about outer spline cylinder axis |
-| Minimum FoS | **2.625** |
-| Required FoS | 1.25 |
+#### Changes from V2
+- Replaced the small concentricity tabs with a single large circular feature.
+- Removed the integrated hole-insert bosses in favor of separately machined spacers.
 
-**FEA — Fatigue** *(same material, fixtures, and loads as above)*
+Together, these changes eliminated the need for rotational alignment between the two CNC operations and prevented feature breakage during machining.
 
-| Parameter | Value |
-|---|---|
-| Event cycles | 1,000,000 |
-| Loading type | Fully reversed |
-| Total life | **696,100 cycles** |
-| Required life | 400,000 cycles |
+The functionality and weight of the assembly remained largely unchanged.
 
-**Mass:** 78.58 g — 41.71 g (34.68%) lighter than the previous year's design
+### Manufacturing
+The DSA was machined using two setups on a Haas VF-2 CNC mill. A 4-jaw chuck with parallels and a dial indicator was used to level the part, while an edge finder was used to set the origin. Each setup began with a roughing pass to remove bulk stock, followed by finishing passes for the respective top and bottom surface features.
 
-**Hardware:**
-- 3× M10 × 1.5 mm, 25 mm, hex head screws (25 g each)
-- 3× M10 × 1.5 mm, 10 mm, locknuts (9 g each)
+The final part was finished with WD-40 and a Scotch-Brite pad to deburr the edges and produce a brushed appearance.
 
----
+The three spacers were turned separately and hand-fitted into the sprocket until a tight fit was achieved.
 
-### V2
+#### Challenges
+The oversized round stock significantly increased manufacturing time. The stock was difficult to seat squarely and securely in the chuck jaws, requiring additional time to level the surface.
 
-**Changes from V1:**
-- Added hole inserts for ¼-28 bolts, switching down from M10 hardware to save mass
-- Switched FEA load case from torque to force, for closer-to-real loading
-- Updated chamfer and fillet dimensions
-- Increased spline cylinder diameter and plate thickness
-- Added an opposing force at the hole inserts to represent the sprocket's reaction load, calculated by scaling the bolt-hole force by the ratio of sprocket width to DSA width
+An initial pass with a 1" diameter end mill lifted the stock, requiring the setup to be repeated with a ½" end mill. Reducing the stock size beforehand with a band saw was considered but avoided, as it would have required an additional manufacturing process.
 
-**FEA — Factor of Safety**
-
-| Parameter | Value |
-|---|---|
-| Material | 7075-T6 (SN) |
-| Fixture | Fixed — inner spline faces |
-| External load 1 | Force on inner bolt hole faces — 4,800 N per bolt |
-| External load 2 | Reaction force at hole inserts (from sprocket) — 2,290 N per bolt |
-| Minimum FoS | **4.8** |
-| Required FoS | 1.25 |
-
-**FEA — Fatigue** *(same material, fixtures, and loads as above)*
-
-| Parameter | Value |
-|---|---|
-| Event cycles | 1,000,000 |
-| Loading type | Fully reversed |
-| Total life | Passed, required threshold exceeded |
-| Required life | 400,000 cycles |
-
-**Mass:** 97.14 g — down 47.44 g from V1's total assembly mass (M10 → ¼-28 hardware swap)
-
-**Hardware:**
-- 3× ¼"-28 hex head screws
-- 3× ¼"-28 nylon-insert locknuts
-
----
-
-### V3
-
-Final manufacturability pass:
-- Replaced the small concentricity tabs with a single large circular register
-- Removed the integrated hole-insert bosses in favor of separately-machined spacers, eliminating the need for rotational alignment between the two CNC operations
-
----
-
-## Manufacturing
-
-Machined in two operations on the CNC, programmed with Fusion 360 CAM.
-
-**Operation 1**
-- Origin located with a dial indicator
-- Held in a 4-jaw chuck
-- Bulk of material removed
-
-**Operation 2**
-- Re-centered using a dial indicator
-- No hole alignment required between operations — the switch to separate spacers removed that dependency
-- Extra material left on the sprocket-mounting lip, hand-fit by removing small amounts of material until a tight fit was achieved
-
-Final surface finished with WD-40 and Scotch-Brite to deburr and produce a brushed appearance.
-
-The oversized provided stock made this process slower than expected — the large radius was difficult to seat squarely in the chuck jaws while keeping the part flat and centered. A 1" diameter end mill was tried first but lifted the part under cutting force. Reducing the stock size on a band saw beforehand was considered but skipped, since it would have required an additional setup.
-
-**Lathe work:** The 3 spacers were turned separately and hand-fit into the sprocket until a tight fit was achieved.
-
-## Results
-
-The DSA assembled cleanly into the drivetrain on the first attempt and successfully transferred torque from the differential to the sprocket throughout endurance testing, with the car completing the endurance event.
+### Results
+The DSA was seamlessly integrated into the drivetrain assembly and met all design requirements. It successfully transferred torque from the differential to the sprocket, and the car completed the endurance event.
