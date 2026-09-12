@@ -2,7 +2,7 @@
 title: "Carbon-Fiber Tube Insert Bond Testing (In Progress)"
 description: "Test procedures, fixtures, and samples for evaluating the torsional strength of epoxy bonds"
 date: 2026-10-30
-order: 4
+order: 5
 ---
 
 import { Image } from "astro:assets";
@@ -13,7 +13,7 @@ import glassBeads from "../../../assets/glass-beads.png";
 import failureModes from "../../../assets/failure-modes.png";
 
 ### Overview
-Carbon-fiber tubes are widely used in motorsports for their high strength-to-weight ratio, stiffness, and low mass. Applications include suspension arms, steering columns, and other structural components. However, attaching hardware to carbon-fiber tubing presents an engineering challenge.
+Carbon-fiber tubes are widely used in motorsports for their exceptional stiffness and high strength-to-weight ratio. Applications include suspension arms, steering columns, and other structural components. However, securing hardware to carbon-fiber tubing and achieving consistent results presents an engineering challenge.
 
 Drilling holes through carbon fiber to mechanically secure inserts breaks continuous fibers, introduces stress concentrations, and can cause delamination. As a result, bonding is commonly used to secure inserts and transfer loads without compromising the structural integrity of the tube.
 
@@ -32,22 +32,22 @@ A cylindrical feature slides inside the tube. This hides and protects the bond f
 </figure>
 
 #### External
-A cylindrical feature slides around the outside of the tube. This provides a larger bonded area due to the increased outer surface area, allowing for a shorter insert engagement length. The increased bond diameter also reduces the shear stress in the adhesive for the same applied torque. However, the external sleeve creates a large stiffness transition where it meets the carbon-fiber tube, resulting in stress concentrations and increasing the risk of peeling, a common failure mode in bonded joints.
+A cylindrical feature slides around the outside of the tube. This provides a larger bonded area due to the increased outer surface area, allowing for a shorter insert engagement length. The increased bond diameter also reduces the shear stress in the adhesive for the same applied torque. However, the external sleeve creates a large stiffness transition where it meets the carbon fiber tube, resulting in stress concentrations and increasing the risk of peeling, a common failure mode in bonded joints.
 
 <figure>
   <Image src={externalInsert} alt="External Insert" style="border-radius: 6px; max-width: 100%; height: auto;" />
-  <figcaption>Figure 1: Cross-Sectional View of an External Insert Assembly</figcaption>
+  <figcaption>Figure 2: Cross-Sectional View of an External Insert Assembly</figcaption>
 </figure>
 
 ### Bond Length
-Bond length is the length of engagement between the insert and the tube. Critically, it is inversely proportional to the insert radius.
+Bond length is the engagement length between the insert and the tube. Critically, it is inversely proportional to the insert radius squared.
 
 $$
 L = \frac{T}{2\pi r^2 \tau_{\mathrm{allow}}}
 $$
 
 ### Bondline Thickness
-Bondline thickness is the distance between two surfaces being joined, which is entirely filled by the adhesive. The optimal values for maximum shear and peel strength can be found on the Technical Data Sheet for each specific adhesive.
+Bondline thickness is the radial gap between the two bonded surfaces, entirely filled by adhesive. Optimal values for maximum shear and peel strength can be found on the Technical Data Sheet for each specific adhesive.
 
 $$
 t_b = \frac{D_{\text{tube, ID}} - D_{\text{insert, OD}}}{2}
@@ -55,15 +55,15 @@ $$
 
 | Too Thin | Too Thick |
 | --- | --- |
-| Most of the adhesive is squeezed out by the insert, causing metal-to-carbon contact and leaving minimal adhesive to absorb stress. The joint becomes extremely brittle. | The adhesive itself becomes the structural weak point. The adhesive tears apart internally before the insert or tubing fails. It is also more difficult to center the insert. |
+| Most of the adhesive is squeezed out by the insert, causing metal-to-carbon contact and leaving too little adhesive to absorb stress. The joint becomes extremely brittle. | The adhesive itself becomes the structural weak point and tears apart internally before the insert or tube fails. It is also harder to keep the insert centered. |
 
 ### Insert Material
 | Material | Shear Mod. / Density | Pros | Cons |
 | :--- | :--- | :--- | :--- |
-| **4130 Steel** | 10.19 | Highest stiffness-to-weight of the set, low cost, easy to machine | Poor long-term durability – corrodes without coating |
-| **Grade 5 Titanium** | 9.93 | Excellent bondability and corrosion resistance – stable oxide layer | Expensive, hard to machine |
-| **304 Stainless Steel** | 9.71 | Great corrosion resistance, bonds well post-abrasion | High stiffness mismatch – more adhesive strain under cyclic loading |
-| **6061 Aluminum** | 9.63 | Industry standard – stable oxide layer gives repeatable bonding, low stiffness mismatch, cheap and easy to machine | Lower yield strength than 7075 |
+| **4130 Steel** | 10.19 | Highest stiffness-to-weight of the set, low cost, easy to machine | Poor long-term durability — corrodes without coating |
+| **Grade 5 Titanium** | 9.93 | Excellent bondability and corrosion resistance — stable oxide layer | Expensive, hard to machine |
+| **304 Stainless Steel** | 9.71 | Great corrosion resistance, bonds well post-abrasion | High stiffness mismatch — more adhesive strain under cyclic loading |
+| **6061 Aluminum** | 9.63 | Industry standard — stable oxide layer gives repeatable bonding, low stiffness mismatch, cheap and easy to machine | Lower yield strength than 7075 |
 | **7075 Aluminum** | 9.57 | Higher shear modulus and yield strength than 6061 | Harder to prep consistently, more corrosion-prone (Zn/Cu content), moderate cost |
 
 ### Galvanic Corrosion
@@ -79,7 +79,7 @@ Toughened, two-part structural epoxies should be used due to their high shear st
 | **DP460** | Slightly higher peel strength than DP420; 60-minute work life; reaches handling strength in 4 hours |
 | **DP460NS** | DP460 as a non-sag paste; better for loose machining tolerances; harder to flow into micro-gaps |
 
-### Surface Preperation
+### Surface Preparation
 | Step | Insert (Aluminum) | Tube (Carbon Fiber) |
 | :--- | :--- | :--- |
 | **1** | Sand with 80–120 grit sandpaper | Sand with 120–180 grit sandpaper |
@@ -91,7 +91,7 @@ Toughened, two-part structural epoxies should be used due to their high shear st
 | **7** | Air dry | — |
 
 ### Gap Thickness Control
-Due to the bond gap created by the insert OD being smaller than the tube ID, ensuring concentricity during the epoxy curing process can be challenging. Two common methods to address this are a geometric solution and a glass bead solution. The geometric solution uses a protrusion to directly align the insert with the inside of the tube, while the glass bead solution involves adding spherical beads to the epoxy to act as spacers between the insert and the tube.
+Since the insert OD is smaller than the tube ID, maintaining concentricity during epoxy curing can be difficult. Two common methods to address this are a geometric solution and a glass bead solution. The geometric solution uses machined features to directly align the insert with the inside of the tube, while the glass bead solution involves adding spherical beads to the epoxy to act as spacers between the insert and the tube.
 
 *Figures 3–5 are adapted from the research study conducted by Rządkowski et al.*
 
@@ -111,10 +111,10 @@ Due to the bond gap created by the insert OD being smaller than the tube ID, ens
 </figure>
 
 ### Methodology
-In progress.
+*In progress.*
 
 ### Results
-Coming soon.
+*Coming soon.*
 
 ### Sources
-Coming soon.
+*Coming soon.*

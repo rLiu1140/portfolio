@@ -9,7 +9,7 @@ order: 2
 As a term-long project for ME 240: Intro to Mechanical Design and Manufacturing, teams of five were tasked with developing rear bike brake calipers. Within my team, I was entirely responsible for the design process, from initial sketches and CAD through FEA-driven optimization, testing-backed iteration, and technical documentation.
 
 ### Requirements
-The design was driven by hard requirements specified by ISO 4210 bicycle safety standards as well as team-defined goals.
+The design was driven by hard requirements from ISO 4210 bicycle safety standards, alongside goals the team defined internally.
 
 | Metric | Ideal | Marginal |
 |---|---|---|
@@ -19,10 +19,10 @@ The design was driven by hard requirements specified by ISO 4210 bicycle safety 
 | Appearance | 5/5 | 2/5 |
 
 ### Concept Development
-The design space was constrained by fixed caliper and brake pad mounting holes, a predetermined lever arm length, and clearance for wheel passage. A rough boundary of this space was hand-sketched before modeling it in CAD. This allowed for finite element analysis (FEA) without over-constraining any load paths.
+The design space was bounded by fixed caliper and brake-pad mounting holes, a predetermined lever arm length, and clearance for wheel passage. A rough sketch of this space was hand-drawn before modeling it in CAD, which allowed for finite element analysis (FEA) without over-constraining any load paths.
 
 #### Calculations
-The relationship between brake geometry and stopping performance was derived using kinematics and a moment balance equation. This showed that the input force required for a given stopping distance is inversely proportional to the input and cable lever arm lengths.
+The relationship between brake geometry and stopping performance was derived from kinematics and a moment balance equation, showing that the input force required for a given stopping distance is inversely proportional to the input and cable lever arm lengths.
 
 $$
 F_{in} = \frac{mv_i^2\,r_{out}\,r_{pad}\,r_{tire}}
@@ -30,24 +30,21 @@ F_{in} = \frac{mv_i^2\,r_{out}\,r_{pad}\,r_{tire}}
 $$
 
 #### Load Path Visualization
-Running FEA on the initial design-space model revealed critical load paths through the part. Loads closely followed the inner radius near the wheel, concentrating at the caliper mounting hole and producing the largest displacement at the brake pad mounting hole. These simulations helped identify where material was structurally necessary and where it could be removed to minimize mass.
+Running FEA on the initial design-space model revealed critical load paths through the part: loads followed the inner radius near the wheel closely, concentrated at the caliper mounting hole, and produced the largest displacement at the brake pad mounting hole. These results identified where material was structurally necessary and where it could be safely removed to cut mass.
 
 #### Topology Optimization
-The profile of each caliper was created using splines to precisely outline the outer load path. Once the boundaries were defined, ribs were sketched and created on each side of the calipers to reflect the direction and magnitude of the internal load paths. The resulting cross-section resembled an I-beam, maximizing stiffness and reducing deflection through an increased moment of inertia. Fillets were then sized based on local stress, with large internal fillets around the stress-concentrated caliper mounting hole and smaller external fillets distributed around less critical regions.
+Splines were used to precisely outline the outer load path for each caliper. Once the boundaries were defined, ribs were sketched on each side to reflect the direction and magnitude of the internal load paths. An I-beam-like cross-section maximized stiffness and reduced deflection through an increased moment of inertia. Fillets were then sized to local stress, with large internal fillets around the stress-concentrated caliper mounting hole, and smaller external fillets elsewhere.
 
-FEA was used iteratively throughout the design process: first to visualize load paths, and then to verify the modeled geometry against stress and deflection requirements before committing to manufacturing.
+FEA was applied iteratively throughout the process, first to visualize load paths, then to verify the modeled geometry against stress and deflection requirements before committing to manufacturing.
 
 ### Design Iterations
 #### V1
-
-Initial real-world testing passed all performance metrics, confirming that the FEA results were generally predictive. However, the cable mounting hardware introduced an unaccounted-for bending moment on the right caliper. Removing an extra mounting nut allowed the cable to sit flush against the caliper face, reducing stopping distance from 254 in to 187 in and lever lockout force from 150 N to 102 N.
+Initial real-world testing passed all performance metrics, confirming that the FEA results were generally predictive. However, the cable mounting hardware introduced an unaccounted-for bending moment on the right caliper. Removing an extra mounting nut let the cable sit flush against the caliper face, reducing stopping distance from 6.45 m to 4.75 m and lever lockout force from 150 N to 102 N.
 
 #### V2
-
-#### Changes from V1
-- Shifted the right caliper cable mounting face to be coplanar with the left caliper, eliminating the bending component.
+- Shifted the right caliper's cable mounting face to be coplanar with the left caliper, eliminating the bending component.
 - Biased material placement along the new diagonal load path created by the offset face.
-- Redesigned the right caliper arm rib from an I to an X to increase bidirectional rigidity.
+- Redesigned the right caliper arm rib from an I to an X for greater bidirectional rigidity.
 - Tightened bolt hole tolerances (6.40 mm → 6.27 mm) to reduce mounting wobble.
 
 | Metric | Target (Marginal / Ideal) | V1 | V2 | Δ |
@@ -55,9 +52,9 @@ Initial real-world testing passed all performance metrics, confirming that the F
 | Stopping distance (25 km/h) | ≤15 / ≤7 m | 13.5 m | 11.5 m | -14.8% |
 | Mass | ≤400 / ≤200 g | 30.2 g | 31.5 g | +4.3% |
 
-The updated design reduced stopping distance by 2 meters, a 14.8% improvement in braking performance. This came at the cost of only 1.3 g of additional mass, which is negligible relative to the bike and rider system and makes the tradeoff worthwhile.
+The updated design reduced stopping distance by 2 meters (a 14.8% improvement in braking performance) at the cost of only 1.3 g of additional mass, which is negligible relative to the bike-and-rider system and well worth the tradeoff.
 
 ### Reflection
-Without the provided material constraint, exploring metal alloys and more organic geometries could further improve performance without significantly increasing weight through the same SLS 3D-printing process.
+Without the provided material constraint, exploring metal alloys and more organic geometries could further improve performance without adding significant weight, using the same SLS 3D-printing process.
 
-Overall, the design process was relatively standard but comprehensive, while the project highlighted the importance of real-world testing alongside simulation.
+Overall, the design process was straightforward yet comprehensive, and the project highlighted the importance of real-world testing alongside simulation.

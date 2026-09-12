@@ -4,26 +4,147 @@ description: "Designed and built for the 2025 FIRST Robotics Competition game, R
 date: 2025-04-05
 order: 5
 ---
+
 ### Overview
+The 2025 FRC game, REEFSCAPE, featured white PVC tubes that robots could score at four different heights, alongside green playground balls that could be scored at two different heights. Robots could only control one tube and one ball at a time. Towards the end of each match, robots could also climb a chain-supported cage for additional points.
+
+After analyzing the game and its scoring options, the team decided to prioritize scoring tubes at every height and climbing the cage.
+
+As part of a 50-member team, I was responsible for:
+- Overall robot architecture
+- Design and assembly of the subsystems documented below
+- All electrical systems
+- Driving the robot
+- Coordinating with the strategy, manufacturing, and programming subteams
 
 ### Constraints
+The design process was guided by fixed rules from the official game manual, along with priorities the team established internally.
 
-### Archetype
+#### Game manual:
+- Frame perimeter fixed, not to exceed 120 in.
+- No part may extend beyond the frame perimeter in its starting configuration.
+- Maximum starting height of 42 in.
+- Maximum weight of 115 lb.
+- Only standard FRC electrical components allowed.
+
+#### Team-defined:
+- Modular construction for transportation from Toronto to Los Angeles.
+	- Components under 60 lb, packable for commercial air transit, and easy to reassemble.
+- Design and assembly complete within 5 weeks.
+
+### Architecture
+#### Manipulator
+Prototype testing revealed that the top three levels were most reliably scored with a downward shot at moderate speed, while the lowest level required a slow, underhand placement. To account for both scenarios, a manipulator with variable angle and speed was required. Reaching the highest level also required significant vertical extension, which a linear elevator could achieve most efficiently.
+
+#### Intake
+Two intake concepts were considered: a ground intake that could pick up tubes from anywhere on the field, and a funnel fed directly by the human wall feeder. The funnel style was selected, since tubes could only enter the field through the wall feeder, which sat next to the scoring location. A funnel was also mechanically simpler, lighter, and more compact, making it easier to integrate alongside an elevator and climbing system.
+
+#### Climb
+Two climbing mechanisms were considered. A linear slider could push down on the cage, but the purely linear motion required the robot’s center of mass to perfectly align with the chain. This meant the cage would need to physically enter the robot's footprint. Alternatively, an arm system could extend beyond the frame perimeter, latch onto the cage, and pull it inward to meet the center of mass. The arm solution was selected because it simplified cage alignment, tolerated center-of-mass offsets, and was backed by a working prototype.
 
 ### Drivetrain
+Following its successful debut the previous season, swerve drive was used again for its omnidirectional mobility and independent rotation and translation. This helped the robot avoid defense and enabled fully automated pick-and-place scoring.
+
+- **Size:** 27 × 27 in, giving adequate space for mechanisms and electronics while remaining compact to save mass.
+- **Modules:** Four corner-mounted X2 swerve modules with inverted motors, keeping motors protected within the chassis and lowering the center of mass. Two X2i modules powered the rear while two corner-biased X2t modules powered the front to optimize elevator packaging. Both were selected over the previous season's MK4i modules for their 2-in-wide treaded wheels, which improved traction and reduced wheel slip during acceleration. All modules were mounted with spacers to drop the drivetrain by an inch, lowering the center of mass for maximum stability.
+- **Gearing:** A low-speed 5.63:1 gear ratio reaching 16.29 ft/s, selected to prioritize acceleration for quarter-field cycles.
+
+A 1/8-in-thick steel belly pan protected the underside of the robot, provided secure mounting for electronics, and further lowered the center of mass. Steel was selected for its high density to concentrate weight at the lowest point of the robot, just 3/8-in above the ground. The belly pan was riveted to the chassis frame with 3/16-in aluminum rivets, selected for their ease of installation and low weight. 1 × 1-in aluminum tubing was riveted to the belly pan with the same hardware to create mounting points for the elevator and robot frame.
+
+The battery lay horizontally at the very back of the drivetrain, acting as a counterweight to the fast-accelerating elevator and arm.
+
+Custom 3D-printed covers kept debris out of the swerve module gears, while 1/16-in-thick polycarbonate plates with hook-and-loop fasteners protected the electronics while maintaining serviceability.
+
+The drivetrain was the heaviest subsystem on the robot and required a custom crate for shipping.
 
 ### Bumpers
+Rules that previously constrained bumper construction to plywood backing and pool noodles were lifted this season.
+
+1/2-in-thick HDPE backing was selected for its high impact resistance and semi-rigid properties. Corners were formed with dovetail joints and reinforced with threaded plastic inserts and aluminum brackets, while studs with flanged wing nuts on the bumper backing interfaced with slotted L-brackets on the chassis frame for mounting. This change from the previous mounting method eliminated all loose hardware and sped up bumper swaps.
+
+Solid pool noodles were chosen to protect the sides of the robot; their low density and curved profile helped deflect balls. Low-friction ultra-high-molecular-weight polyethylene tape was placed along the top edge of each side to prevent the robot from riding up onto the rubber balls. The front and back sides of the bumper used high-density polyethylene foam, selected for its rigidity, shock absorption, and durability against the repeated wall impacts that came with picking and placing tubes.
 
 ### Frame
+The frame's geometry was developed through 2D sketches to support the elevator, funnel, and climb subsystems. Extruded aluminum tubes were pocketed on a CNC mill to reduce weight while maintaining rigidity. These tubes were secured to the drivetrain with bolts and steel nut strips instead of individual nuts to improve modularity. Each frame member could be packed individually for shipping.
 
 ### Intake
+The intake received tubes from the human wall feeder and delivered them to the manipulator, with a break-beam sensor detecting when a tube had entered the robot. The system went through several iterations to improve performance and integration.
+
+#### V1
+The funnel consisted of four 1/8-in-thick polycarbonate plates bolted directly to the frame. This solution was too rigid, and tubes bounced around before settling into the manipulator.
+
+#### V2
+Four angled polycarbonate pieces were introduced between the funnel and the frame. This reduced the funnel’s rigidity and absorbed some impact as tubes entered the robot, cutting down on settling time.
+
+#### V3
+The funnel would collide with the cage when misaligned, negating a successful climb. The polycarbonate pieces were replaced with a spring-loaded hinge, and rope tied to the climbing arm pulled the funnel outward to clear room for the cage during a climb.
+
+#### V4
+As automated scoring was refined over the season, the passive funnel became a bottleneck. A carbon fiber roller was held down by surgical tubing and folded backward with the same rope-and-climber-arm mechanism. Its drive motor sat near the front of the drivetrain to maintain a low center of mass and counterbalance the elevator, with a dual-belt system transmitting power.
 
 ### Elevator
+The elevator provided vertical extension for the manipulator. It was positioned at the very front of the robot to minimize the length of the swinging arm, and its geometry was verified across every scoring position.
+
+#### Structure
+The structure needed to be exceptionally strong and rigid given the elevator's speed and reach. It consisted of two stages and a carriage, providing enough height to reach the tallest level.
+
+The first stage utilized 1/8-in-wall aluminum tubes with the top portion pocketed for weight savings. The bottom portion was secured to the drivetrain through four methods:
+- 1/4-in-thick tapped steel plates within the bottom cross members, threaded by eight 1/4-20 bolts inserted through the steel belly pan.
+- Triangular gussets on each side of the base, securing the elevator to the 1 × 1-in chassis tubing with ten 10-32 bolts.
+- Lateral winged supports on each side of the base, directly secured to the chassis frame through eight 10-32 bolts.
+- Aluminum rods on each side of the first stage, directly secured to the chassis frame through 1/4-20 eyebolts and jam nuts.
+
+Nut strips were exclusively used inside the elevator tubing and across the drivetrain to eliminate individual nuts throughout the assembly.
+
+A cross member mounted to the top bearing blocks was offset from the elevator, allowing the second stage and carriage to pass through while preventing the first-stage tubing from spreading apart.
+
+The second stage used thinner 1/16-in-wall aluminum tubing rather than the pocketed 1/8-in tubing of the first stage, yielding a lighter assembly. Bearing blocks and tube inserts were bolted to its ends and connected to aluminum cross members. The bottom cross member included a cutout to clear the gears protruding from the gearbox.
+
+The carriage used thicker 1/10-in-wall aluminum tubing, providing extra strength for the gearbox and belt-tensioning system while minimizing weight. Tube inserts secured a bottom cross member, while a dead-axle arm pivot shaft structured the top.
+
+Despite its height, the fully assembled elevator packaged easily inside a Pelican case.
+
+#### Rigging
+Two rigging methods were considered. Cascade rigging uses several short rope runs, each fixed to the top of one stage and the bottom of the next. Every stage moves simultaneously, with each additional stage moving at twice the speed of the one before it, at half the torque. Alternatively, continuous rigging uses a single loop, fixed at the bottom of the carriage, routed through the gearbox and up through every stage, then back down to the carriage. It drives the carriage directly while intermediate stages move freely and are controlled through a set of hardstops.
+
+Continuous rigging was selected for its fewer tie-down points and individual runs. It also favored a lower center of mass, since the intermediate stage only lifted when the manipulator extended to the highest scoring position.
+
+#### Gearbox
+The gearbox powered and synchronized the belts that drove the elevator. A mirrored gear-and-pulley setup achieved the necessary reduction while keeping linear belt speed matched on both sides. A linear-speed gearbox calculator verified pinion, gear, and pulley sizes to achieve a 0.3-second extension time while keeping operating current under 20 A. The pitch diameters of the selected gears and pulleys were overlaid on the 2D elevator sketch to position motors and bearings.
+
+- Two Kraken X60 motors, mounted toward the front of the robot to leave room for the climber winch and electronics.
+- Needle roller bearings with 3D-printed idler pulleys on dead-axle aluminum shafts redirected the belt throughout the elevator for rigging and added belt-to-pulley contact to prevent slippage.
+- A 20-mm-wide H2D belt was selected over non-stretch rope for its rigidity and tooth profile, which could be driven directly by a pulley. It was fixed at the bottom of the carriage by two aluminum plates, and at the top by a CNC-machined aluminum sliding clamp with a cam system for tensioning.
+- Shim tape between commercial gears and hex shafts reduced backlash throughout.
+- A Hall-effect sensor zeroed the elevator throughout each match to limit encoder drift.
+- A protruding 1/2-in hex shaft could zero the elevator manually if the sensor failed.
+- Gussets, gearbox plates, and gears were pocketed to reduce weight.
 
 ### Arm Gearbox
+The arm gearbox controlled the angle of the manipulator and sat low on the carriage to keep the center of mass down. A significant reduction was required from the 5,785 RPM free speed of the Kraken X60. A lighter motor, the Kraken X44, was considered but would have required an additional gear stage to compensate for its higher free speed, negating the weight saved. The X60 also carried a low-voltage Powerpole adapter board, which powered smaller sensors and removed the need for separate low-voltage wiring across the elevator.
+
+A gearbox calculator, similar to the one used for the elevator, helped verify the system and finalize packaging. The final two-stage system paired a large pocketed gear with 3D-printed pulleys to minimize complexity and weight, with a variable-diameter idler controlling belt tension.
+
+The arm pivot ran on a 1/2-in aluminum dead-axle shaft and bushings, with an absolute encoder tracking the arm's position directly, bypassing any backlash. Gearbox plates were machined from 1/4-in aluminum and bolted to the inside of the carriage.
 
 ### Climber
+The climber was integrated progressively over the season as robot packaging was optimized. A winch-powered arm with passive hooks stayed tucked within the frame perimeter and deployed when needed. Driving into the cage allowed its weight to seat the hooks, and as the winch pulled the arm inward, the cage reacted against rubber tread pads to lift the robot.
+
+The arm pivot used a round 1-in-OD aluminum shaft with oil-impregnated bronze bushings, selected for high torque capacity and suitability for low-RPM use. The arm itself was a pocketed 1/8-in-wall aluminum extrusion with hooks machined from 1/4-in aluminum plates and rubber contact points. The winch mounted directly to the steel belly pan and was powered by a two-stage planetary gearbox for a large reduction in a compact, lightweight package. An aluminum pulley reeled in a high-strength, non-stretch Ultra-High Molecular Weight Polyethylene (UHMWPE) rope, known as Dyneema.
+
+### Electronics
+Standard FRC electrical components were used throughout, in accordance with the game rules.
+
+- A single 12 V, 18 Ah SLA battery powered a power distribution hub, which supplied fourteen 12 V brushless motors and various sensors.
+- Two Orange Pi 5s, buck converters, and three high-speed global-shutter USB cameras enabled robotic vision for automated pickup and scoring. The vision system was initially powered by a dedicated rechargeable power bank before switching to a 12 V-to-5 V power distribution hub to reduce weight.
+- Two separate CAN networks, one for the drivetrain, intake, and climbing devices, and another for the elevator and manipulator, aided troubleshooting and reliability. The elevator network was terminated with a 120-ohm resistor at the end of the manipulator to avoid a downward wire run.
+- Wire sleeving bundled and protected wiring along the elevator and at the arm joint.
+- Anderson Powerpole connectors and Wago hubs were placed between each subsystem, allowing for modular assembly.
 
 ### Results
+The robot performed at extremely high levels across all competitions, reaching two event finals and the semifinals at the provincial championship, and qualifying for the World Championship, though the team ultimately did not attend. It ranked within the top 100 teams worldwide for scoring ability and 10th in Ontario out of 130 teams, the team’s best result since 2018. It also earned the Innovation in Control Award and Quality Award.
 
 ### Reflection
+The season was extremely successful, and the robot performed to its highest ability during crucial matches. One area of potential development would have been an active roller mechanism to latch onto the cage, rather than passive hooks. Had the robot competed at the World Championship, a ground intake or ball-scoring mechanism would likely have made it even more competitive.
+
+The season was fulfilling both technically and personally, presenting a range of design challenges, from modular subsystems to linear motion and folding mechanisms, that came together for standout results in the team's 25th season.
