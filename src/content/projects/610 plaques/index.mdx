@@ -5,16 +5,27 @@ date: 2025-06-13
 order: 8
 ---
 
+import { Image } from "astro:assets";
+import plaqueCAD from "../../../assets/plaque-cad.png";
+import crosshatch from "../../../assets/crosshatch.png";
+import plaques from "../../../assets/plaques.png";
+
 ### Overview
 To commemorate FRC Team 610's 25th anniversary, I designed and manufactured custom plaques to recognize mentors and individuals who have continuously supported the team.
 
 ### Design
 The plaque featured the Team 610 logo with recessed pockets to highlight negative space. It was finished with an adhesive felt layer on the back.
 
+<Image src={plaqueCAD} alt="Plaque CAD" style="border-radius: 6px; max-width: 75%; height: auto;" />
+
 ### Finishing
-To take advantage of CNC milling, I selected a crosshatched toolpath finish. An initial trial used small stepovers to create a fine pattern, but this resulted in excessive machining time. Increasing the stepover produced a larger hatch pattern while significantly reducing the machining time.
+To take advantage of CNC milling, I selected a zig-zag toolpath finish. An initial trial used small stepovers to create a fine crosshatch pattern, but this resulted in excessive machining time. Increasing the stepover produced a larger zig-zag pattern while significantly reducing the machining time.
+
+<Image src={crosshatch} alt="Crosshatch Pattern" style="border-radius: 6px; max-width: 64%; height: auto;" />
 
 ### Manufacturing
 The initial design featured a small logo that required 1/16-in-diameter end mills for the recessed features. These tools were fragile, costly, and had a slow feed rate, which increased complexity and machining time. Marginally increasing the logo size allowed for the use of a stronger 3/32-in end mill instead.
 
-Maintaining workpiece flatness during machining was also crucial for a consistent crosshatched pattern. Secure workholding was achieved with multiple clamps.
+<Image src={plaques} alt="Plaques" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
+Maintaining workpiece flatness during machining was also crucial for a consistent zig-zag pattern. Secure workholding was achieved with multiple clamps.
