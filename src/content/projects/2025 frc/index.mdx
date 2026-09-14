@@ -5,6 +5,25 @@ date: 2025-04-05
 order: 5
 ---
 
+import { Image } from "astro:assets";
+import rsCAD from "../../../assets/rs-cad.png";
+import rsDriveFrame from "../../../assets/rs-drive-frame.png";
+import rsDrive from "../../../assets/rs-drive.png";
+import rsBumper from "../../../assets/rs-bumper.png";
+import rsFrame from "../../../assets/rs-frame.png";
+import rsFunnel from "../../../assets/rs-funnel.png";
+import rsEle from "../../../assets/rs-ele.png";
+import rsEleMount from "../../../assets/rs-ele-mount.png";
+import rsEleSide from "../../../assets/rs-ele-side.png";
+import rsEleBrace from "../../../assets/rs-ele-brace.png";
+import rsEleGear from "../../../assets/rs-ele-gear.png";
+import rsEleGearFront from "../../../assets/rs-ele-gear-front.png";
+import rsEleMotor from "../../../assets/rs-ele-motor.png";
+import rsArmGear from "../../../assets/rs-arm-gear.png";
+import rsClimb from "../../../assets/rs-climb.png";
+import rsWinch from "../../../assets/rs-winch.png";
+import rsPis from "../../../assets/rs-pis.png";
+
 ### Overview
 The 2025 FRC game, REEFSCAPE, featured white PVC tubes that robots could score at four different heights, alongside green playground balls that could be scored at two different heights. Robots could only control one tube and one ball at a time. Towards the end of each match, robots could also climb a chain-supported cage for additional points.
 
@@ -12,7 +31,14 @@ After analyzing the game and its scoring options, the team decided to prioritize
 
 As part of a 50-member team, I was responsible for:
 - Overall robot architecture
-- Design and assembly of the subsystems documented below
+- Complete design and assembly of the following subsystem
+	- Drivetrain
+	- Bumpers
+	- Frame
+	- Intake
+	- Elevator
+	- Arm Gearbox
+	- Climber
 - All electrical systems
 - Driving the robot
 - Coordinating with the strategy, manufacturing, and programming subteams
@@ -42,12 +68,18 @@ Two intake concepts were considered: a ground intake that could pick up tubes fr
 #### Climb
 Two climbing mechanisms were considered. A linear slider could push down on the cage, but the purely linear motion required the robot’s center of mass to perfectly align with the chain. This meant the cage would need to physically enter the robot's footprint. Alternatively, an arm system could extend beyond the frame perimeter, latch onto the cage, and pull it inward to meet the center of mass. The arm solution was selected because it simplified cage alignment, tolerated center-of-mass offsets, and was backed by a working prototype.
 
+<Image src={rsCAD} alt="2025 CAD" style="border-radius: 6px; max-width: 75%; height: auto;" />
+
 ### Drivetrain
 Following its successful debut the previous season, swerve drive was used again for its omnidirectional mobility and independent rotation and translation. This helped the robot avoid defense and enabled fully automated pick-and-place scoring.
+
+<Image src={rsDrive} alt="2025 Drive" style="border-radius: 6px; max-width: 100%; height: auto;" />
 
 - **Size:** 27 × 27 in, giving adequate space for mechanisms and electronics while remaining compact to save mass.
 - **Modules:** Four corner-mounted X2 swerve modules with inverted motors, keeping motors protected within the chassis and lowering the center of mass. Two X2i modules powered the rear while two corner-biased X2t modules powered the front to optimize elevator packaging. Both were selected over the previous season's MK4i modules for their 2-in-wide treaded wheels, which improved traction and reduced wheel slip during acceleration. All modules were mounted with spacers to drop the drivetrain by an inch, lowering the center of mass for maximum stability.
 - **Gearing:** A low-speed 5.63:1 gear ratio reaching 16.29 ft/s, selected to prioritize acceleration for quarter-field cycles.
+
+<Image src={rsDriveFrame} alt="2025 Drive Frame" style="border-radius: 6px; max-width: 100%; height: auto;" />
 
 A 1/8-in-thick steel belly pan protected the underside of the robot, provided secure mounting for electronics, and further lowered the center of mass. Steel was selected for its high density to concentrate weight at the lowest point of the robot, just 3/8-in above the ground. The belly pan was riveted to the chassis frame with 3/16-in aluminum rivets, selected for their ease of installation and low weight. 1 × 1-in aluminum tubing was riveted to the belly pan with the same hardware to create mounting points for the elevator and robot frame.
 
@@ -62,10 +94,14 @@ Rules that previously constrained bumper construction to plywood backing and poo
 
 1/2-in-thick HDPE backing was selected for its high impact resistance and semi-rigid properties. Corners were formed with dovetail joints and reinforced with threaded plastic inserts and aluminum brackets, while studs with flanged wing nuts on the bumper backing interfaced with slotted L-brackets on the chassis frame for mounting. This change from the previous mounting method eliminated all loose hardware and sped up bumper swaps.
 
+<Image src={rsBumper} alt="2025 Bumper" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 Solid pool noodles were chosen to protect the sides of the robot; their low density and curved profile helped deflect balls. Low-friction ultra-high-molecular-weight polyethylene tape was placed along the top edge of each side to prevent the robot from riding up onto the rubber balls. The front and back sides of the bumper used high-density polyethylene foam, selected for its rigidity, shock absorption, and durability against the repeated wall impacts that came with picking and placing tubes.
 
 ### Frame
 The frame's geometry was developed through 2D sketches to support the elevator, funnel, and climb subsystems. Extruded aluminum tubes were pocketed on a CNC mill to reduce weight while maintaining rigidity. These tubes were secured to the drivetrain with bolts and steel nut strips instead of individual nuts to improve modularity. Each frame member could be packed individually for shipping.
+
+<Image src={rsFrame} alt="2025 Frame" style="border-radius: 6px; max-width: 50%; height: auto;" />
 
 ### Intake
 The intake received tubes from the human wall feeder and delivered them to the manipulator, with a break-beam sensor detecting when a tube had entered the robot. The system went through several iterations to improve performance and integration.
@@ -80,13 +116,30 @@ Four angled polycarbonate pieces were introduced between the funnel and the fram
 The funnel would collide with the cage when misaligned, negating a successful climb. The polycarbonate pieces were replaced with a spring-loaded hinge, and rope tied to the climbing arm pulled the funnel outward to clear room for the cage during a climb.
 
 #### V4
-As automated scoring was refined over the season, the passive funnel became a bottleneck. A carbon fiber roller was held down by surgical tubing and folded backward with the same rope-and-climber-arm mechanism. Its drive motor sat near the front of the drivetrain to maintain a low center of mass and counterbalance the elevator, with a dual-belt system transmitting power.
+As automated scoring was refined over the season, the passive funnel became a bottleneck. A carbon fiber roller was held down by surgical tubing and folded backward with the same rope-and-climber-arm mechanism. Its drive motor sat near the front of the drivetrain to maintain a low center of mass and counterbalance the elevator, with a dual-belt system transmitting power through a co-axial dead axle pivot.
+
+<Image src={rsFunnel} alt="2025 Funnel" style="border-radius: 6px; max-width: 100%; height: auto;" />
 
 ### Elevator
 The elevator provided vertical extension for the manipulator. It was positioned at the very front of the robot to minimize the length of the swinging arm, and its geometry was verified across every scoring position.
 
+<Image src={rsEle} alt="2025 Ele" style="border-radius: 6px; max-width: 75%; height: auto;" />
+
 #### Structure
 The structure needed to be exceptionally strong and rigid given the elevator's speed and reach. It consisted of two stages and a carriage, providing enough height to reach the tallest level.
+
+<div className="flex flex-col gap-6">
+  <Image 
+    src={rsEleMount} 
+    alt="2025 Ele Mount" 
+    className="w-full h-auto rounded-md" 
+  />
+  <Image 
+    src={rsEleSide} 
+    alt="2025 Ele Side" 
+    className="w-[75%] h-auto rounded-md" 
+  />
+</div>
 
 The first stage utilized 1/8-in-wall aluminum tubes with the top portion pocketed for weight savings. The bottom portion was secured to the drivetrain through four methods:
 - 1/4-in-thick tapped steel plates within the bottom cross members, threaded by eight 1/4-20 bolts inserted through the steel belly pan.
@@ -95,6 +148,8 @@ The first stage utilized 1/8-in-wall aluminum tubes with the top portion pockete
 - Aluminum rods on each side of the first stage, directly secured to the chassis frame through 1/4-20 eyebolts and jam nuts.
 
 Nut strips were exclusively used inside the elevator tubing and across the drivetrain to eliminate individual nuts throughout the assembly.
+
+<Image src={rsEleBrace} alt="2025 Ele Brace" style="border-radius: 6px; max-width: 75%; height: auto;" />
 
 A cross member mounted to the top bearing blocks was offset from the elevator, allowing the second stage and carriage to pass through while preventing the first-stage tubing from spreading apart.
 
@@ -112,6 +167,24 @@ Continuous rigging was selected for its fewer tie-down points and individual run
 #### Gearbox
 The gearbox powered and synchronized the belts that drove the elevator. A mirrored gear-and-pulley setup achieved the necessary reduction while keeping linear belt speed matched on both sides. A linear-speed gearbox calculator verified pinion, gear, and pulley sizes to achieve a 0.3-second extension time while keeping operating current under 20 A. The pitch diameters of the selected gears and pulleys were overlaid on the 2D elevator sketch to position motors and bearings.
 
+<div className="flex flex-col gap-6">
+  <Image 
+    src={rsEleGear} 
+    alt="2025 Ele Gear" 
+    className="w-full h-auto rounded-md" 
+  />
+  <Image 
+    src={rsEleGearFront} 
+    alt="2025 Ele Gear Front" 
+    className="w-full h-auto rounded-md" 
+  />
+  <Image 
+    src={rsEleMotor} 
+    alt="2025 Ele Motor" 
+    className="w-full h-auto rounded-md" 
+  />
+</div>
+
 - Two Kraken X60 motors, mounted toward the front of the robot to leave room for the climber winch and electronics.
 - Needle roller bearings with 3D-printed idler pulleys on dead-axle aluminum shafts redirected the belt throughout the elevator for rigging and added belt-to-pulley contact to prevent slippage.
 - A 20-mm-wide H2D belt was selected over non-stretch rope for its rigidity and tooth profile, which could be driven directly by a pulley. It was fixed at the bottom of the carriage by two aluminum plates, and at the top by a CNC-machined aluminum sliding clamp with a cam system for tensioning.
@@ -123,6 +196,8 @@ The gearbox powered and synchronized the belts that drove the elevator. A mirror
 ### Arm Gearbox
 The arm gearbox controlled the angle of the manipulator and sat low on the carriage to keep the center of mass down. A significant reduction was required from the 5,785 RPM free speed of the Kraken X60. A lighter motor, the Kraken X44, was considered but would have required an additional gear stage to compensate for its higher free speed, negating the weight saved. The X60 also carried a low-voltage Powerpole adapter board, which powered smaller sensors and removed the need for separate low-voltage wiring across the elevator.
 
+<Image src={rsArmGear} alt="2025 Arm Gear" style="border-radius: 6px; max-width: 75%; height: auto;" />
+
 A gearbox calculator, similar to the one used for the elevator, helped verify the system and finalize packaging. The final two-stage system paired a large pocketed gear with 3D-printed pulleys to minimize complexity and weight, with a variable-diameter idler controlling belt tension.
 
 The arm pivot ran on a 1/2-in aluminum dead-axle shaft and bushings, with an absolute encoder tracking the arm's position directly, bypassing any backlash. Gearbox plates were machined from 1/4-in aluminum and bolted to the inside of the carriage.
@@ -130,10 +205,25 @@ The arm pivot ran on a 1/2-in aluminum dead-axle shaft and bushings, with an abs
 ### Climber
 The climber was integrated progressively over the season as robot packaging was optimized. A winch-powered arm with passive hooks stayed tucked within the frame perimeter and deployed when needed. Driving into the cage allowed its weight to seat the hooks, and as the winch pulled the arm inward, the cage reacted against rubber tread pads to lift the robot.
 
+<div className="flex flex-col items-center gap-6">
+  <Image 
+    src={rsClimb} 
+    alt="2025 Climb" 
+    className="w-[75%] h-auto rounded-md" 
+  />
+  <Image 
+    src={rsWinch} 
+    alt="2025 Winch" 
+    className="w-[75%] h-auto rounded-md" 
+  />
+</div>
+
 The arm pivot used a round 1-in-OD aluminum shaft with oil-impregnated bronze bushings, selected for high torque capacity and suitability for low-RPM use. The arm itself was a pocketed 1/8-in-wall aluminum extrusion with hooks machined from 1/4-in aluminum plates and rubber contact points. The winch mounted directly to the steel belly pan and was powered by a two-stage planetary gearbox for a large reduction in a compact, lightweight package. An aluminum pulley reeled in a high-strength, non-stretch Ultra-High Molecular Weight Polyethylene (UHMWPE) rope, known as Dyneema.
 
 ### Electronics
 Standard FRC electrical components were used throughout, in accordance with the game rules.
+
+<Image src={rsPis} alt="2025 Pis" style="border-radius: 6px; max-width: 75%; height: auto;" />
 
 - A single 12 V, 18 Ah SLA battery powered a power distribution hub, which supplied fourteen 12 V brushless motors and various sensors.
 - Two Orange Pi 5s, buck converters, and three high-speed global-shutter USB cameras enabled robotic vision for automated pickup and scoring. The vision system was initially powered by a dedicated rechargeable power bank before switching to a 12 V-to-5 V power distribution hub to reduce weight.

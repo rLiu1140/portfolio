@@ -5,14 +5,32 @@ date: 2024-10-20
 order: 6
 ---
 
+import { Image } from "astro:assets";
+import crescRobot from "../../../assets/cresc-robot.png";
+import crescDrivePivotArm from "../../../assets/cresc-drive-pivot-arm.png";
+import crescDrive from "../../../assets/cresc-drive.png";
+import crescBacking from "../../../assets/cresc-backing.png";
+import crescPivot from "../../../assets/cresc-pivot.png";
+import crescPivotBottom from "../../../assets/cresc-pivot-bottom.png";
+import crescPivotFront from "../../../assets/cresc-pivot-front.png";
+import crescDrivePivot from "../../../assets/cresc-drive-pivot.png";
+import crescWrist from "../../../assets/cresc-wrist.png";
+import crescPivotArm from "../../../assets/cresc-pivot-arm.png";
+
 ### Overview
 The 2024 FRC game, CRESCENDO, involved orange foam rings that robots could score at two different heights, with only one ring controllable at a time. Towards the end of each match, robots could also climb a chain and score a ring into a third goal for additional points.
+
+<Image src={crescRobot} alt="2024 Robot" style="border-radius: 6px; max-width: 75%; height: auto;" />
 
 After analyzing the game and its scoring options, the team decided to prioritize scoring into the two primary goals while keeping the option to climb open.
 
 As part of a 50-member team, I was responsible for:
 - Overall robot architecture
-- Design and assembly of the subsystems documented below
+- Complete design and assembly of the following subsystems
+	- Drivetrain
+	- Bumpers
+	- Arm Pivot
+	- Wrist Gearbox
 - All electrical systems
 - Driving the robot
 - Coordinating with the strategy, manufacturing, and programming subteams
@@ -40,12 +58,16 @@ Since the only rings available at the start of each match were on the ground, a 
 #### Integration
 Rather than separate pivoting intake, indexer, and shooter systems, a single pivoting arm handled all three tasks: reaching the ground for intaking, extending high enough for the downward shot into the low goal, and adjusting the shooter angle for various horizontal shots, while also reaching the chain for climbing.
 
+<Image src={crescDrivePivotArm} alt="2024 Drive Pivot Arm" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 ### Drivetrain
 For the first time in the team's 24-year history, the robot used a swerve drive for its omnidirectional mobility and independent rotation and translation. This enabled faster shot alignment, defense-avoiding maneuvers, and more effective vision-assisted autonomous routines compared to the previous tank drive architecture.
 
 - **Size:** 30 × 28 in, providing the pivoting arm room and stability while maintaining a reduced footprint to avoid other robots and field obstacles.
 - **Modules:** Four corner-mounted MK4i swerve modules with inverted motors, keeping motors protected within the chassis and lowering the center of mass.
 - **Gearing:** A high-speed 5.9:1 gear ratio reaching 20.1 ft/s, selected to prioritize top speed for full-field cycles.
+
+<Image src={crescDrive} alt="2024 Drive" style="border-radius: 6px; max-width: 100%; height: auto;" />
 
 Two crossmembers ran front to back for additional structure, creating a secure battery compartment and attachment points for the arm pivot. Large holes with rubber grommets assisted with wire management. The battery lay horizontally at the very front of the drivetrain, acting as a counterweight to the heavy, backward-swinging arm.
 
@@ -54,14 +76,31 @@ A 1/8-in-thick aluminum belly pan protected the underside of the robot, provided
 ### Bumpers
 Bumper design was constrained by rules requiring 3/4-in-thick plywood backing and 2-1/2-in pool noodles wrapped in rugged cloth. A one-piece design was chosen for its added strength. Plywood backing was joined with dovetail joints and reinforced with tee nuts and aluminum brackets, while L-brackets on the inside of the bumper bolted to the chassis frame for mounting.
 
+<Image src={crescBacking} alt="2024 Backing" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 ### Arm Pivot
 The arm's geometry was optimized using 2D CAD sketches and verified across its full range of scoring positions to determine joint placement.
 
 #### Structure
 Extruded aluminum tubes were connected to the drivetrain through 1/4-in-thick aluminum gussets, which doubled as gearbox plates. The structure used 3/16-in aluminum rivets for their low-profile heads and #10-32 socket-head bolts for their high clamp load and serviceability.
 
+<Image src={crescPivot} alt="2024 Pivot" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 #### Gearbox
 Powering the arm required a significant gear reduction due to the 6,784 RPM free speed of the NEO Vortex motors driving it. The gearbox also needed to support the robot's full weight during climbing without slowing down scoring motions. Estimated loads and gear sets were run through a gearbox calculator to confirm motor current stayed within 25 A to prevent battery brownouts. The pitch diameters of the selected gears were overlaid on the 2D pivot sketch to position motors and bearings.
+
+<div className="flex flex-col gap-6">
+  <Image 
+    src={crescPivotBottom} 
+    alt="2024 Pivot Bottom" 
+    className="w-full h-auto rounded-md" 
+  />
+  <Image 
+    src={crescPivotFront} 
+    alt="2024 Pivot Front" 
+    className="w-full h-auto rounded-md" 
+  />
+</div>
 
 - Four NEO Vortex motors, mounted in mirrored gearboxes, one on each side of the drivetrain.
 - A xx:xx final reduction through x stages of compound gearing.
@@ -72,10 +111,16 @@ Powering the arm required a significant gear reduction due to the 6,784 RPM free
 #### Joint
 The joint utilized a round 1-in-OD aluminum shaft with oil-impregnated bronze bushings, selected for high torque capacity and suitability for low-RPM use. A magnet-and-absolute-encoder system tracked arm position directly at the joint, bypassing backlash in the gear train for PID motion control.
 
+<Image src={crescDrivePivot} alt="2024 Drive Pivot" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 ### Wrist Gearbox
 The wrist gearbox controlled the angle of the manipulator, which combined the intake and shooter. It was placed low on the arm to minimize the swinging moment. A gearbox calculator, similar to the one used for the arm, helped verify the system and finalize packaging.
 
+<Image src={crescWrist} alt="2024 Wrist" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 A single NEO Vortex motor drove the wrist shaft through two stages of compound gearing and a #25 chain-and-sprocket system. The final-stage shaft used a magnet-and-absolute-encoder system for precise positional tracking and control. Gearbox plates were machined from 1/4-in aluminum, pocketed to reduce weight, and bolted to the inside of the arm.
+
+<Image src={crescPivotArm} alt="2024 Pivot Arm" style="border-radius: 6px; max-width: 100%; height: auto;" />
 
 ### Electronics
 Standard FRC electrical components were used throughout, in accordance with the game rules.
