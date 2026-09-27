@@ -32,7 +32,7 @@ import brakev2Test from "../../../assets/brake-v2-test.png";
 ### Overview
 As a term-long project for ME 240: Intro to Mechanical Design and Manufacturing, teams of five were tasked with developing rear bike brake calipers. Within my team, I was entirely responsible for the design process, from initial sketches and CAD through FEA-driven optimization, testing-backed iteration, and technical documentation.
 
-<Image src={brakeAssembly} alt="Brake Assembly" style="border-radius: 6px; max-width: 75%; height: auto;" />
+<Image src={brakeAssembly} alt="Brake Assembly" className="rounded-md max-w-[75%] h-auto" />
 
 ### Requirements
 The design was driven by hard requirements from ISO 4210 bicycle safety standards, alongside goals the team defined internally.
@@ -47,7 +47,7 @@ The design was driven by hard requirements from ISO 4210 bicycle safety standard
 ### Concept Development
 The design space was bounded by fixed caliper and brake-pad mounting holes, a predetermined lever arm length, and clearance for wheel passage.
 
-<Image src={brakeDrawing} alt="Brake Drawing" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={brakeDrawing} alt="Brake Drawing" className="rounded-md max-w-full h-auto" />
 
 A rough sketch of this space was hand-drawn before modeling it in CAD, which allowed for finite element analysis (FEA) without over-constraining any load paths.
 
@@ -72,23 +72,23 @@ $$
 #### Load Path Visualization
 Running FEA on the initial design-space model revealed critical load paths through the part: loads followed the inner radius near the wheel closely, concentrated at the caliper mounting hole, and produced the largest displacement at the brake pad mounting hole. These results identified where material was structurally necessary and where it could be safely removed to cut mass.
 
-<div className="grid grid-cols-5 gap-4 items-start">
+<div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-start">
   <Image 
     src={leftTopology} 
     alt="Left Topology" 
-    className="w-full h-auto rounded-md col-span-2" 
+    className="w-full h-auto rounded-md sm:col-span-2" 
   />
   <Image 
     src={rightTopology} 
     alt="Right Topology" 
-    className="w-full h-auto rounded-md col-span-3" 
+    className="w-full h-auto rounded-md sm:col-span-3" 
   />
 </div>
 
 #### Topology Optimization
 Splines were used to precisely outline the outer load path for each caliper.
 
-<div className="grid grid-cols-[45fr_55fr] gap-4 items-start">
+<div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
   <Image 
     src={leftOutline} 
     alt="Left Outline" 
@@ -103,7 +103,7 @@ Splines were used to precisely outline the outer load path for each caliper.
 
 Once the boundaries were defined, ribs were sketched on each side to reflect the direction and magnitude of the internal load paths.
 
-<div className="grid grid-cols-2 gap-4 items-start">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
   <Image 
     src={leftRib} 
     alt="Left Rib" 
@@ -118,7 +118,7 @@ Once the boundaries were defined, ribs were sketched on each side to reflect the
 
 An I-beam-like cross-section maximized stiffness and reduced deflection through an increased moment of inertia.
 
-<div className="w-full md:w-[75%] mx-auto grid grid-cols-1 md:grid-cols-[35fr_65fr] gap-4 items-start">
+<div className="w-full sm:w-[75%] mx-auto grid grid-cols-1 sm:grid-cols-[35fr_65fr] gap-4 items-start">
   <Image 
     src={leftX} 
     alt="Left X" 
@@ -135,7 +135,7 @@ Fillets were then sized to local stress, with large internal fillets around the 
 
 FEA was applied iteratively throughout the process, first to visualize load paths, then to verify the modeled geometry against stress and deflection requirements before committing to manufacturing.
 
-<div className="grid grid-cols-[45fr_55fr] gap-4 items-start">
+<div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
   <Image 
     src={leftStress} 
     alt="Left Stress" 
@@ -152,19 +152,19 @@ FEA was applied iteratively throughout the process, first to visualize load path
 #### V1
 Initial real-world testing passed all performance metrics, confirming that the FEA results were generally predictive. However, the cable mounting hardware introduced an unaccounted-for bending moment on the right caliper.
 
-<Image src={brakev1Test} alt="Brake v2 Test" style="border-radius: 6px; max-width: 50%; height: auto;" />
+<Image src={brakev1Test} alt="Brake v2 Test" className="rounded-md max-w-[50%] h-auto" />
 
 Removing an extra mounting nut let the cable sit flush against the caliper face, reducing stopping distance from 6.45 m to 4.75 m and lever lockout force from 150 N to 102 N.
 
 #### V2
 
-<div className="mb-6 grid grid-cols-[55fr_auto_45fr] gap-4 items-center">
+<div className="mb-6 grid grid-cols-1 sm:grid-cols-[55fr_auto_45fr] gap-4 items-center">
   <Image 
     src={brakev1Arm} 
     alt="Brake v1 Arm" 
     className="w-full h-auto rounded-md" 
   />
-  <span className="text-2xl font-bold">
+  <span className="text-2xl font-bold rotate-90 sm:rotate-0 mx-auto">
     →
   </span>
   <Image 
@@ -174,7 +174,7 @@ Removing an extra mounting nut let the cable sit flush against the caliper face,
   />
 </div>
 
-<div className="grid grid-cols-[45fr_55fr] gap-4 items-start">
+<div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
   <Image 
     src={brakev2X} 
     alt="Brake v2 X" 

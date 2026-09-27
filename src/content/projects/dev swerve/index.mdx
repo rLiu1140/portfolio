@@ -20,15 +20,15 @@ To support Team 610's adoption of swerve drive, I independently designed, machin
 
 The chassis measured 21 × 21 in, compared to the 30 × 30 in footprint of typical competition robots. This smaller size provided enough space for electronics while keeping the drivetrain compact and stable. Chassis tubing was machined on a manual mill, while gussets were CNC-routed.
 
-<Image src={swerveCAD} alt="Swerve CAD" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={swerveCAD} alt="Swerve CAD" className="rounded-md max-w-full h-auto" />
 
 Four corner-mounted MK4i swerve modules powered by Falcon 500 motors drove the chassis. The inverted motor configuration protected the motors during collisions and lowered the center of mass. Colson wheel compatibility provided durability for repeated testing.
 
-<Image src={swerveFrame} alt="Swerve Frame" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={swerveFrame} alt="Swerve Frame" className="rounded-md max-w-full h-auto" />
 
 Instead of conventional wood-and-foam bumpers, curved ultra-high-molecular-weight polyethylene (UHMWPE) plates were riveted around the chassis corners. These plates were selected for their high impact resistance and ductility and offered a lightweight, simple way to protect the swerve modules from accidental impact.
 
-<Image src={swerveTesting} alt="Swerve Testing" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={swerveTesting} alt="Swerve Testing" className="rounded-md max-w-full h-auto" />
 
 An adjustable-angle camera mount at the front of the drivetrain allowed programmers to optimize camera position for AprilTag and reflective-tape detection.
 
@@ -37,7 +37,7 @@ Standard FRC components were used throughout to ensure software developed on the
 
 A 12 V, 18 Ah SLA battery powered the drivetrain through a power distribution hub. Eight 40 A, 12 V brushless motors drove the swerve modules, with an absolute encoder tracking the steering angle of each module alongside an IMU for robot heading and acceleration. All devices were connected to a common onboard CAN network. An OM5P router provided the network connection needed for wireless driver-station control, and Wago distribution hubs were placed throughout the chassis to simplify wiring and serviceability.
 
-<Image src={swerveWiring} alt="Swerve Wiring" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={swerveWiring} alt="Swerve Wiring" className="rounded-md max-w-full h-auto" />
 
 ### Results
 The drivetrain allowed programmers to develop both teleoperated and autonomous vision-assisted swerve control. Swerve drive was successfully implemented in the 2024 season, with progressively more advanced automation introduced each year:

@@ -27,6 +27,9 @@ header {
   @apply fixed top-0 left-0 right-0 z-50 py-5;
   @apply bg-stone-100/75 dark:bg-stone-900/25;
   @apply backdrop-blur-sm saturate-200;
+  /* Keep the base py-5 gutter, but never let it shrink below the
+     device's top safe area (notch / Dynamic Island) in landscape. */
+  padding-top: max(1.25rem, env(safe-area-inset-top));
 }
 
 main {
@@ -41,6 +44,20 @@ article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
   @apply prose-headings:text-black prose-headings:dark:text-white;
+}
+
+/* Wide tables and long KaTeX equations scroll horizontally in their own
+   box instead of forcing the whole page to scroll sideways on iPhone. */
+article table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 @layer utilities {

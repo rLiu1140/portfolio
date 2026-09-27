@@ -116,18 +116,18 @@ Two intake concepts were considered: a ground intake that could pick up tubes fr
 #### Climb
 Two climbing mechanisms were considered. A linear slider could push down on the cage, but the purely linear motion required the robot’s center of mass to perfectly align with the chain. This meant the cage would need to physically enter the robot's footprint. Alternatively, an arm system could extend beyond the frame perimeter, latch onto the cage, and pull it inward to meet the center of mass. The arm solution was selected because it simplified cage alignment, tolerated center-of-mass offsets, and was backed by a working prototype.
 
-<Image src={rsCAD} alt="2025 CAD" style="border-radius: 6px; max-width: 75%; height: auto;" />
+<Image src={rsCAD} alt="2025 CAD" className="rounded-md max-w-[75%] h-auto" />
 
 ### Drivetrain
 Following its successful debut the previous season, swerve drive was used again for its omnidirectional mobility and independent rotation and translation. This helped the robot avoid defense and enabled fully automated pick-and-place scoring.
 
-<Image src={rsDrive} alt="2025 Drive" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={rsDrive} alt="2025 Drive" className="rounded-md max-w-full h-auto" />
 
 - **Size:** 27 × 27 in, giving adequate space for mechanisms and electronics while remaining compact to save mass.
 - **Modules:** Four corner-mounted X2 swerve modules with inverted motors, keeping motors protected within the chassis and lowering the center of mass. Two X2i modules powered the rear while two corner-biased X2t modules powered the front to optimize elevator packaging. Both were selected over the previous season's MK4i modules for their 2-in-wide treaded wheels, which improved traction and reduced wheel slip during acceleration. All modules were mounted with spacers to drop the drivetrain by an inch, lowering the center of mass for maximum stability.
 - **Gearing:** A low-speed 5.63:1 gear ratio reaching 16.29 ft/s, selected to prioritize acceleration for quarter-field cycles.
 
-<Image src={rsDriveFrame} alt="2025 Drive Frame" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={rsDriveFrame} alt="2025 Drive Frame" className="rounded-md max-w-full h-auto" />
 
 A 1/8-in-thick steel belly pan protected the underside of the robot, provided secure mounting for electronics, and further lowered the center of mass. Steel was selected for its high density to concentrate weight at the lowest point of the robot, just 3/8-in above the ground. The belly pan was riveted to the chassis frame with 3/16-in aluminum rivets, selected for their ease of installation and low weight. 1 × 1-in aluminum tubing was riveted to the belly pan with the same hardware to create mounting points for the elevator and robot frame.
 
@@ -137,21 +137,21 @@ Custom 3D-printed covers kept debris out of the swerve module gears, while 1/16-
 
 The drivetrain was the heaviest subsystem on the robot and required a custom crate for shipping.
 
-<Image src={rsCrate} alt="2025 Crate" style="border-radius: 6px; max-width: 50%; height: auto;" />
+<Image src={rsCrate} alt="2025 Crate" className="rounded-md max-w-[50%] h-auto" />
 
 ### Bumpers
 Rules that previously constrained bumper construction to plywood backing and pool noodles were lifted this season.
 
 1/2-in-thick HDPE backing was selected for its high impact resistance and semi-rigid properties. Corners were formed with dovetail joints and reinforced with threaded plastic inserts and aluminum brackets, while studs with flanged wing nuts on the bumper backing interfaced with slotted L-brackets on the chassis frame for mounting. This change from the previous mounting method eliminated all loose hardware and sped up bumper swaps.
 
-<Image src={rsBumper} alt="2025 Bumper" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={rsBumper} alt="2025 Bumper" className="rounded-md max-w-full h-auto" />
 
 Solid pool noodles were chosen to protect the sides of the robot; their low density and curved profile helped deflect balls. Low-friction ultra-high-molecular-weight polyethylene tape was placed along the top edge of each side to prevent the robot from riding up onto the rubber balls. The front and back sides of the bumper used high-density polyethylene foam, selected for its rigidity, shock absorption, and durability against the repeated wall impacts that came with picking and placing tubes.
 
 ### Frame
 The frame's geometry was developed through 2D sketches to support the elevator, funnel, and climb subsystems. Extruded aluminum tubes were pocketed on a CNC mill to reduce weight while maintaining rigidity. These tubes were secured to the drivetrain with bolts and steel nut strips instead of individual nuts to improve modularity. Each frame member could be packed individually for shipping.
 
-<Image src={rsFrame} alt="2025 Frame" style="border-radius: 6px; max-width: 50%; height: auto;" />
+<Image src={rsFrame} alt="2025 Frame" className="rounded-md max-w-[50%] h-auto" />
 
 ### Intake
 The intake received tubes from the human wall feeder and delivered them to the manipulator, with a break-beam sensor detecting when a tube had entered the robot. The system went through several iterations to improve performance and integration.
@@ -168,12 +168,12 @@ The funnel would collide with the cage when misaligned, negating a successful cl
 #### V4
 As automated scoring was refined over the season, the passive funnel became a bottleneck. A carbon fiber roller was held down by surgical tubing and folded backward with the same rope-and-climber-arm mechanism. Its drive motor sat near the front of the drivetrain to maintain a low center of mass and counterbalance the elevator, with a dual-belt system transmitting power through a co-axial dead axle pivot.
 
-<Image src={rsFunnel} alt="2025 Funnel" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={rsFunnel} alt="2025 Funnel" className="rounded-md max-w-full h-auto" />
 
 ### Elevator
 The elevator provided vertical extension for the manipulator. It was positioned at the very front of the robot to minimize the length of the swinging arm, and its geometry was verified across every scoring position.
 
-<Image src={rsEle} alt="2025 Ele" style="border-radius: 6px; max-width: 75%; height: auto;" />
+<Image src={rsEle} alt="2025 Ele" className="rounded-md max-w-[75%] h-auto" />
 
 #### Structure
 The structure needed to be exceptionally strong and rigid given the elevator's speed and reach. It consisted of two stages and a carriage, providing enough height to reach the tallest level.
@@ -199,7 +199,7 @@ The first stage utilized 1/8-in-wall aluminum tubes with the top portion pockete
 
 Nut strips were exclusively used inside the elevator tubing and across the drivetrain to eliminate individual nuts throughout the assembly.
 
-<Image src={rsEleBrace} alt="2025 Ele Brace" style="border-radius: 6px; max-width: 75%; height: auto;" />
+<Image src={rsEleBrace} alt="2025 Ele Brace" className="rounded-md max-w-[75%] h-auto" />
 
 A cross member mounted to the top bearing blocks was offset from the elevator, allowing the second stage and carriage to pass through while preventing the first-stage tubing from spreading apart.
 
@@ -209,14 +209,14 @@ The carriage used thicker 1/10-in-wall aluminum tubing, providing extra strength
 
 Despite its height, the fully assembled elevator packaged easily inside a Pelican case.
 
-<Image src={rsPelican} alt="2025 Pelican" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={rsPelican} alt="2025 Pelican" className="rounded-md max-w-full h-auto" />
 
 #### Rigging
 Two rigging methods were considered. Cascade rigging uses several short rope runs, each fixed to the top of one stage and the bottom of the next. Every stage moves simultaneously, with each additional stage moving at twice the speed of the one before it, at half the torque. Alternatively, continuous rigging uses a single loop, fixed at the bottom of the carriage, routed through the gearbox and up through every stage, then back down to the carriage. It drives the carriage directly while intermediate stages move freely and are controlled through a set of hardstops.
 
 Continuous rigging was selected for its fewer tie-down points and individual runs. It also favored a lower center of mass, since the intermediate stage only lifted when the manipulator extended to the highest scoring position.
 
-<Image src={rsRigging} alt="2025 Rigging" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={rsRigging} alt="2025 Rigging" className="rounded-md max-w-full h-auto" />
 
 #### Gearbox
 The gearbox powered and synchronized the belts that drove the elevator. A mirrored gear-and-pulley setup achieved the necessary reduction while keeping linear belt speed matched on both sides. A linear-speed gearbox calculator verified pinion, gear, and pulley sizes to achieve a 0.3-second extension time while keeping operating current under 20 A. The pitch diameters of the selected gears and pulleys were overlaid on the 2D elevator sketch to position motors and bearings.
@@ -250,7 +250,7 @@ The gearbox powered and synchronized the belts that drove the elevator. A mirror
 ### Arm Gearbox
 The arm gearbox controlled the angle of the manipulator and sat low on the carriage to keep the center of mass down. A significant reduction was required from the 5,785 RPM free speed of the Kraken X60. A lighter motor, the Kraken X44, was considered but would have required an additional gear stage to compensate for its higher free speed, negating the weight saved. The X60 also carried a low-voltage Powerpole adapter board, which powered smaller sensors and removed the need for separate low-voltage wiring across the elevator.
 
-<Image src={rsArmGear} alt="2025 Arm Gear" style="border-radius: 6px; max-width: 75%; height: auto;" />
+<Image src={rsArmGear} alt="2025 Arm Gear" className="rounded-md max-w-[75%] h-auto" />
 
 A gearbox calculator, similar to the one used for the elevator, helped verify the system and finalize packaging. The final two-stage system paired a large pocketed gear with 3D-printed pulleys to minimize complexity and weight, with a variable-diameter idler controlling belt tension.
 
@@ -277,7 +277,7 @@ The arm pivot used a round 1-in-OD aluminum shaft with oil-impregnated bronze bu
 ### Electronics
 Standard FRC electrical components were used throughout, in accordance with the game rules.
 
-<Image src={rsPis} alt="2025 Pis" style="border-radius: 6px; max-width: 75%; height: auto;" />
+<Image src={rsPis} alt="2025 Pis" className="rounded-md max-w-[75%] h-auto" />
 
 - A single 12 V, 18 Ah SLA battery powered a power distribution hub, which supplied fourteen 12 V brushless motors and various sensors.
 - Two Orange Pi 5s, buck converters, and three high-speed global-shutter USB cameras enabled robotic vision for automated pickup and scoring. The vision system was initially powered by a dedicated rechargeable power bank before switching to a 12 V-to-5 V power distribution hub to reduce weight.

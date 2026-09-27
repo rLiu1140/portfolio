@@ -33,16 +33,16 @@ I led this four-person project and took ownership of the design and manufacturin
 ### Load Case
 The load case was derived from the peak motor torque of 220 Nm, converted to an equivalent force of 4,800 N applied at each bolt hole.
 
-<div className="grid grid-cols-10 gap-4 items-start">
+<div className="grid grid-cols-1 sm:grid-cols-10 gap-4 items-start">
   <Image 
     src={DSAv1FoS} 
     alt="DSA v1 FoS" 
-    className="w-full h-auto rounded-md col-span-7" 
+    className="w-full h-auto rounded-md sm:col-span-7" 
   />
   <Image 
     src={DSAReaction} 
     alt="DSA Reaction" 
-    className="w-full h-auto rounded-md col-span-3" 
+    className="w-full h-auto rounded-md sm:col-span-3" 
   />
 </div>
 
@@ -55,7 +55,7 @@ During the second design iteration, an additional 2,290 N, opposing the directio
 ### Design Iterations
 #### V1
 
-<div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   <Image src={DSAv1Top} alt="DSA v1 Top" className="w-full h-auto rounded-md" />
   <Image src={DSAv1Bottom} alt="DSA v1 Bottom" className="w-full h-auto rounded-md" />
 </div>
@@ -68,7 +68,7 @@ During the second design iteration, an additional 2,290 N, opposing the directio
 
 #### V2
 
-<div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   <Image src={DSAv2Top} alt="DSA v2 Top" className="w-full h-auto rounded-md" />
   <Image src={DSAv2Bottom} alt="DSA v2 Bottom" className="w-full h-auto rounded-md" />
 </div>
@@ -89,7 +89,7 @@ During the second design iteration, an additional 2,290 N, opposing the directio
 
 #### V3
 
-<div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   <Image src={DSAv3Top} alt="DSA v3 Top" className="w-full h-auto rounded-md" />
   <Image src={DSAv3Bottom} alt="DSA v3 Bottom" className="w-full h-auto rounded-md" />
 </div>
@@ -102,14 +102,14 @@ Together, these changes eliminated the need for rotational alignment between the
 ### Manufacturing
 The DSA was machined in two setups on a Haas VF-2 CNC mill. A 4-jaw chuck with parallels and a dial indicator leveled the part, while an edge finder set the origin. Each setup began with a roughing pass to remove bulk stock, followed by finishing passes for the respective top and bottom surface features.
 
-<Image src={DSABottom} alt="DSA Bottom" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={DSABottom} alt="DSA Bottom" className="rounded-md max-w-full h-auto" />
 
 The final part was finished with WD-40 and a Scotch-Brite pad to deburr the edges and produce a brushed appearance. The three spacers were turned separately and hand-fitted into the sprocket until a tight fit was achieved.
 
 #### Challenges
 The oversized round stock significantly increased manufacturing time, as it was difficult to seat squarely and securely in the chuck jaws and required extra time to level.
 
-<div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   <Image src={DSATop} alt="DSA Top" className="w-full h-auto rounded-md" />
   <Image src={DSA} alt="DSA" className="w-full h-auto rounded-md" />
 </div>
@@ -119,4 +119,4 @@ An initial pass with a 1-in-diameter end mill lifted the stock, requiring the se
 ### Results
 The DSA integrated seamlessly into the drivetrain assembly and met all design requirements, successfully transferring torque from the differential to the sprocket. The team’s car completed the endurance event for the first time in a decade.
 
-<Image src={DSAAssembly} alt="DSA Assembly" style="border-radius: 6px; max-width: 100%; height: auto;" />
+<Image src={DSAAssembly} alt="DSA Assembly" className="rounded-md max-w-full h-auto" />

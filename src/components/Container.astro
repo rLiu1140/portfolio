@@ -2,6 +2,15 @@
 
 ---
 
-<div class="mx-auto max-w-3xl px-5">
+<div class="mx-auto max-w-3xl px-5 container-safe-x">
   <slot />
 </div>
+
+<style>
+  /* Keep the base px-5 gutter, but never let it shrink below the
+     device's safe area (notch / rounded corners) in landscape. */
+  .container-safe-x {
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+</style>
