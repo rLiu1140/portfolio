@@ -1,0 +1,310 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  images: {
+    src: ImageMetadata;
+    alt: string;
+    /** Display width as a percentage of the carousel's full width. Defaults to 100 (fills it, centered otherwise). */
+    widthPercent?: number;
+  }[];
+  /** Accessible name for the whole gallery */
+  label?: string;
+}
+
+const { images, label = "Image gallery" } = Astro.props;
+
+// The height-morphing script sizes the container from each slide's ratio,
+// assuming the image spans the full slide width. When an image is shown
+// narrower than that (widthPercent < 100), its actual on-screen height is
+// smaller too, so we scale the ratio to match — otherwise the container
+// would reserve extra blank space below a half-width image.
+const effectiveRatio = (img: Props["images"][number]) =>
+  img.src.width / img.src.height / ((img.widthPercent ?? 100) / 100);
+
+const first = images[0];
+---
+
+<section
+  class="carousel not-prose my-8"
+  data-carousel
+  role="region"
+  aria-roledescription="carousel"
+  aria-label={label}
+  style={`--first-ratio: ${effectiveRatio(first)}`}
+>
+  <div class="relative">
+    <div class="track" data-track tabindex="0" aria-label={`${label} slides`}>
+      {
+        images.map((img, i) => (
+          <div
+            class="slide"
+            data-slide
+            data-ratio={effectiveRatio(img)}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${images.length}`}
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              width={Math.min(img.src.width, 1400)}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              class="block h-auto w-full"
+              style={
+                img.widthPercent && img.widthPercent !== 100
+                  ? `width:${img.widthPercent}%; margin-inline:auto;`
+                  : undefined
+              }
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <button
+      type="button"
+      data-prev
+      aria-label="Previous image"
+      class="nav left-2 border border-black/15 bg-white/85 text-black dark:border-white/20 dark:bg-black/75 dark:text-white"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m15 18-6-6 6-6"></path>
+      </svg>
+    </button>
+    <button
+      type="button"
+      data-next
+      aria-label="Next image"
+      class="nav right-2 border border-black/15 bg-white/85 text-black dark:border-white/20 dark:bg-black/75 dark:text-white"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m9 18 6-6-6-6"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mt-2 relative flex items-center justify-center">
+    <div class="flex flex-wrap items-center">
+      {
+        images.map((_, i) => (
+          <button
+            type="button"
+            class="dot"
+            data-dot
+            aria-label={`Go to image ${i + 1}`}
+            aria-current={i === 0 ? "true" : "false"}
+          />
+        ))
+      }
+    </div>
+    <span
+      class="absolute right-0 text-sm tabular-nums text-black/60 dark:text-white/60"
+      data-counter
+      aria-live="polite"
+    >
+      1 / {images.length}
+    </span>
+  </div>
+</section>
+
+<style>
+  .track {
+    display: flex;
+    /* Added align-items center as a fallback to keep the track perfectly balanced */
+    align-items: center; 
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    aspect-ratio: var(--first-ratio);
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    /* FIX: This centers the image vertically during the height morph */
+    align-self: center; 
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .slide img {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .nav:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.06);
+  }
+  .nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .dot {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+  .dot::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: currentColor;
+    opacity: 0.25;
+    transition: width 200ms ease, opacity 200ms ease;
+  }
+  .dot:hover::after {
+    opacity: 0.5;
+  }
+  .dot[aria-current="true"]::after {
+    width: 1.25rem;
+    opacity: 1;
+  }
+
+  .track:focus-visible,
+  .nav:focus-visible,
+  .dot:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav,
+    .dot::after {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Wrap the logic in a function so we can call it on every page navigation
+  const initCarousels = () => {
+    document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+      // Prevent attaching multiple listeners if this carousel was already initialized
+      if (root.dataset.initialized === "true") return;
+      root.dataset.initialized = "true";
+
+      const track = root.querySelector<HTMLElement>("[data-track]")!;
+      const prev = root.querySelector<HTMLButtonElement>("[data-prev]")!;
+      const next = root.querySelector<HTMLButtonElement>("[data-next]")!;
+      const counter = root.querySelector<HTMLElement>("[data-counter]")!;
+      const dots = Array.from(
+        root.querySelectorAll<HTMLButtonElement>("[data-dot]"),
+      );
+      const ratios = Array.from(
+        root.querySelectorAll<HTMLElement>("[data-slide]"),
+      ).map((s) => Number(s.dataset.ratio));
+      
+      const total = ratios.length;
+      const last = total - 1;
+      const clamp = (n: number) => Math.max(0, Math.min(last, n));
+      const wrap = (n: number) => ((n % total) + total) % total;
+
+      let current = -1;
+      let target = -1; 
+      let idleTimer = 0;
+      let width = track.getBoundingClientRect().width;
+
+      track.style.aspectRatio = "auto";
+
+      const go = (i: number) => {
+        target = wrap(i);
+        
+        track.style.scrollSnapType = "none";
+        
+        track.scrollTo({
+          left: target * width,
+          behavior: !reduceMotion.matches ? "smooth" : "auto",
+        });
+      };
+
+      const frame = () => {
+        if (!width) return;
+        const pos = track.scrollLeft / width;
+        const lo = clamp(Math.floor(pos));
+        const hi = clamp(lo + 1);
+        const t = Math.min(1, Math.max(0, pos - lo));
+        
+        track.style.height = `${(width / ratios[lo]) * (1 - t) + (width / ratios[hi]) * t}px`;
+
+        const i = clamp(Math.round(pos));
+        if (i !== current) {
+          current = i;
+          dots.forEach((d, n) => d.setAttribute("aria-current", String(n === i)));
+          counter.textContent = `${i + 1} / ${total}`;
+        }
+
+        clearTimeout(idleTimer);
+        idleTimer = window.setTimeout(() => {
+          track.style.height = `${width / ratios[current]}px`;
+          track.style.scrollSnapType = "";
+          target = -1; 
+        }, 150);
+      };
+
+      let raf = 0;
+      track.addEventListener(
+        "scroll",
+        () => {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(frame);
+        },
+        { passive: true },
+      );
+
+      new ResizeObserver(() => {
+        const w = track.getBoundingClientRect().width;
+        if (w === width) return;
+        width = w;
+        frame();
+      }).observe(root);
+
+      const getBaseIndex = () => target !== -1 ? target : current;
+
+      prev.addEventListener("click", () => go(getBaseIndex() - 1));
+      next.addEventListener("click", () => go(getBaseIndex() + 1));
+      dots.forEach((d, n) => d.addEventListener("click", () => go(n)));
+
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          go(getBaseIndex() - 1);
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          go(getBaseIndex() + 1);
+        }
+      });
+
+      frame();
+    });
+  };
+
+  // Run immediately on first load, AND re-run every time View Transitions swap the page
+  document.addEventListener("astro:page-load", initCarousels);
+</script>

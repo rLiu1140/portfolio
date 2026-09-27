@@ -6,6 +6,7 @@ order: 2
 ---
 
 import { Image } from "astro:assets";
+import Carousel from "../../../components/Carousel.astro";
 import brakeAssembly from "../../../assets/brake-assembly.png";
 import brakeDrawing from "../../../assets/brake-drawing.png";
 import brakeSide from "../../../assets/brake-side.png";
@@ -50,12 +51,15 @@ The design space was bounded by fixed caliper and brake-pad mounting holes, a pr
 
 A rough sketch of this space was hand-drawn before modeling it in CAD, which allowed for finite element analysis (FEA) without over-constraining any load paths.
 
-<div className="my-8 w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-  <Image src={brakeSide} alt="Brake Side" className="w-full h-auto rounded-md" />
-  <Image src={brakeFront} alt="Brake Front" className="w-full h-auto rounded-md" />
-  <Image src={brakeTop} alt="Brake Top" className="w-full h-auto rounded-md" />
-  <Image src={brakeDesignSpace} alt="Brake Design Space" className="w-full h-auto rounded-md" />
-</div>
+<Carousel
+  label="Brake design views"
+  images={[
+    { src: brakeSide, alt: "Brake Side", widthPercent: 75 },
+    { src: brakeFront, alt: "Brake Front", widthPercent: 75 },
+    { src: brakeTop, alt: "Brake Top", widthPercent: 75 },
+    { src: brakeDesignSpace, alt: "Brake Design Space", widthPercent: 75 },
+  ]}
+/>
 
 #### Calculations
 The relationship between brake geometry and stopping performance was derived from kinematics and a moment balance equation, showing that the input force required for a given stopping distance is inversely proportional to the input and cable lever arm lengths.

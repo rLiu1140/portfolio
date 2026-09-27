@@ -6,6 +6,7 @@ order: 6
 ---
 
 import { Image } from "astro:assets";
+import Carousel from "../../../components/Carousel.astro";
 import crescRobot from "../../../assets/cresc-robot.png";
 import crescDrivePivotArm from "../../../assets/cresc-drive-pivot-arm.png";
 import crescDrive from "../../../assets/cresc-drive.png";
@@ -16,6 +17,27 @@ import crescPivotFront from "../../../assets/cresc-pivot-front.png";
 import crescDrivePivot from "../../../assets/cresc-drive-pivot.png";
 import crescWrist from "../../../assets/cresc-wrist.png";
 import crescPivotArm from "../../../assets/cresc-pivot-arm.png";
+import crescBuild1 from "../../../assets/cresc-build1.png";
+import crescBuild2 from "../../../assets/cresc-build2.png";
+import crescBuild3 from "../../../assets/cresc-build3.png";
+import crescBuild4 from "../../../assets/cresc-build4.png";
+import crescBuild5 from "../../../assets/cresc-build5.png";
+import crescTest1 from "../../../assets/cresc-test1.png";
+import crescNmkt1 from "../../../assets/cresc-nmkt1.png";
+import crescMcm1 from "../../../assets/cresc-mcm1.png";
+import crescMcm2 from "../../../assets/cresc-mcm2.png";
+import crescProvs1 from "../../../assets/cresc-provs1.png";
+
+<Carousel
+  label="Comp Galery"
+  images={[
+    { src: crescProvs1, alt: "Provs1" },
+    { src: crescTest1, alt: "Test1" },
+    { src: crescNmkt1, alt: "Nmkt1" },
+    { src: crescMcm1, alt: "Mcm1" },
+    { src: crescMcm2, alt: "Mcm2" },
+  ]}
+/>
 
 ### Overview
 The 2024 FRC game, CRESCENDO, involved orange foam rings that robots could score at two different heights, with only one ring controllable at a time. Towards the end of each match, robots could also climb a chain and score a ring into a third goal for additional points.
@@ -34,6 +56,17 @@ As part of a 50-member team, I was responsible for:
 - All electrical systems
 - Driving the robot
 - Coordinating with the strategy, manufacturing, and programming subteams
+
+<Carousel
+  label="Build Gallery"
+  images={[
+    { src: crescBuild1, alt: "Build1", widthPercent: 90 },
+    { src: crescBuild2, alt: "Build2", widthPercent: 75 },
+    { src: crescBuild3, alt: "Build3", widthPercent: 90},
+    { src: crescBuild4, alt: "Build4", widthPercent: 75 },
+    { src: crescBuild5, alt: "Build5", widthPercent: 75 },
+  ]}
+/>
 
 ### Constraints
 The design process was guided by fixed rules from the official game manual, along with priorities the team established internally.

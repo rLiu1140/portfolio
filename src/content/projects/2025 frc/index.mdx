@@ -6,9 +6,11 @@ order: 5
 ---
 
 import { Image } from "astro:assets";
+import Carousel from "../../../components/Carousel.astro";
 import rsCAD from "../../../assets/rs-cad.png";
 import rsDriveFrame from "../../../assets/rs-drive-frame.png";
 import rsDrive from "../../../assets/rs-drive.png";
+import rsCrate from "../../../assets/rs-crate.png";
 import rsBumper from "../../../assets/rs-bumper.png";
 import rsFrame from "../../../assets/rs-frame.png";
 import rsFunnel from "../../../assets/rs-funnel.png";
@@ -16,6 +18,8 @@ import rsEle from "../../../assets/rs-ele.png";
 import rsEleMount from "../../../assets/rs-ele-mount.png";
 import rsEleSide from "../../../assets/rs-ele-side.png";
 import rsEleBrace from "../../../assets/rs-ele-brace.png";
+import rsPelican from "../../../assets/rs-pelican.png";
+import rsRigging from "../../../assets/rs-rigging.png";
 import rsEleGear from "../../../assets/rs-ele-gear.png";
 import rsEleGearFront from "../../../assets/rs-ele-gear-front.png";
 import rsEleMotor from "../../../assets/rs-ele-motor.png";
@@ -23,6 +27,41 @@ import rsArmGear from "../../../assets/rs-arm-gear.png";
 import rsClimb from "../../../assets/rs-climb.png";
 import rsWinch from "../../../assets/rs-winch.png";
 import rsPis from "../../../assets/rs-pis.png";
+import rsBuild1 from "../../../assets/rs-build1.png";
+import rsBuild2 from "../../../assets/rs-build2.png";
+import rsBuild3 from "../../../assets/rs-build3.png";
+import rsCali1 from "../../../assets/rs-cali1.png";
+import rsCali2 from "../../../assets/rs-cali2.png";
+import rsCali3 from "../../../assets/rs-cali3.png";
+import rsCali4 from "../../../assets/rs-cali4.png";
+import rsCent1 from "../../../assets/rs-cent1.png";
+import rsCent2 from "../../../assets/rs-cent2.png";
+import rsCent3 from "../../../assets/rs-cent3.png";
+import rsNBay1 from "../../../assets/rs-nbay1.png";
+import rsProvs1 from "../../../assets/rs-provs1.png";
+import rsProvs2 from "../../../assets/rs-provs2.png";
+import rsProvs3 from "../../../assets/rs-provs3.png";
+import rsProvs4 from "../../../assets/rs-provs4.png";
+import rsProvs5 from "../../../assets/rs-provs5.png";
+
+<Carousel
+  label="Comp Gallery"
+  images={[
+    { src: rsCali1, alt: "Cali1" },
+    { src: rsCali2, alt: "Cali2" },
+    { src: rsCali3, alt: "Cali3" },
+    { src: rsCali4, alt: "Cali4" },
+    { src: rsCent1, alt: "Cent1" },
+    { src: rsCent2, alt: "Cent2" },
+    { src: rsCent3, alt: "Cent3" },
+    { src: rsNBay1, alt: "NBay1" },
+    { src: rsProvs1, alt: "Provs1" },
+    { src: rsProvs2, alt: "Provs2" },
+    { src: rsProvs3, alt: "Provs3" },
+    { src: rsProvs4, alt: "Provs4" },
+    { src: rsProvs5, alt: "Provs5" },
+  ]}
+/>
 
 ### Overview
 The 2025 FRC game, REEFSCAPE, featured white PVC tubes that robots could score at four different heights, alongside green playground balls that could be scored at two different heights. Robots could only control one tube and one ball at a time. Towards the end of each match, robots could also climb a chain-supported cage for additional points.
@@ -31,7 +70,7 @@ After analyzing the game and its scoring options, the team decided to prioritize
 
 As part of a 50-member team, I was responsible for:
 - Overall robot architecture
-- Complete design and assembly of the following subsystem
+- Complete design and assembly of the following subsystems
 	- Drivetrain
 	- Bumpers
 	- Frame
@@ -42,6 +81,15 @@ As part of a 50-member team, I was responsible for:
 - All electrical systems
 - Driving the robot
 - Coordinating with the strategy, manufacturing, and programming subteams
+
+<Carousel
+  label="Build Gallery"
+  images={[
+    { src: rsBuild1, alt: "Build1", widthPercent: 50 },
+    { src: rsBuild2, alt: "Build2", widthPercent: 50 },
+    { src: rsBuild3, alt: "Build3", widthPercent: 50 },
+  ]}
+/>
 
 ### Constraints
 The design process was guided by fixed rules from the official game manual, along with priorities the team established internally.
@@ -88,6 +136,8 @@ The battery lay horizontally at the very back of the drivetrain, acting as a cou
 Custom 3D-printed covers kept debris out of the swerve module gears, while 1/16-in-thick polycarbonate plates with hook-and-loop fasteners protected the electronics while maintaining serviceability.
 
 The drivetrain was the heaviest subsystem on the robot and required a custom crate for shipping.
+
+<Image src={rsCrate} alt="2025 Crate" style="border-radius: 6px; max-width: 50%; height: auto;" />
 
 ### Bumpers
 Rules that previously constrained bumper construction to plywood backing and pool noodles were lifted this season.
@@ -159,10 +209,14 @@ The carriage used thicker 1/10-in-wall aluminum tubing, providing extra strength
 
 Despite its height, the fully assembled elevator packaged easily inside a Pelican case.
 
+<Image src={rsPelican} alt="2025 Pelican" style="border-radius: 6px; max-width: 100%; height: auto;" />
+
 #### Rigging
 Two rigging methods were considered. Cascade rigging uses several short rope runs, each fixed to the top of one stage and the bottom of the next. Every stage moves simultaneously, with each additional stage moving at twice the speed of the one before it, at half the torque. Alternatively, continuous rigging uses a single loop, fixed at the bottom of the carriage, routed through the gearbox and up through every stage, then back down to the carriage. It drives the carriage directly while intermediate stages move freely and are controlled through a set of hardstops.
 
 Continuous rigging was selected for its fewer tie-down points and individual runs. It also favored a lower center of mass, since the intermediate stage only lifted when the manipulator extended to the highest scoring position.
+
+<Image src={rsRigging} alt="2025 Rigging" style="border-radius: 6px; max-width: 100%; height: auto;" />
 
 #### Gearbox
 The gearbox powered and synchronized the belts that drove the elevator. A mirrored gear-and-pulley setup achieved the necessary reduction while keeping linear belt speed matched on both sides. A linear-speed gearbox calculator verified pinion, gear, and pulley sizes to achieve a 0.3-second extension time while keeping operating current under 20 A. The pitch diameters of the selected gears and pulleys were overlaid on the 2D elevator sketch to position motors and bearings.
