@@ -32,9 +32,9 @@ import crescProvs1 from "../../../assets/cresc-provs1.png";
   label="Comp Galery"
   images={[
     { src: crescProvs1, alt: "Provs1" },
+    { src: crescMcm1, alt: "Mcm1" },
     { src: crescTest1, alt: "Test1" },
     { src: crescNmkt1, alt: "Nmkt1" },
-    { src: crescMcm1, alt: "Mcm1" },
     { src: crescMcm2, alt: "Mcm2" },
   ]}
 />
@@ -42,13 +42,11 @@ import crescProvs1 from "../../../assets/cresc-provs1.png";
 ### Overview
 The 2024 FRC game, CRESCENDO, involved orange foam rings that robots could score at two different heights, with only one ring controllable at a time. Towards the end of each match, robots could also climb a chain and score a ring into a third goal for additional points.
 
-<Image src={crescRobot} alt="2024 Robot" className="rounded-md max-w-[75%] h-auto" />
-
 After analyzing the game and its scoring options, the team decided to prioritize scoring into the two primary goals while keeping the option to climb open.
 
 As part of a 50-member team, I was responsible for:
 - Overall robot architecture
-- Complete design and assembly of the following subsystems
+- Complete design and assembly of the following subsystems:
 	- Drivetrain
 	- Bumpers
 	- Arm Pivot
@@ -60,11 +58,11 @@ As part of a 50-member team, I was responsible for:
 <Carousel
   label="Build Gallery"
   images={[
-    { src: crescBuild1, alt: "Build1", widthPercent: 90 },
-    { src: crescBuild2, alt: "Build2", widthPercent: 75 },
-    { src: crescBuild3, alt: "Build3", widthPercent: 90},
+    { src: crescBuild3, alt: "Build3" },
     { src: crescBuild4, alt: "Build4", widthPercent: 75 },
+    { src: crescBuild1, alt: "Build1" },
     { src: crescBuild5, alt: "Build5", widthPercent: 75 },
+    { src: crescBuild2, alt: "Build2", widthPercent: 75 },
   ]}
 />
 
@@ -86,7 +84,7 @@ The design process was guided by fixed rules from the official game manual, alon
 Prototype testing revealed that the low goal was scored most reliably with a downward shot at moderate speed, while the high goal favored a high-speed horizontal shot. To account for both scenarios, a shooter with variable angle and speed was required.
 
 #### Intake
-Since the only rings available at the start of each match were on the ground, a ground intake was needed to cut pickup time throughout the match. Two layouts were considered: one extending over the bumpers, and one fixed within the frame perimeter. The over-the-bumper option was selected for its more direct ring contact, better visibility during operation, and access for serviceability.
+Since the only rings available at the start of each match were on the ground, a ground intake was needed. Two layouts were considered: one extending over the bumpers, and one fixed within the frame perimeter. The over-the-bumper option was selected for its more direct ring contact, better visibility during operation, and access for serviceability.
 
 #### Integration
 Rather than separate pivoting intake, indexer, and shooter systems, a single pivoting arm handled all three tasks: reaching the ground for intaking, extending high enough for the downward shot into the low goal, and adjusting the shooter angle for various horizontal shots, while also reaching the chain for climbing.
@@ -94,7 +92,7 @@ Rather than separate pivoting intake, indexer, and shooter systems, a single piv
 <Image src={crescDrivePivotArm} alt="2024 Drive Pivot Arm" className="rounded-md max-w-full h-auto" />
 
 ### Drivetrain
-For the first time in the team's 24-year history, the robot used a swerve drive for its omnidirectional mobility and independent rotation and translation. This enabled faster shot alignment, defense-avoiding maneuvers, and more effective vision-assisted autonomous routines compared to the previous tank drive architecture.
+For the first time in the team's 24-year history, the robot used a swerve drive for its omnidirectional mobility and independent rotation and translation. This enabled faster shot alignment, defense-avoiding maneuvers, and more effective vision-assisted autonomous routines compared to the previous tank-drive architecture.
 
 - **Size:** 30 × 28 in, providing the pivoting arm room and stability while maintaining a reduced footprint to avoid other robots and field obstacles.
 - **Modules:** Four corner-mounted MK4i swerve modules with inverted motors, keeping motors protected within the chassis and lowering the center of mass.
@@ -104,7 +102,7 @@ For the first time in the team's 24-year history, the robot used a swerve drive 
 
 Two crossmembers ran front to back for additional structure, creating a secure battery compartment and attachment points for the arm pivot. Large holes with rubber grommets assisted with wire management. The battery lay horizontally at the very front of the drivetrain, acting as a counterweight to the heavy, backward-swinging arm.
 
-A 1/8-in-thick aluminum belly pan protected the underside of the robot, provided secure mounting for electronics, and further lowered the center of mass. The belly pan was riveted to the chassis frame with 3/16-in aluminum rivets, selected for their ease of installation and low weight. Custom 3D-printed covers kept debris out of the swerve module gears, while 1/8-in-thick polycarbonate plates with hook-and-loop fasteners protected the electronics while maintaining serviceability.
+A 1/8-in-thick aluminum belly pan protected the underside of the robot, provided secure mounting for electronics, and further lowered the center of mass. The belly pan was riveted to the chassis frame with 3/16-in aluminum rivets, selected for their ease of installation and low weight. Custom 3D-printed covers kept debris out of the swerve module gears, while 1/8-in-thick polycarbonate plates with hook-and-loop fasteners protected the electronics and maintained serviceability.
 
 ### Bumpers
 Bumper design was constrained by rules requiring 3/4-in-thick plywood backing and 2-1/2-in pool noodles wrapped in rugged cloth. A one-piece design was chosen for its added strength. Plywood backing was joined with dovetail joints and reinforced with tee nuts and aluminum brackets, while L-brackets on the inside of the bumper bolted to the chassis frame for mounting.
@@ -135,10 +133,10 @@ Powering the arm required a significant gear reduction due to the 6,784 RPM free
   />
 </div>
 
-- Four NEO Vortex motors, mounted in mirrored gearboxes, one on each side of the drivetrain.
-- A xx:xx final reduction through x stages of compound gearing.
-- A through-shaft on the final stage synchronized both sides, with a #35 sprocket-and-chain system, tensioned by turnbuckles, delivering power to the arm.
-- Shim tape between commercial gears and hex shafts reduced backlash throughout.
+- Four NEO Vortex motors were distributed across mirrored gearboxes.
+- A 117.27:1 reduction was achieved through four stages of compound gearing.
+- Third- and fourth-stage through-shafts synchronized both sides, driving the arm via a turnbuckle-tensioned #35 chain system.
+- Shim tape was applied between commercial gears and hex shafts to minimize backlash.
 - Gussets and gearbox plates were pocketed to reduce weight.
 
 #### Joint
@@ -151,7 +149,7 @@ The wrist gearbox controlled the angle of the manipulator, which combined the in
 
 <Image src={crescWrist} alt="2024 Wrist" className="rounded-md max-w-full h-auto" />
 
-A single NEO Vortex motor drove the wrist shaft through two stages of compound gearing and a #25 chain-and-sprocket system. The final-stage shaft used a magnet-and-absolute-encoder system for precise positional tracking and control. Gearbox plates were machined from 1/4-in aluminum, pocketed to reduce weight, and bolted to the inside of the arm.
+A single NEO Vortex motor drove the wrist shaft through two stages of compound gearing and a turnbuckle-tensioned #25 chain system. The final-stage shaft used a magnet-and-absolute-encoder system for precise positional tracking and control. Gearbox plates were machined from 1/4-in-thick aluminum, pocketed to reduce weight, and bolted to the inside of the arm with tapped holes for serviceability.
 
 <Image src={crescPivotArm} alt="2024 Pivot Arm" className="rounded-md max-w-full h-auto" />
 
@@ -160,13 +158,15 @@ Standard FRC electrical components were used throughout, in accordance with the 
 
 - A single 12 V, 18 Ah SLA battery powered a power distribution hub, which supplied fifteen 12 V brushless motors and various sensors.
 - A CAN network connected all electronic devices and was terminated with a 120-ohm resistor at the end of the manipulator to minimize wiring spanning the arm.
-- Anderson Powerpole connectors and Wago hubs were placed between each subsystem, allowing for modular assembly.
 - Wire sleeving bundled and protected wiring at the arm and wrist joints.
+- Anderson Powerpole connectors and Wago hubs were placed between each subsystem, allowing for modular assembly.
 
 ### Results
 The robot performed at a high level during the season, reaching two event finals and qualifying for the World Championship, where it competed in the division playoffs. It also earned the Excellence in Engineering and Industrial Design Awards.
 
 ### Reflection
-Despite these strong results, the robot was intermittently held back by a fragile manipulator that took constant impacts during play. In retrospect, a fixed under-the-bumper intake would likely have delivered more consistent performance given the physical gameplay. On the other hand, the serviceability-focused design was highly beneficial, allowing for quick and modular repairs during short breaks between matches.
+Despite these strong results, the robot was intermittently held back by a delicate manipulator that took impacts during play. In retrospect, a fixed under-the-bumper intake would likely have delivered more consistent performance given the physical gameplay. On the other hand, the serviceability-focused design was highly beneficial, allowing for quick and modular repairs during short breaks between matches.
 
 Overall, the double-jointed arm architecture made for a complex and interesting engineering challenge that I learned a lot from and genuinely enjoyed working on.
+
+<Image src={crescRobot} alt="2024 Robot" className="rounded-md max-w-[75%] h-auto" />

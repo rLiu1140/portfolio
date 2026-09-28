@@ -5,11 +5,8 @@ date: 2027-06-19
 order: 1
 ---
 
-import SheetTable from '../../../components/SheetTable.astro';
-import { SHEETS } from '../../../data/sheets';
-
 ### Overview
-Formula SAE requires all teams to develop a mechanical steering system. Previously, Northwestern Formula Racing has used 4130 steel columns with welded connections to achieve a highly reliable and stiff system. However, reducing the weight of the steering system remains a key area for optimization.
+Formula SAE requires all teams to develop a mechanical steering system. Previously, Northwestern Formula Racing has used 4130 steel columns with welded connections to achieve a highly reliable and stiff system. However, reducing the weight of the steering system has been an area of interest.
 
 I am independently working on a new steering system, exploring alternative materials and structural components to meet the design goals.
 
@@ -21,8 +18,6 @@ I am independently working on a new steering system, exploring alternative mater
 | 6061 Aluminum | 26 | 2.70 | 9.63 | Isotropic |
 | 7075 Aluminum | 26.9 | 2.81 | 9.57 | Isotropic |
 | **±45° CF Layup** | 20–30 | 1.50–1.60 | ~16.13 | Anisotropic |
-
-- 4130 steel outperforms both aluminum alloys in torsional stiffness-to-weight, but carbon fiber is theoretically superior. However, FSAE rules require bonded connections to have a mechanical backup.
 
 #### U-Joint Attachment Options
 #### 4130 Steel
@@ -47,15 +42,13 @@ I am independently working on a new steering system, exploring alternative mater
 
 ### Carbon-Fiber Tube Selection
 #### Manufacturer
-Rock West Composites is one of the largest direct-to-consumer online suppliers of composite materials and is well known for supporting projects from universities and FSAE teams. They provide transparent engineering data, including exact ply layups and material properties, and they even offer calculators for mechanical analysis. They carry an extremely wide range of composite products, including various sizes of carbon-fiber tubing specifically designed for torsional applications using ±45° layups.
+Rock West Composites is one of the largest direct-to-consumer online suppliers of composite materials and is well known for supporting projects from universities and FSAE teams. They provide transparent engineering data, including exact ply layups and material properties, and even offer calculators for mechanical analysis. They carry an extremely wide range of composite products, including various sizes of carbon-fiber tubing specifically designed for torsional applications using ±45° layups.
 
 #### Layup
 ±45° layups provide the highest strength and stiffness for carbon-fiber tubes under torsion. This is because the tensile and compressive stresses generated during torsional loading are maximized at 45° to the tube axis. Rock West's torsion tubes are specifically manufactured with fibers oriented primarily at ±45° to maximize this performance.
 
 #### Wall Thickness
 According to FSAE rules, bonded joints within the steering system must have a mechanical backup, such as a bolt or pin. The primary failure modes around drilled holes under torsion are delamination due to stress concentration, matrix cracking, and pin/bolt tear-out. Using 1/8-in walls significantly protects against these failures by decreasing shear stress, which is inversely proportional to wall thickness. The thicker wall also increases the bearing area between the fastener and the tube, which directly combats tear-out. Additionally, 1/8-in walls allow for a reduced outer diameter while maintaining torsional stiffness, which helps with packaging at the cost of weight.
-
-<SheetTable csvUrl={SHEETS.steeringTubeComparison} caption="Carbon-Fiber Tube Comparison" />
 
 - 0.750” OD × 0.500” ID maximizes weight savings while measurably improving stiffness.
 
@@ -69,7 +62,7 @@ According to FSAE rules, bonded joints within the steering system must have a me
 *In progress.*
 
 ### Load Case
-I developed a custom calculator to estimate both static and dynamic steering loads from suspension geometry and other vehicle parameters. To verify the calculator’s accuracy, values from the 2026 car were used to estimate the loads. These estimates will then be compared with actual values obtained from testing the 2026 car.
+I developed a calculator to estimate both static and dynamic steering loads from suspension geometry and other vehicle parameters. To verify the calculator's accuracy, values from the 2026 car were used to generate baseline estimates. These estimates will then be compared to the actual values from testing the 2026 car.
 
 ### Parts Order
 

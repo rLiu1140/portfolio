@@ -19,13 +19,15 @@ import DSA from "../../../assets/dsa.png";
 import DSABottom from "../../../assets/dsa-bottom.png";
 import DSAAssembly from "../../../assets/dsa-assembly.png";
 
+<Image src={DSAAssembly} alt="DSA Assembly" className="rounded-md max-w-[80%] h-auto" />
+
 ### Overview
-The differential sprocket adapter (DSA) connects the differential to the drivetrain sprocket, transferring torque between the two: the differential shaft has a splined profile, while the drivetrain sprocket has six mounting holes.
+The differential sprocket adapter (DSA) connects the differential to the drivetrain sprocket, transferring torque between the two. The differential shaft has a splined profile, while the drivetrain sprocket has six mounting holes.
 
 I led this four-person project and took ownership of the design and manufacturing process, from initial modeling through FEA validation, optimization, CAM programming, and CNC machining.
 
 ### Requirements
-1. Ensure concentricity between the differential and sprocket.
+1. Ensure concentricity between the differential shaft and sprocket.
 2. Achieve a factor of safety (FoS) greater than 1.25 and a fatigue life beyond 400,000 cycles.
 3. Minimize mass.
 4. Successfully machine the part on the first attempt.
@@ -95,7 +97,7 @@ During the second design iteration, an additional 2,290 N, opposing the directio
 </div>
 
 - Replaced the small concentricity tabs with a single large circular feature.
-- Removed the integrated hole-intent bosses in favor of separately machined spacers.
+- Removed the integrated bosses in favor of separately machined spacers.
 
 Together, these changes eliminated the need for rotational alignment between the two CNC setups and prevented feature breakage during machining. The assembly's function and weight were largely unchanged.
 
@@ -107,16 +109,14 @@ The DSA was machined in two setups on a Haas VF-2 CNC mill. A 4-jaw chuck with p
 The final part was finished with WD-40 and a Scotch-Brite pad to deburr the edges and produce a brushed appearance. The three spacers were turned separately and hand-fitted into the sprocket until a tight fit was achieved.
 
 #### Challenges
-The oversized round stock significantly increased manufacturing time, as it was difficult to seat squarely and securely in the chuck jaws and required extra time to level.
+The oversized round stock significantly increased manufacturing time, as it was difficult to seat squarely and securely in the chuck jaws.
 
 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   <Image src={DSATop} alt="DSA Top" className="w-full h-auto rounded-md" />
   <Image src={DSA} alt="DSA" className="w-full h-auto rounded-md" />
 </div>
 
-An initial pass with a 1-in-diameter end mill lifted the stock, requiring the setup to be redone with a 1/2-in end mill. Reducing the stock size beforehand with a band saw was considered but avoided, since it would have added an extra manufacturing step.
+An initial pass with a 1-in-diameter end mill lifted the stock, requiring the setup to be redone with a 1/2-in end mill. Reducing the stock size beforehand with a band saw was considered but avoided, as it would have added an extra manufacturing step.
 
 ### Results
-The DSA integrated seamlessly into the drivetrain assembly and met all design requirements, successfully transferring torque from the differential to the sprocket. The team’s car completed the endurance event for the first time in a decade.
-
-<Image src={DSAAssembly} alt="DSA Assembly" className="rounded-md max-w-full h-auto" />
+The DSA integrated seamlessly into the drivetrain assembly and met all design requirements, successfully transferring torque from the differential shaft to the sprocket. The team's car completed the endurance event for the first time in a decade.

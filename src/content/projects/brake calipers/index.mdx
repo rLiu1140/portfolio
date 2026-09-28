@@ -29,10 +29,10 @@ import brakev2Arm from "../../../assets/brake-v2-arm.png";
 import brakev2X from "../../../assets/brake-v2-x.png";
 import brakev2Test from "../../../assets/brake-v2-test.png";
 
+<Image src={brakeAssembly} alt="Brake Assembly" className="rounded-md max-w-[80%] h-auto" />
+
 ### Overview
 As a term-long project for ME 240: Intro to Mechanical Design and Manufacturing, teams of five were tasked with developing rear bike brake calipers. Within my team, I was entirely responsible for the design process, from initial sketches and CAD through FEA-driven optimization, testing-backed iteration, and technical documentation.
-
-<Image src={brakeAssembly} alt="Brake Assembly" className="rounded-md max-w-[75%] h-auto" />
 
 ### Requirements
 The design was driven by hard requirements from ISO 4210 bicycle safety standards, alongside goals the team defined internally.
@@ -174,6 +174,9 @@ Removing an extra mounting nut let the cable sit flush against the caliper face,
   />
 </div>
 
+- Shifted the right caliper's cable mounting face to be coplanar with the left caliper, eliminating the bending component.
+- Redesigned the right caliper arm rib from an I to an X for greater bidirectional rigidity.
+
 <div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
   <Image 
     src={brakev2X} 
@@ -187,9 +190,7 @@ Removing an extra mounting nut let the cable sit flush against the caliper face,
   />
 </div>
 
-- Shifted the right caliper's cable mounting face to be coplanar with the left caliper, eliminating the bending component.
 - Biased material placement along the new diagonal load path created by the offset face.
-- Redesigned the right caliper arm rib from an I to an X for greater bidirectional rigidity.
 - Tightened bolt hole tolerances (6.40 mm → 6.27 mm) to reduce mounting wobble.
 
 | Metric | Target (Marginal / Ideal) | V1 | V2 | Δ |
@@ -200,6 +201,6 @@ Removing an extra mounting nut let the cable sit flush against the caliper face,
 The updated design reduced stopping distance by 2 meters (a 14.8% improvement in braking performance) at the cost of only 1.3 g of additional mass, which is negligible relative to the bike-and-rider system and well worth the tradeoff.
 
 ### Reflection
-Without the provided material constraint, exploring metal alloys and more organic geometries could further improve performance without adding significant weight, using the same SLS 3D-printing process.
+Without the provided material constraint, exploring metal alloys and more organic geometries could further improve performance without adding significant weight.
 
 Overall, the design process was straightforward yet comprehensive, and the project highlighted the importance of real-world testing alongside simulation.
