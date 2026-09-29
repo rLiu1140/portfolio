@@ -2,7 +2,7 @@
 title: "2025 FRC Robot"
 description: "Designed and built for the 2025 FIRST Robotics Competition game, REEFSCAPE"
 date: 2025-04-05
-order: 5
+order: 3
 ---
 
 import { Image } from "astro:assets";
@@ -43,23 +43,15 @@ import rsProvs2 from "../../../assets/rs-provs2.png";
 import rsProvs3 from "../../../assets/rs-provs3.png";
 import rsProvs4 from "../../../assets/rs-provs4.png";
 import rsProvs5 from "../../../assets/rs-provs5.png";
+import rsIntakeVid from "../../../assets/rs-intake-vid.mp4";
 
 <Carousel
   label="Comp Gallery"
   images={[
-    { src: rsCali1, alt: "Cali1" },
-    { src: rsCali2, alt: "Cali2" },
-    { src: rsCali3, alt: "Cali3" },
-    { src: rsCali4, alt: "Cali4" },
-    { src: rsCent1, alt: "Cent1" },
-    { src: rsCent2, alt: "Cent2" },
-    { src: rsCent3, alt: "Cent3" },
-    { src: rsNBay1, alt: "NBay1" },
-    { src: rsProvs1, alt: "Provs1" },
-    { src: rsProvs2, alt: "Provs2" },
-    { src: rsProvs3, alt: "Provs3" },
-    { src: rsProvs4, alt: "Provs4" },
     { src: rsProvs5, alt: "Provs5" },
+    { src: rsCali4, alt: "Cali4" },
+    { src: rsProvs4, alt: "Provs4" },
+    { src: rsCali1, alt: "Cali1" },
   ]}
 />
 
@@ -146,7 +138,7 @@ Rules that previously constrained bumper construction to plywood backing and poo
 
 <Image src={rsBumper} alt="2025 Bumper" className="rounded-md max-w-full h-auto" />
 
-Solid pool noodles were chosen to protect the sides of the robot; their low density and curved profile helped deflect balls. Low-friction ultra-high-molecular-weight polyethylene (UHMWPE) tape was placed along the top edge of each side to prevent the robot from riding up onto the rubber balls. The front and back sides of the bumper used high-density polyethylene foam, selected for its rigidity, shock absorption, and durability against the repeated wall impacts that came with picking and placing tubes.
+Solid pool noodles were chosen to protect the sides of the robot as their low density and curved profile helped deflect balls. Low-friction ultra-high-molecular-weight polyethylene (UHMWPE) tape was placed along the top edge of each side to prevent the robot from riding up onto the rubber balls. The front and back sides of the bumper used high-density polyethylene foam, selected for its rigidity, shock absorption, and durability against the repeated wall impacts that came with picking and placing tubes.
 
 ### Frame
 The frame's geometry was developed through 2D sketches to support the elevator, funnel, and climb subsystems. Extruded aluminum tubes were pocketed on a CNC mill to reduce weight while maintaining strength. These tubes were secured to the drivetrain with bolts and steel nut strips instead of individual nuts to improve modularity. Each frame member could be packed individually with the elevator for shipping.
@@ -170,10 +162,18 @@ As automated scoring was refined over the season, the passive funnel became a bo
 
 <Image src={rsFunnel} alt="2025 Funnel" className="rounded-md max-w-full h-auto" />
 
+<video 
+  src={rsIntakeVid} 
+  controls 
+  playsInline 
+  preload="metadata"
+  className="w-full aspect-video rounded-md my-4 bg-black/5 dark:bg-white/5" 
+/>
+
 ### Elevator
 The elevator provided vertical extension for the manipulator. It was positioned at the very front of the robot to minimize the length of the swinging arm, and its geometry was verified across every scoring position.
 
-<Image src={rsEle} alt="2025 Ele" className="rounded-md max-w-[70%] h-auto" />
+<Image src={rsEle} alt="2025 Ele" className="rounded-md max-w-full h-auto" />
 
 #### Structure
 The structure needed to be exceptionally strong and rigid given the elevator's speed and reach. It consisted of two stages and a carriage, providing enough height to reach the tallest level.
@@ -286,3 +286,10 @@ The robot was highly competitive throughout the season, reaching two event final
 
 ### Reflection
 The season was fulfilling both technically and personally, presenting a range of design challenges, from modular subsystems to linear motion and folding mechanisms, that came together to deliver exceptional results in the team's 25th season.
+
+<script>{`
+  document.addEventListener('astro:page-load', () => {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => video.load());
+  });
+`}</script>
