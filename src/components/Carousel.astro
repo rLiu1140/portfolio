@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-interface Props {
+type Props = {
   images: {
     src: ImageMetadata;
     alt: string;
@@ -11,7 +11,7 @@ interface Props {
   }[];
   /** Accessible name for the whole gallery */
   label?: string;
-}
+};
 
 const { images, label = "Image gallery" } = Astro.props;
 
@@ -106,8 +106,8 @@ const first = images[0];
 <style>
   .track {
     display: flex;
-    align-items: center; 
-    /* Adding a tiny gap perfectly solves sub-pixel edge bleeding */
+    align-items: center;
+    /* Small gap prevents sub-pixel bleed between slides. Keep in sync with `gap` in the script. */
     gap: 4px;
     width: 100%;
     overflow-x: auto;
@@ -124,7 +124,7 @@ const first = images[0];
     flex: 0 0 100%;
     width: 100%;
     min-width: 100%;
-    align-self: center; 
+    align-self: center;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
@@ -145,14 +145,10 @@ const first = images[0];
     border-radius: 9999px;
     backdrop-filter: blur(6px);
     cursor: pointer;
-    transition: all 200ms ease;
+    transition: color 300ms ease-in-out, transform 300ms ease-in-out;
   }
-  .nav:hover:not(:disabled) {
+  .nav:hover {
     transform: translateY(-50%) scale(1.06);
-  }
-  .nav:disabled {
-    opacity: 0;
-    pointer-events: none;
   }
 
   .dot {
@@ -169,7 +165,7 @@ const first = images[0];
     border-radius: 9999px;
     background: currentColor;
     opacity: 0.25;
-    transition: width 200ms ease, opacity 200ms ease;
+    transition: width 300ms ease-in-out, opacity 300ms ease-in-out;
   }
   .dot:hover::after {
     opacity: 0.5;
@@ -211,25 +207,25 @@ const first = images[0];
       const ratios = Array.from(
         root.querySelectorAll<HTMLElement>("[data-slide]"),
       ).map((s) => Number(s.dataset.ratio));
-      
+
       const total = ratios.length;
       const last = total - 1;
       const clamp = (n: number) => Math.max(0, Math.min(last, n));
       const wrap = (n: number) => ((n % total) + total) % total;
 
       let current = -1;
-      let target = -1; 
+      let target = -1;
       let idleTimer = 0;
       let width = track.getBoundingClientRect().width;
-      const gap = 4; // Ensure this matches the `gap: 4px` in the CSS
+      const gap = 4; // Must match `gap: 4px` in the CSS
 
       track.style.aspectRatio = "auto";
 
       const go = (i: number) => {
         target = wrap(i);
-        
+
         track.style.scrollSnapType = "none";
-        
+
         track.scrollTo({
           left: target * (width + gap),
           behavior: !reduceMotion.matches ? "smooth" : "auto",
@@ -238,12 +234,12 @@ const first = images[0];
 
       const frame = () => {
         if (!width) return;
-        // Divide by distance between slide starts (width + gap) to find the true progress
+        // Slide starts are (width + gap) apart, so divide by that for true progress
         const pos = track.scrollLeft / (width + gap);
         const lo = clamp(Math.floor(pos));
         const hi = clamp(lo + 1);
         const t = Math.min(1, Math.max(0, pos - lo));
-        
+
         track.style.height = `${(width / ratios[lo]) * (1 - t) + (width / ratios[hi]) * t}px`;
 
         const i = clamp(Math.round(pos));
@@ -256,7 +252,7 @@ const first = images[0];
         idleTimer = window.setTimeout(() => {
           track.style.height = `${width / ratios[current]}px`;
           track.style.scrollSnapType = "";
-          target = -1; 
+          target = -1;
         }, 150);
       };
 

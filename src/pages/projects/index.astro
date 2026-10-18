@@ -5,10 +5,9 @@ import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import { PROJECTS } from "@consts";
 
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft);
+const projects = (await getCollection("projects")).filter((project) => !project.data.draft);
 
-// Sort 1: Featured (Projects with an 'order' go first, then sorted by date)
+// Featured: projects with an `order` first (ascending), then newest first.
 const featuredProjects = [...projects].sort((a, b) => {
   const orderA = a.data.order ?? Infinity;
   const orderB = b.data.order ?? Infinity;
@@ -16,61 +15,55 @@ const featuredProjects = [...projects].sort((a, b) => {
   return b.data.date.valueOf() - a.data.date.valueOf();
 });
 
-// Sort 2: Recent (Strictly chronological)
+// Recent: strictly newest first.
 const recentProjects = [...projects].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      
-      {/* Header and Sort Toggle */}
       <div class="animate flex flex-wrap items-center justify-between gap-y-2">
         <h4 class="font-semibold text-black dark:text-white">
           Projects
         </h4>
-        
-        {/* Sort Buttons */}
+
         <div class="flex items-center gap-2">
-          
-          {/* Active State (Featured is default on load) */}
-          <button 
-            id="btn-featured" 
-            class="text-black dark:text-white transition-colors duration-300 ease-in-out cursor-pointer"
+          {/* Featured is the default view, so it starts in the active state. */}
+          <button
+            type="button"
+            id="btn-featured"
+            class="text-black dark:text-white transition-colors duration-300 ease-in-out"
           >
             Featured
           </button>
-          
+
           <span class="text-black/30 dark:text-white/30">/</span>
-          
-          {/* Inactive State */}
-          <button 
-            id="btn-recent" 
-            class="text-black/50 dark:text-white/50 hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out cursor-pointer"
+
+          <button
+            type="button"
+            id="btn-recent"
+            class="text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
           >
             Recent
           </button>
         </div>
       </div>
 
-      {/* Featured List (Visible by Default) */}
-      <ul id="list-featured" class="animate flex flex-col gap-4">
-        {featuredProjects.map(project => (
+      <ul id="list-featured" class="animate grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {featuredProjects.map((project) => (
           <li>
             <ArrowCard entry={project} />
           </li>
         ))}
       </ul>
 
-      {/* Recent List (Hidden by Default) */}
-      <ul id="list-recent" class="animate flex flex-col gap-4 hidden">
-        {recentProjects.map(project => (
+      <ul id="list-recent" class="animate grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+        {recentProjects.map((project) => (
           <li>
             <ArrowCard entry={project} />
           </li>
         ))}
       </ul>
-
     </div>
   </Container>
 </PageLayout>
@@ -79,27 +72,27 @@ const recentProjects = [...projects].sort((a, b) => b.data.date.valueOf() - a.da
   import { setToggleState } from "@lib/utils";
 
   function setupProjectSorting() {
-    const btnFeatured = document.getElementById('btn-featured');
-    const btnRecent = document.getElementById('btn-recent');
-    const listFeatured = document.getElementById('list-featured');
-    const listRecent = document.getElementById('list-recent');
+    const btnFeatured = document.getElementById("btn-featured");
+    const btnRecent = document.getElementById("btn-recent");
+    const listFeatured = document.getElementById("list-featured");
+    const listRecent = document.getElementById("list-recent");
 
     if (!btnFeatured || !btnRecent || !listFeatured || !listRecent) return;
 
-    btnFeatured.addEventListener('click', () => {
-      listFeatured.classList.remove('hidden');
-      listRecent.classList.add('hidden');
+    btnFeatured.addEventListener("click", () => {
+      listFeatured.classList.remove("hidden");
+      listRecent.classList.add("hidden");
       setToggleState(btnFeatured, true);
       setToggleState(btnRecent, false);
     });
 
-    btnRecent.addEventListener('click', () => {
-      listRecent.classList.remove('hidden');
-      listFeatured.classList.add('hidden');
+    btnRecent.addEventListener("click", () => {
+      listRecent.classList.remove("hidden");
+      listFeatured.classList.add("hidden");
       setToggleState(btnRecent, true);
       setToggleState(btnFeatured, false);
     });
   }
 
-  document.addEventListener('astro:page-load', setupProjectSorting);
+  document.addEventListener("astro:page-load", setupProjectSorting);
 </script>

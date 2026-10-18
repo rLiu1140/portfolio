@@ -4,15 +4,15 @@ type Props = {
   external?: boolean;
   class?: string;
   [key: string]: any;
-}
+};
 
 const { href, external, class: className, ...rest } = Astro.props;
 ---
 
-<a 
-  href={href} 
-  target={external ? "_blank" : undefined} 
-  rel={external ? "noopener noreferrer" : undefined} 
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
   class={className}
   {...rest}
 >

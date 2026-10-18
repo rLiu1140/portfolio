@@ -3,7 +3,7 @@ import type { Site, Metadata, Socials } from "@types";
 export const SITE: Site = {
   NAME: "Ryan Liu",
   EMAIL: "ryanliu1140@gmail.com",
-  NUM_PROJECTS_ON_HOMEPAGE: 5,
+  NUM_PROJECTS_ON_HOMEPAGE: 4,
 };
 
 export const HOME: Metadata = {
@@ -20,5 +20,5 @@ export const SOCIALS: Socials = [
   {
     NAME: "LinkedIn",
     HREF: "https://www.linkedin.com/in/ryan-liu-me",
-  }
+  },
 ];

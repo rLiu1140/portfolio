@@ -3,6 +3,7 @@ title: "2025 FRC Robot"
 description: "Designed and built for the 2025 FIRST Robotics Competition game, REEFSCAPE"
 date: 2025-04-05
 order: 3
+heroImage: "../../../assets/rs-hero.png"
 ---
 
 import { Image } from "astro:assets";
@@ -31,18 +32,10 @@ import rsBuild1 from "../../../assets/rs-build1.png";
 import rsBuild2 from "../../../assets/rs-build2.png";
 import rsBuild3 from "../../../assets/rs-build3.png";
 import rsCali1 from "../../../assets/rs-cali1.png";
-import rsCali2 from "../../../assets/rs-cali2.png";
-import rsCali3 from "../../../assets/rs-cali3.png";
 import rsCali4 from "../../../assets/rs-cali4.png";
-import rsCent1 from "../../../assets/rs-cent1.png";
-import rsCent2 from "../../../assets/rs-cent2.png";
-import rsCent3 from "../../../assets/rs-cent3.png";
-import rsNBay1 from "../../../assets/rs-nbay1.png";
-import rsProvs1 from "../../../assets/rs-provs1.png";
-import rsProvs2 from "../../../assets/rs-provs2.png";
-import rsProvs3 from "../../../assets/rs-provs3.png";
 import rsProvs4 from "../../../assets/rs-provs4.png";
 import rsProvs5 from "../../../assets/rs-provs5.png";
+import grad from "../../../assets/grad.png";
 import rsIntakeVid from "../../../assets/rs-intake-vid.mp4";
 
 <Carousel
@@ -56,20 +49,22 @@ import rsIntakeVid from "../../../assets/rs-intake-vid.mp4";
 />
 
 ### Overview
+
 The 2025 FRC game, REEFSCAPE, featured white PVC tubes that robots could score at four different heights, alongside green playground balls that could be scored at two different heights. Robots could only control one tube and one ball at a time. Towards the end of each match, robots could also climb a chain-supported cage for additional points.
 
 After analyzing the game and its scoring options, the team decided to prioritize scoring tubes at every height and climbing the cage.
 
 As part of a 50-member team, I was responsible for:
+
 - Overall robot architecture
-- Complete design and assembly of the following subsystems
-	- Drivetrain
-	- Bumpers
-	- Frame
-	- Intake
-	- Elevator
-	- Arm Gearbox
-	- Climber
+- Complete design and assembly of the following subsystems:
+  - Drivetrain
+  - Bumpers
+  - Frame
+  - Intake
+  - Elevator
+  - Arm Gearbox
+  - Climber
 - All electrical systems
 - Driving the robot
 - Coordinating with the strategy, manufacturing, and programming subteams
@@ -84,9 +79,11 @@ As part of a 50-member team, I was responsible for:
 />
 
 ### Constraints
+
 The design process was guided by fixed rules from the official game manual, along with priorities the team established internally.
 
 #### Game manual:
+
 - Frame perimeter fixed, not to exceed 120 in.
 - No part may extend beyond the frame perimeter in its starting configuration.
 - Maximum starting height of 42 in.
@@ -94,23 +91,29 @@ The design process was guided by fixed rules from the official game manual, alon
 - Only standard FRC electrical components allowed.
 
 #### Team-defined:
+
 - Modular construction for transportation from Toronto to Los Angeles.
-	- Components under 60 lb, packable for commercial air transit, and easy to reassemble.
+  - Components under 60 lb, packable for commercial air transit, and easy to reassemble.
 - Design and assembly complete within 5 weeks.
 
 ### Architecture
+
 #### Manipulator
+
 Prototype testing revealed that the top three levels were most reliably scored with a downward shot at moderate speed, while the lowest level required a slow, underhand placement. To account for both scenarios, a manipulator with variable angle and speed was required. Reaching the highest level also required significant vertical extension, which a linear elevator could achieve most efficiently.
 
 #### Intake
+
 Two intake concepts were considered: a ground intake that could pick up tubes from anywhere on the field, and a funnel fed directly by the human wall feeder. The funnel style was selected, since tubes could only enter the field through the wall feeder, which sat next to the scoring location. A funnel was also mechanically simpler, lighter, and more compact, making it easier to integrate alongside an elevator and climbing system.
 
 #### Climb
+
 Two climbing mechanisms were considered. A linear slider could push down on the cage, but the purely linear motion required the robot's center of mass to perfectly align with the chain. This meant the cage would need to physically enter the robot's footprint. Alternatively, an arm system could extend beyond the frame perimeter, latch onto the cage, and pull it inward to meet the center of mass. The arm solution was selected because it simplified cage alignment, tolerated center-of-mass offsets, and was backed by a working prototype.
 
 <Image src={rsCAD} alt="2025 CAD" className="rounded-md max-w-[85%] h-auto" />
 
 ### Drivetrain
+
 Following its successful debut the previous season, swerve drive was used again for its omnidirectional mobility and independent rotation and translation. This helped the robot avoid defense and enabled fully automated pick-and-place scoring.
 
 <Image src={rsDrive} alt="2025 Drive" className="rounded-md max-w-full h-auto" />
@@ -132,6 +135,7 @@ The drivetrain was the heaviest subsystem on the robot and required a custom cra
 <Image src={rsCrate} alt="2025 Crate" className="rounded-md max-w-[70%] h-auto" />
 
 ### Bumpers
+
 Rules that previously constrained bumper construction to plywood backing and pool noodles were lifted this season.
 
 1/2-in-thick HDPE backing was selected for its high impact resistance and semi-rigid properties. Corners were formed with dovetail joints and reinforced with threaded plastic inserts and aluminum brackets, while studs with flanged wing nuts on the bumper backing interfaced with slotted L-brackets on the chassis frame for mounting. This change from the previous mounting method eliminated all loose hardware and sped up bumper swaps.
@@ -141,57 +145,66 @@ Rules that previously constrained bumper construction to plywood backing and poo
 Solid pool noodles were chosen to protect the sides of the robot as their low density and curved profile helped deflect balls. Low-friction ultra-high-molecular-weight polyethylene (UHMWPE) tape was placed along the top edge of each side to prevent the robot from riding up onto the rubber balls. The front and back sides of the bumper used high-density polyethylene foam, selected for its rigidity, shock absorption, and durability against the repeated wall impacts that came with picking and placing tubes.
 
 ### Frame
+
 The frame's geometry was developed through 2D sketches to support the elevator, funnel, and climb subsystems. Extruded aluminum tubes were pocketed on a CNC mill to reduce weight while maintaining strength. These tubes were secured to the drivetrain with bolts and steel nut strips instead of individual nuts to improve modularity. Each frame member could be packed individually with the elevator for shipping.
 
 <Image src={rsFrame} alt="2025 Frame" className="rounded-md max-w-[65%] h-auto" />
 
 ### Intake
+
 The intake received tubes from the human wall feeder and delivered them to the manipulator, with a break-beam sensor detecting when a tube had entered the robot. The system went through several iterations to improve performance and integration.
 
 #### V1
+
 The funnel consisted of four 1/8-in-thick polycarbonate plates bolted directly to the frame. This solution was too rigid, and tubes bounced around before settling into the manipulator.
 
 #### V2
+
 Four angled polycarbonate pieces were introduced between the funnel and the frame. This reduced the funnel's rigidity and absorbed some impact as tubes entered the robot.
 
 #### V3
+
 The funnel would collide with the cage when misaligned, negating a successful climb. The polycarbonate pieces were replaced with spring-loaded hinges, and rope tied to the climbing arm pulled the funnel outward to clear room for the cage during a climb.
 
 #### V4
+
 As automated scoring was refined over the season, the passive funnel became a bottleneck. An active carbon-fiber roller was held down by surgical tubing and folded backward with the same rope mechanism. Its drive motor sat near the front of the drivetrain to maintain a low center of mass, with a dual-belt system transmitting power through a co-axial pivot.
 
 <Image src={rsFunnel} alt="2025 Funnel" className="rounded-md max-w-full h-auto" />
 
-<video 
-  src={rsIntakeVid} 
-  controls 
-  playsInline 
+<video
+  src={rsIntakeVid}
+  controls
+  playsInline
   preload="metadata"
-  className="w-full aspect-video rounded-md my-4 bg-black/5 dark:bg-white/5" 
+  className="rounded-md w-full aspect-video my-4 bg-black/5 dark:bg-white/5"
 />
 
 ### Elevator
+
 The elevator provided vertical extension for the manipulator. It was positioned at the very front of the robot to minimize the length of the swinging arm, and its geometry was verified across every scoring position.
 
 <Image src={rsEle} alt="2025 Ele" className="rounded-md max-w-[70%] h-auto" />
 
 #### Structure
+
 The structure needed to be exceptionally strong and rigid given the elevator's speed and reach. It consisted of two stages and a carriage, providing enough height to reach the tallest level.
 
 <div className="flex flex-col gap-6">
-  <Image 
-    src={rsEleMount} 
-    alt="2025 Ele Mount" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rsEleMount}
+    alt="2025 Ele Mount"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rsEleSide} 
-    alt="2025 Ele Side" 
-    className="w-[70%] h-auto rounded-md" 
+  <Image
+    src={rsEleSide}
+    alt="2025 Ele Side"
+    className="rounded-md w-[70%] h-auto"
   />
 </div>
 
 The first stage utilized 1/8-in-wall aluminum tubes with the top portion pocketed for weight reduction. The bottom portion was secured to the drivetrain through four methods:
+
 1. 1/4-in-thick tapped steel plates within the bottom cross members, threaded by eight 1/4-20 bolts inserted through the steel belly pan.
 2. Triangular gussets on each side of the base, securing the elevator to the 1 × 1-in chassis tubing with ten 10-32 bolts.
 3. Lateral winged supports on each side of the base, directly secured to the chassis frame through six 10-32 bolts.
@@ -212,6 +225,7 @@ Despite its height, the fully assembled elevator packaged easily inside a Pelica
 <Image src={rsPelican} alt="2025 Pelican" className="rounded-md max-w-full h-auto" />
 
 #### Rigging
+
 Two rigging methods were considered. Cascade rigging uses several short rope runs, each fixed to the top of one stage and the bottom of the next. Every stage moves simultaneously, with each additional stage moving at twice the speed of the one before it, at half the torque. Alternatively, continuous rigging uses a single loop, fixed at the bottom of the carriage, routed through the gearbox and up through every stage, then back down to the carriage. It drives the carriage directly while intermediate stages move freely and are controlled through a set of hardstops.
 
 Continuous rigging was selected for its fewer tie-down points and individual runs. It also favored a lower center of mass, since the intermediate stage only lifted when the manipulator extended to the highest scoring position.
@@ -219,23 +233,24 @@ Continuous rigging was selected for its fewer tie-down points and individual run
 <Image src={rsRigging} alt="2025 Rigging" className="rounded-md max-w-full h-auto" />
 
 #### Gearbox
+
 The gearbox powered and synchronized the belts that drove the elevator. A mirrored gear-and-pulley setup achieved the necessary reduction while keeping linear belt speed matched on both sides. A linear-speed gearbox calculator verified pinion, gear, and pulley sizes to achieve a 0.3-second extension time while keeping operating current under 15 A. The pitch diameters of the selected gears and pulleys were overlaid on the 2D elevator sketch to position motors and bearings.
 
 <div className="flex flex-col gap-6">
-  <Image 
-    src={rsEleGear} 
-    alt="2025 Ele Gear" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rsEleGear}
+    alt="2025 Ele Gear"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rsEleGearFront} 
-    alt="2025 Ele Gear Front" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rsEleGearFront}
+    alt="2025 Ele Gear Front"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rsEleMotor} 
-    alt="2025 Ele Motor" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rsEleMotor}
+    alt="2025 Ele Motor"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
@@ -249,6 +264,7 @@ The gearbox powered and synchronized the belts that drove the elevator. A mirror
 - Gussets, gearbox plates, and gears were pocketed to reduce weight.
 
 ### Arm Gearbox
+
 The arm gearbox controlled the angle of the manipulator and sat low on the carriage to keep the center of mass down. A significant reduction was required from the 5,785 RPM free speed of the Kraken X60. A lighter motor, the Kraken X44, was considered but would have required an additional gear stage to compensate for its higher free speed, negating the weight saved. The X60 also carried a low-voltage Powerpole adapter board, which powered smaller sensors and eliminated the need for separate low-voltage wiring across the elevator.
 
 <Image src={rsArmGear} alt="2025 Arm Gear" className="rounded-md max-w-[75%] h-auto" />
@@ -258,6 +274,7 @@ A gearbox calculator, similar to the one used for the elevator, helped verify th
 The arm ran on a 1/2-in OD aluminum dead-axle shaft and polymer bushings, with an absolute encoder tracking the arm's position directly, bypassing any backlash.
 
 ### Climber
+
 The climber was integrated progressively over the season as robot packaging was optimized. A winch-powered arm with passive hooks stayed tucked within the frame perimeter and deployed when needed. Driving into the steel cage allowed its weight to seat the hooks, and as the winch pulled the arm inward, the cage reacted against rubber tread pads to lift the robot.
 
 <Image src={rsClimb} alt="2025 Climb" className="rounded-md max-w-[75%] h-auto" />
@@ -269,6 +286,7 @@ The arm pivot used a 1-in-OD aluminum dead-axle shaft with oil-impregnated bronz
 The winch was mounted directly to the steel belly pan, while a two-stage planetary gearbox provided the necessary reduction in a compact, lightweight package. An aluminum pulley wound high-strength, low-stretch ultra-high-molecular-weight polyethylene (UHMWPE) rope, commonly known as Dyneema.
 
 ### Electronics
+
 Standard FRC electrical components were used throughout, in accordance with the game rules.
 
 - A single 12 V, 18 Ah SLA battery powered a power distribution hub, which supplied fourteen 12 V brushless motors and various sensors.
@@ -282,14 +300,17 @@ Standard FRC electrical components were used throughout, in accordance with the 
 - Two Orange Pi 5s, buck converters, and three high-speed global-shutter USB cameras enabled robotic vision for automated pickup and scoring. The vision system was initially powered by a dedicated rechargeable power bank before switching to a 12 V-to-5 V power distribution hub to reduce weight.
 
 ### Results
+
 The robot was highly competitive throughout the season, reaching two event finals, advancing to the semifinals at the Provincial Championship, and qualifying for the World Championship, though the team ultimately did not attend. The team ranked among the top 100 worldwide and 10th out of 130 teams in Ontario, its best result since 2018. The team also received the Innovation in Control Award and Quality Award.
 
 ### Reflection
+
 The season was fulfilling both technically and personally, presenting a range of design challenges, from modular subsystems to linear motion and folding mechanisms, that came together to deliver exceptional results in the team's 25th season.
 
+<Image src={grad} alt="2025 Grad" className="rounded-md max-w-[100%] h-auto" />
+
 <script>{`
-  document.addEventListener('astro:page-load', () => {
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => video.load());
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll("video").forEach((video) => video.load());
   });
 `}</script>

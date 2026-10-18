@@ -3,6 +3,7 @@ title: "3D-Printed Bicycle Brake Calipers"
 description: "SLS-printed brake calipers designed and FEA-optimized to meet ISO braking requirements"
 date: 2026-06-09
 order: 1
+heroImage: "../../../assets/brake-hero.png"
 ---
 
 import { Image } from "astro:assets";
@@ -32,9 +33,11 @@ import brakev2Test from "../../../assets/brake-v2-test.png";
 <Image src={brakeAssembly} alt="Brake Assembly" className="rounded-md max-w-[80%] h-auto" />
 
 ### Overview
+
 As a term-long project for ME 240: Intro to Mechanical Design and Manufacturing, teams of five were tasked with developing rear bike brake calipers. Within my team, I was entirely responsible for the design process, from initial sketches and CAD through FEA-driven optimization, testing-backed iteration, and technical documentation.
 
 ### Requirements
+
 The design was driven by hard requirements from ISO 4210 bicycle safety standards, alongside goals the team defined internally.
 
 | Metric | Ideal | Marginal |
@@ -45,6 +48,7 @@ The design was driven by hard requirements from ISO 4210 bicycle safety standard
 | Appearance | 5/5 | 2/5 |
 
 ### Concept Development
+
 The design space was bounded by fixed caliper and brake-pad mounting holes, a predetermined lever arm length, and clearance for wheel passage.
 
 <Image src={brakeDrawing} alt="Brake Drawing" className="rounded-md max-w-full h-auto" />
@@ -62,6 +66,7 @@ A rough sketch of this space was hand-drawn before modeling it in CAD, which all
 />
 
 #### Calculations
+
 The relationship between brake geometry and stopping performance was derived from kinematics and a moment balance equation, showing that the input force required for a given stopping distance is inversely proportional to the input and cable lever arm lengths.
 
 $$
@@ -70,64 +75,66 @@ F_{in} = \frac{mv_i^2\,r_{out}\,r_{pad}\,r_{tire}}
 $$
 
 #### Load Path Visualization
+
 Running FEA on the initial design-space model revealed critical load paths through the part: loads followed the inner radius near the wheel closely, concentrated at the caliper mounting hole, and produced the largest displacement at the brake pad mounting hole. These results identified where material was structurally necessary and where it could be safely removed to cut mass.
 
 <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-start">
-  <Image 
-    src={leftTopology} 
-    alt="Left Topology" 
-    className="w-full h-auto rounded-md sm:col-span-2" 
+  <Image
+    src={leftTopology}
+    alt="Left Topology"
+    className="rounded-md w-full h-auto sm:col-span-2"
   />
-  <Image 
-    src={rightTopology} 
-    alt="Right Topology" 
-    className="w-full h-auto rounded-md sm:col-span-3" 
+  <Image
+    src={rightTopology}
+    alt="Right Topology"
+    className="rounded-md w-full h-auto sm:col-span-3"
   />
 </div>
 
 #### Topology Optimization
+
 Splines were used to precisely outline the outer load path for each caliper.
 
 <div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
-  <Image 
-    src={leftOutline} 
-    alt="Left Outline" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={leftOutline}
+    alt="Left Outline"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rightOutline} 
-    alt="Right Outline" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rightOutline}
+    alt="Right Outline"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
 Once the boundaries were defined, ribs were sketched on each side to reflect the direction and magnitude of the internal load paths.
 
 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-  <Image 
-    src={leftRib} 
-    alt="Left Rib" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={leftRib}
+    alt="Left Rib"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rightRib} 
-    alt="Right Rib" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rightRib}
+    alt="Right Rib"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
 An I-beam-like cross-section maximized stiffness and reduced deflection through an increased moment of inertia.
 
 <div className="w-full sm:w-[75%] mx-auto grid grid-cols-1 sm:grid-cols-[35fr_65fr] gap-4 items-start">
-  <Image 
-    src={leftX} 
-    alt="Left X" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={leftX}
+    alt="Left X"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rightX} 
-    alt="Right X" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rightX}
+    alt="Right X"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
@@ -136,41 +143,43 @@ Fillets were then sized to local stress, with large internal fillets around the 
 FEA was applied iteratively throughout the process, first to visualize load paths, then to verify the modeled geometry against stress and deflection requirements before committing to manufacturing.
 
 <div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
-  <Image 
-    src={leftStress} 
-    alt="Left Stress" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={leftStress}
+    alt="Left Stress"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={rightStress} 
-    alt="Right Stress" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={rightStress}
+    alt="Right Stress"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
 ### Design Iterations
+
 #### V1
+
 Initial real-world testing passed all performance metrics, confirming that the FEA results were generally predictive. However, the cable mounting hardware introduced an unaccounted-for bending moment on the right caliper.
 
-<Image src={brakev1Test} alt="Brake v2 Test" className="rounded-md max-w-[50%] h-auto" />
+<Image src={brakev1Test} alt="Brake v1 Test" className="rounded-md max-w-[50%] h-auto" />
 
 Removing an extra mounting nut let the cable sit flush against the caliper face, reducing stopping distance from 6.45 m to 4.75 m and lever lockout force from 150 N to 102 N.
 
 #### V2
 
 <div className="mb-6 grid grid-cols-1 sm:grid-cols-[55fr_auto_45fr] gap-4 items-center">
-  <Image 
-    src={brakev1Arm} 
-    alt="Brake v1 Arm" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={brakev1Arm}
+    alt="Brake v1 Arm"
+    className="rounded-md w-full h-auto"
   />
   <span className="text-2xl font-bold rotate-90 sm:rotate-0 mx-auto">
     →
   </span>
-  <Image 
-    src={brakev2Arm} 
-    alt="Brake v2 Arm" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={brakev2Arm}
+    alt="Brake v2 Arm"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
@@ -178,15 +187,15 @@ Removing an extra mounting nut let the cable sit flush against the caliper face,
 - Redesigned the right caliper arm rib from an I to an X for greater bidirectional rigidity.
 
 <div className="grid grid-cols-1 sm:grid-cols-[45fr_55fr] gap-4 items-start">
-  <Image 
-    src={brakev2X} 
-    alt="Brake v2 X" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={brakev2X}
+    alt="Brake v2 X"
+    className="rounded-md w-full h-auto"
   />
-  <Image 
-    src={brakev2Test} 
-    alt="Brake v2 Test" 
-    className="w-full h-auto rounded-md" 
+  <Image
+    src={brakev2Test}
+    alt="Brake v2 Test"
+    className="rounded-md w-full h-auto"
   />
 </div>
 
@@ -201,6 +210,7 @@ Removing an extra mounting nut let the cable sit flush against the caliper face,
 The updated design reduced stopping distance by 2 meters (a 14.8% improvement in braking performance) at the cost of only 1.3 g of additional mass, which is negligible relative to the bike-and-rider system and well worth the tradeoff.
 
 ### Reflection
+
 Without the provided material constraint, exploring metal alloys and more organic geometries could further improve performance without adding significant weight.
 
 Overall, the design process was straightforward yet comprehensive, and the project highlighted the importance of real-world testing alongside simulation.

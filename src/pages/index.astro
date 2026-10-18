@@ -6,19 +6,23 @@ import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { SITE, HOME, SOCIALS } from "@consts";
 
+// Featured projects: non-draft entries with an `order` of 1-4, in that order.
 const projects = (await getCollection("projects"))
-  // 1. Only grab projects that have an 'order' number and aren't drafts
-  .filter(project => !project.data.draft && project.data.order !== undefined)
-  // 2. Sort them numerically (1, 2, 3...). The "?? 0" keeps TypeScript happy!
+  .filter(
+    (project) =>
+      !project.data.draft &&
+      project.data.order !== undefined &&
+      project.data.order >= 1 &&
+      project.data.order <= 4,
+  )
   .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
-  // 3. Cut off any extras based on your site limits
   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
     <h4 class="animate font-semibold text-black dark:text-white">
-      Ryan Liu
+      {SITE.NAME}
     </h4>
     <h4 class="animate font-semibold text-black dark:text-white">
       Mechanical Engineering · Northwestern University
@@ -27,10 +31,10 @@ const projects = (await getCollection("projects"))
       <section>
         <article class="space-y-4">
           <p class="animate">
-            I love to design, build, test, and optimize electromechanical systems. I'm dedicated to creating thoughtful hardware solutions to real-world problems.
+            I love to design, build, and optimize electromechanical systems. I'm dedicated to creating thoughtful hardware solutions to real-world problems.
           </p>
           <p class="animate">
-            I'm drawn to elegant and efficient systems that actually work. Currently exploring robotics, advanced manufacturing, and product design as I figure out what to obsess over next.
+            I'm drawn to elegant and efficient systems that actually work. Currently exploring robotics, product design, and advanced manufacturing.
           </p>
         </article>
       </section>
@@ -40,16 +44,12 @@ const projects = (await getCollection("projects"))
           <h5 class="font-semibold text-black dark:text-white">
             Featured Projects
           </h5>
-          {/* Updated href to include /portfolio/ prefix */}
-          <Link 
-            href="/portfolio/projects" 
-            class="link-fade"
-          >
+          <Link href="/portfolio/projects" class="link-fade">
             See all projects
           </Link>
         </div>
-        <ul class="flex flex-col gap-4">
-          {projects.map(project => (
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {projects.map((project) => (
             <li>
               <ArrowCard entry={project} />
             </li>
@@ -61,28 +61,24 @@ const projects = (await getCollection("projects"))
         <h5 class="font-semibold text-black dark:text-white">
           Let's Connect
         </h5>
-        <article>
-          <p>
-            Interested in collaborating or getting in touch? Feel free to reach out by email or on social media.
-          </p>
         </article>
         <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
+          {SOCIALS.map((social) => (
             <li class="flex gap-x-2 text-nowrap">
-              <Link 
-                href={SOCIAL.HREF} 
-                external 
-                aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+              <Link
+                href={social.HREF}
+                external
+                aria-label={`${SITE.NAME} on ${social.NAME}`}
                 class="link-fade"
               >
-                {SOCIAL.NAME}
+                {social.NAME}
               </Link>
-              <span class="text-black/30 dark:text-white/30">{"/"}</span>
+              <span class="text-black/30 dark:text-white/30">/</span>
             </li>
           ))}
           <li class="line-clamp-1">
-            <Link 
-              href={`mailto:${SITE.EMAIL}`} 
+            <Link
+              href={`mailto:${SITE.EMAIL}`}
               aria-label={`Email ${SITE.NAME}`}
               class="link-fade"
             >

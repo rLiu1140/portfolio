@@ -1,8 +1,9 @@
 ---
 title: "Developmental FRC Swerve Drive"
-description: "A compact drivetrain built to enable omnidirectional movement and vision-based automation"
+description: "A compact drivetrain built to enable vision-based automation and omnidirectional control"
 date: 2023-12-06
 order: 5
+heroImage: "../../../assets/swerve-hero.png"
 ---
 
 import { Image } from "astro:assets";
@@ -14,6 +15,7 @@ import swerveWiring from "../../../assets/swerve-wiring.png";
 <Image src={swerveTesting} alt="Swerve Testing" className="rounded-md max-w-full h-auto" />
 
 ### Overview
+
 As FRC teams shifted to swerve drive, Team 610 faced significant limitations with its traditional tank-drive architecture. Tank drive restricted independent rotation and translation, which limited vision-based navigation and made maneuvers predictable during defense. However, implementing swerve required substantial software development, making an in-season transition unfeasible.
 
 To support Team 610's adoption of swerve drive, I independently designed, machined, and assembled a scaled-down drivetrain with all the components of a standard competition drivetrain.
@@ -33,6 +35,7 @@ An adjustable-angle camera mount at the front of the drivetrain allowed programm
 <Image src={swerveFrame} alt="Swerve Frame" className="rounded-md max-w-full h-auto" />
 
 ### Electronics
+
 Standard FRC components were used throughout to ensure software developed on the drivetrain would accurately translate to the competition robot.
 
 A 12 V, 18 Ah SLA battery powered the drivetrain through a power distribution hub. Eight 40 A, 12 V brushless motors drove the swerve modules, with an absolute encoder tracking the steering angle of each module alongside an IMU for robot heading and acceleration. All devices were connected to a common onboard CAN network. An OM5P router provided the network connection needed for wireless driver-station control, and Wago distribution hubs were placed throughout the chassis to simplify wiring and serviceability.
@@ -40,6 +43,7 @@ A 12 V, 18 Ah SLA battery powered the drivetrain through a power distribution hu
 <Image src={swerveWiring} alt="Swerve Wiring" className="rounded-md max-w-full h-auto" />
 
 ### Results
+
 The drivetrain allowed programmers to develop both teleoperated and autonomous vision-assisted swerve control. Swerve drive was successfully implemented in the 2024 season, with progressively more advanced automation introduced each year:
 
 - **2024**: Vision-assisted shooting and automated drive-to-target
