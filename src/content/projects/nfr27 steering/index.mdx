@@ -23,6 +23,38 @@ Formula SAE requires all teams to develop a mechanical steering system. Previous
 
 I am independently working on a new steering system for the 2027 car, exploring alternative materials and structural concepts to reduce overall weight.
 
+### Load Calculations
+
+To ensure the steering system components could withstand peak driver inputs and track forces, I established two primary load cases: a **Static Case** (dry steering at 0 mph) and a **Dynamic Case** (high-speed cornering at 1.5G lateral acceleration). 
+
+#### Vehicle & Geometry Inputs
+| Parameter | Value | Source / Notes |
+| :--- | :--- | :--- |
+| **Total Mass (Car + Driver)** | 370.6 kg | Sus. DR (642 lb) + Estimate (175 lb) |
+| **CG Height** | 10.6 in | Sus. DR |
+| **Track Width** | 48.5 in | CAD |
+| **Front Weight Bias** | 50% | Sus. DR |
+| **Lateral Acceleration** | 1.5 G | Sus. DR |
+| **Tire Friction Coeff. ($\mu$)** | 1.8 | Estimate |
+| **Caster Angle** | 4.01° | Sus. DR |
+| **Total Trail** | 19.3 mm | Mech (9.3 mm) + Pneu (10 mm) |
+| **Scrub Radius** | 16.16 mm | Sus. DR |
+
+#### Steering System Specifications
+| Parameter | Value | Source / Notes |
+| :--- | :--- | :--- |
+| **Rack Speed** | 87.9 mm/rev | Component Specs |
+| **Pinion Radius** | 14.0 mm | Calculated |
+| **Steering Arm Length** | 65.2 mm | Sus. DR |
+| **Steering Wheel Width** | 11.0 in | CAD |
+| **Mechanical Efficiency** | 85% | Estimate |
+
+#### Final Load Results
+| Load Case | Steering Torque | Steering Force (Push/Pull) |
+| :--- | :--- | :--- |
+| **Static (0 mph, Dry Steering)** | 55.7 Nm (493.1 in-lbs) | 199.4 N (44.8 lbf) |
+| **Dynamic (1.5 G Cornering)** | 13.3 Nm (117.5 in-lbs) | 47.5 N (10.7 lbf) |
+
 ### Steering Rack
 
 <div className="flex flex-col gap-6 w-full items-center">
@@ -61,6 +93,14 @@ I am independently working on a new steering system for the 2027 car, exploring 
 </div>
 
 ### Steering Encoder
+
+*Coming soon.*
+
+### Manufacturing
+
+*Coming soon.*
+
+### Assembly
 
 *Coming soon.*
 
